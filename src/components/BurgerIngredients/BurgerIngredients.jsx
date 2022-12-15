@@ -1,4 +1,5 @@
-import {React, propTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Card from '../Card/Card'
 import BIngrStyles from './BurgerIngredients.module.css'
@@ -40,5 +41,5 @@ export default function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-  cards: propTypes.array
+  cards: PropTypes.array
 }

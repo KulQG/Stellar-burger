@@ -8,9 +8,9 @@ export default function TotalConstructor(props) {
   const [isActive, setIsActive] = React.useState(true);
 
   return (
-    <div className={ConstructorStyles.constructor}>
+    <main className={ConstructorStyles.main}>
       <BurgerIngredients />
       <BurgerConstructor />
-    </div>
+    </main>
   )
 }

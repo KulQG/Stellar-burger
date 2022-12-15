@@ -5,10 +5,10 @@ import TotalConstructor from '../TotalConstructor/TotalConstructor'
 
 function App() {
   return (
-    <main className={appStyles.app}>
+    <>
       <Header />
       <TotalConstructor />
-   </main>
+    </>
   )
 }
 
