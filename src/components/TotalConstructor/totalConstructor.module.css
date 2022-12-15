@@ -1,0 +1,6 @@
+.constructor {
+    width: 1240px;
+    margin: 40px auto;
+    display: flex;
+    gap: 40px;
+}
