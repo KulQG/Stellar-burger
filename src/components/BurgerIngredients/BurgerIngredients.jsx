@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Card from '../Card/Card'
 import BIngrStyles from './BurgerIngredients.module.css'
-import ingrsData from '../../utils/data.js'
 
 export default function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one')
-  const [cards, setCards] = React.useState(ingrsData)
+  const [cards, setCards] = React.useState(props.arr)
 
   //разделение ингредиентов
   const headersWithCards = () => {
@@ -29,7 +28,6 @@ export default function BurgerIngredients(props) {
     //возврат разметки карточки 
     //для каждого уникального массива
     const mapMethod = (arr) => {
-      console.log(arr)
       return arr.map((card) => {
         return (<Card post={card} key={card._id} />)
       })
@@ -49,7 +47,7 @@ export default function BurgerIngredients(props) {
 
   const tab = () => {
     return (
-      <div className={BIngrStyles.tabs}>
+      <nav className={BIngrStyles.tabs}>
         <Tab value="one" active={current === 'one'} onClick={setCurrent}>
           Булки
         </Tab>
@@ -59,7 +57,7 @@ export default function BurgerIngredients(props) {
         <Tab value="three" active={current === 'three'} onClick={setCurrent}>
           Начинки
         </Tab>
-      </div>
+      </nav>
     )
   }
 
@@ -75,5 +73,5 @@ export default function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-  cards: PropTypes.array
+  arr: PropTypes.array.isRequired
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import navigStyles from './NavigationComponent.module.css'
 import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ListIcon } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -38,4 +39,9 @@ export default function NavigationComponent(props) {
       <p style={{ userSelect: 'none' }} className={classText}>{props.text}</p>
     </div>
   )
+}
+
+NavigationComponent.propTypes = {
+  text: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired
 }
