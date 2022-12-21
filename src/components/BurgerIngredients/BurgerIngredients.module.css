@@ -1,0 +1,45 @@
+.catalog {
+    box-sizing: border-box;
+    width: 600px;
+    height: 912px;
+}
+
+.cards {
+    box-sizing: border-box;
+    width: 568px;
+    margin: 24px auto ;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px;
+    row-gap: 32px;
+}
+
+.products {
+    height: 716px;
+    overflow: auto;
+    /*box-sizing: border-box;
+    width: 568px;
+    margin: 24px auto ;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px;
+    row-gap: 32px;*/
+}
+
+.products::-webkit-scrollbar {
+    box-sizing: content-box;
+    width: 8px;
+}
+
+.products::-webkit-scrollbar-track {
+    background: rgba(47, 47, 55, 1);
+}
+
+.products::-webkit-scrollbar-thumb {
+    background-color: rgba(133, 133, 173, 1);
+}
+
+.tabs {
+    margin: 20px 0 40px;
+    display: flex;
+}

@@ -1,0 +1,8 @@
+.chapter {
+    width: 178px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
