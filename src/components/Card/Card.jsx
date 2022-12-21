@@ -19,7 +19,7 @@ export default function Card(props) {
   }
 
   return (
-    <div id={props.post._id} className={cardStyles.card}>
+    <div id={props.post._id} className={cardStyles.card} >
       {setCounter()}
       <img
         className={cardStyles.image}

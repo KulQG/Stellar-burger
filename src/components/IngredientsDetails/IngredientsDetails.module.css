@@ -1,0 +1,32 @@
+.box {
+    margin: 40px auto 0;
+    width: 640px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    padding: 0 60px;
+}
+
+.img {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.imgContent {
+    width: calc(100% - 40px);
+}
+
+.info {
+    margin: 32px 0 60px;
+    display: flex;
+    gap: 20px;
+}
+
+.infoElement {
+    text-align: center;
+    width: 120px;
+}

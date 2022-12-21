@@ -11,7 +11,7 @@ export default function TotalConstructor(props) {
   return (
     <main className={ConstructorStyles.main}>
       <BurgerIngredients arr={props.arr} />
-      <BurgerConstructor arr={props.arr} />
+      <BurgerConstructor setter={props.setter} arr={props.arr} openPopup={props.openPopup} def={props.def}/>
     </main>
   )
 }

@@ -6,7 +6,7 @@ import BIngrStyles from './BurgerIngredients.module.css'
 
 export default function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one')
-  const [cards, setCards] = React.useState(props.arr)
+  //const [cards, setCards] = React.useState(props.arr)
 
   //разделение ингредиентов
   const headersWithCards = () => {
@@ -15,7 +15,7 @@ export default function BurgerIngredients(props) {
     let main = []
     let sauces = []
 
-    cards.forEach((card) => {
+    props.arr.forEach((card) => {
       if (card.type === 'bun') {
         buns.push(card)
       } else if (card.type === 'main') {
