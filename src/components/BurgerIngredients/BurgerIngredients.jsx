@@ -83,4 +83,7 @@ export default function BurgerIngredients(props) {
 
 BurgerIngredients.propTypes = {
   arr: PropTypes.array.isRequired,
+  setter: PropTypes.func.isRequired,
+  openPopup: PropTypes.func.isRequired,
+  def: PropTypes.func.isRequired
 }

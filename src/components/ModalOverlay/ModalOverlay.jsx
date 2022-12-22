@@ -1,14 +1,16 @@
 import React from 'react'
 import ModalClass from './ModalOver.module.css'
+import PropTypes from 'prop-types'
 
 export default function ModalOverlay(props) {
-  const handleEsc = React.useCallback((e) => {
-    if (e.key === 'Escape') {
-      props.close()
-    }
-  })
 
   React.useEffect(() => {
+    const handleEsc = (e) => {
+        if (e.key === 'Escape') {
+            props.close()
+        }
+    }
+
     document.addEventListener('keydown', handleEsc)
 
     return () => {
@@ -17,4 +19,8 @@ export default function ModalOverlay(props) {
   })
 
   return (<div className={ModalClass.overlay} onClick={props.close} >{props.children}</div>)
+}
+
+ModalOverlay.propTypes = {
+    close: PropTypes.func.isRequired
 }

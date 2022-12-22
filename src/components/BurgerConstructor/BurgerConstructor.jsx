@@ -13,7 +13,7 @@ export default function BurgerConstructor(props) {
   //функция нужна для возврата карточек из массива
   const fill = (arr) => {
     //удаление булок из массива
-    let filling = arr.filter((card) => card.type !== 'bun')
+    const filling = arr.filter((card) => card.type !== 'bun')
 
     //возврат каждой карточки
     const mapMethod = (arr) => {
@@ -83,4 +83,6 @@ export default function BurgerConstructor(props) {
 
 BurgerConstructor.propTypes = {
   arr: PropTypes.array.isRequired,
+  openPopup: PropTypes.func.isRequired,
+  def: PropTypes.func.isRequired
 }

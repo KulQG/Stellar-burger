@@ -4,6 +4,7 @@ import {
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import cardStyles from './Card.module.css'
+import PropTypes from 'prop-types'
 
 export default function Card(props) {
   //const [card, setCard] = React.useState(props)
@@ -41,4 +42,12 @@ export default function Card(props) {
       <p className="text text_type_main-default">{props.post.name}</p>
     </div>
   )
+}
+
+Card.propTypes = {
+  setter: PropTypes.func.isRequired,
+  arr:PropTypes.array.isRequired,
+  openPopup:PropTypes.func.isRequired,
+  def:PropTypes.func.isRequired,
+  post:PropTypes.object.isRequired,
 }

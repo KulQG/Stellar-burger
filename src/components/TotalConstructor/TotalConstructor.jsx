@@ -17,5 +17,8 @@ export default function TotalConstructor(props) {
 }
 
 TotalConstructor.propTypes = {
-  arr: PropTypes.array.isRequired
+  arr: PropTypes.array.isRequired,
+  setter: PropTypes.func.isRequired,
+  openPopup: PropTypes.func.isRequired,
+  def: PropTypes.func.isRequired
 }

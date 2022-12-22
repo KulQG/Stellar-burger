@@ -2,6 +2,7 @@ import ModalOverlay from '../ModalOverlay/ModalOverlay'
 import ReactDOM from 'react-dom'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalClass from './Modal.module.css'
+import PropTypes from 'prop-types'
 const modalRoot = document.getElementById('react-modals')
 
 export default function Modal(props) {
@@ -23,4 +24,9 @@ export default function Modal(props) {
     </div>),
     modalRoot,
   )
+}
+
+Modal.propTypes = {
+    visual: PropTypes.bool.isRequired,
+    close: PropTypes.func.isRequired
 }
