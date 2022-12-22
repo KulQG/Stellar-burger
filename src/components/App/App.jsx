@@ -6,6 +6,7 @@ import { address } from '../../utils/consts.js'
 import ModalOverlay from '../ModalOverlay/ModalOverlay'
 import OrderDetails from '../OrderDetails/OrderDetails'
 import IngredientsDetails from '../IngredientsDetails/IngredientsDetails'
+import Modal from '../Modal/Modal'
 
 function App() {
   //состояние для загрузки карточек
@@ -38,14 +39,14 @@ function App() {
   const [card, setCard] = React.useState({})
 
   //состояние открытого и закрытого попапа
-  const [modal, setModal] = React.useState(false)
+  const [isOpen, setIsOpen] = React.useState(false)
 
   const openPopup = () => {
-    setModal(true)
+    setIsOpen(true)
   }
 
   const closePopup = () => {
-    setModal(false)
+    setIsOpen(false)
   }
 
   //определение какой именно попап открыть
@@ -67,10 +68,10 @@ function App() {
         arr={state.cardData}
         openPopup={openPopup}
         def={setPopup}
-      />
-      <ModalOverlay visual={modal} close={closePopup}>
+  />
+      <Modal visual={isOpen} close={closePopup}>
         {definePopup(popup)}
-      </ModalOverlay>
+      </Modal>
     </>
   )
 }

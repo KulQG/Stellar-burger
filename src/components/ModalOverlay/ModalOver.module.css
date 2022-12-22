@@ -1,34 +1,13 @@
-.modal {
+.overlay {
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(0, 0, 0, .6);
-    display: none;
     cursor: pointer;
-}
-
-.modal.active {
+    background-color: rgba(0, 0, 0, .5);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.modalContent {
-    color: white;
-    box-sizing: content-box;
-    width: 720px;
-    background-color: black;
-    border-radius: 40px;
-    display: flex;
-    justify-content: center;
-    cursor: default;
-}
-
-.icon {
-    position: relative;
-    bottom: -63px;
-    right: -654px;
-    cursor: pointer;
-}

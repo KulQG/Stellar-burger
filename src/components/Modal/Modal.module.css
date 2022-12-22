@@ -1,0 +1,27 @@
+.content {
+    color: white;
+    box-sizing: content-box;
+    width: 720px;
+    background-color: black;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    cursor: default;
+}
+
+.modal {
+    display: none;
+}
+
+.modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    position: relative;
+    bottom: -63px;
+    right: -654px;
+    cursor: pointer;
+}
