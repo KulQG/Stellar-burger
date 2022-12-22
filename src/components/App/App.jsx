@@ -17,10 +17,19 @@ function App() {
   //запрос карточек с сервера
   React.useEffect(() => {
     const getData = async () => {
-      setState({ ...state, loading: true })
-      const res = await fetch(address)
-      const data = await res.json()
-      setState({ cardData: data.data, isLoading: false })
+      try {
+        setState({ ...state, loading: true })
+        const res = await fetch(address)
+        if (res.ok) {
+          let data
+          data = await res.json()
+          setState({ cardData: data.data, isLoading: false })
+        } else {
+          console.log(res.status)
+        }
+      } catch (error) {
+        console.log(error)
+      }
     }
     getData()
   }, [])
@@ -44,17 +53,22 @@ function App() {
 
   const definePopup = (p) => {
     if (p === 'ingr') {
-      return (<IngredientsDetails card={card} />)
+      return <IngredientsDetails card={card} />
     } else if (p === 'order') {
-      return ( <OrderDetails /> )
+      return <OrderDetails />
     }
   }
 
   return (
     <>
       <Header />
-      <TotalConstructor setter={setCard} arr={state.cardData} openPopup={openPopup} def={setPopup} />
-      <ModalOverlay visual={modal} close={closePopup} >
+      <TotalConstructor
+        setter={setCard}
+        arr={state.cardData}
+        openPopup={openPopup}
+        def={setPopup}
+      />
+      <ModalOverlay visual={modal} close={closePopup}>
         {definePopup(popup)}
       </ModalOverlay>
     </>
