@@ -26,7 +26,7 @@ function App() {
           data = await res.json()
           setState({ cardData: data.data, isLoading: false })
         } else {
-          console.log(res.status)
+          Promise.reject(`Ошибка ${res.status}`)
         }
       } catch (error) {
         console.log(error)
@@ -60,6 +60,12 @@ function App() {
     }
   }
 
+  const opening = () => {
+    if (isOpen) {
+      return (<Modal close={closePopup}>{definePopup(popup)}</Modal>)
+    }
+  }
+
   return (
     <>
       <Header />
@@ -68,10 +74,8 @@ function App() {
         arr={state.cardData}
         openPopup={openPopup}
         def={setPopup}
-  />
-      <Modal visual={isOpen} close={closePopup}>
-        {definePopup(popup)}
-      </Modal>
+      />
+      {opening()}
     </>
   )
 }

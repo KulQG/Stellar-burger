@@ -10,14 +10,11 @@
 }
 
 .modal {
-    display: none;
-}
-
-.modal.active {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 
 .icon {
     position: relative;

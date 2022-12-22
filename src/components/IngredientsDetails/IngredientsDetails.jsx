@@ -10,7 +10,7 @@ export default function IngredientsDetails({card}) {
         <div className={classes.img}>
           <img className={classes.imgContent} src={card.image_large} alt={card.name} />
         </div>
-        <p style={{textAlign: 'center'}} className="text text_type_main-medium">{card.name}</p>
+        <p className={`text text_type_main-medium ${classes.text}`}>{card.name}</p>
         <div className={classes.info}>
           <div className={classes.infoElement}>
             <p className="text text_type_main-default text_color_inactive">

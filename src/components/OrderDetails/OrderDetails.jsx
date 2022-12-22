@@ -6,7 +6,7 @@ import done from '../../images/done.svg'
 export default function OrderDetails(props) {
   return (
     <div className={orderClass.box}>
-      <h2 style={{textAlign: 'self'}} className={`text text_type_digits-large ${orderClass.title}`}>
+      <h2 className={`text text_type_digits-large ${orderClass.title}`}>
         034536
       </h2>
       <h3 className={`text text_type_main-medium ${orderClass.subtitle}`}>
