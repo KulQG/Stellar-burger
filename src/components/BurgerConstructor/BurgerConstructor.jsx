@@ -15,23 +15,11 @@ export default function BurgerConstructor(props) {
     //удаление булок из массива
     let filling = arr.filter((card) => card.type !== 'bun')
 
-    const setDeterminant = () => {
-      props.def('ingr')
-    }
-
     //возврат каждой карточки
     const mapMethod = (arr) => {
       return arr.map((card) => {
         return (
-          <div
-            onClick={() => {
-              props.openPopup()
-              props.setter(card)
-              props.def('ingr')
-            }}
-            className={BrgConstructorStyles.fillingElement}
-            key={card._id}
-          >
+          <div className={BrgConstructorStyles.fillingElement} key={card._id}>
             <DragIcon type="secondary" />
             <ConstructorElement
               text={card.name}

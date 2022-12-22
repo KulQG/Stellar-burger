@@ -19,7 +19,15 @@ export default function Card(props) {
   }
 
   return (
-    <div id={props.post._id} className={cardStyles.card} >
+    <div
+      id={props.post._id}
+      className={cardStyles.card}
+      onClick={() => {
+        props.openPopup()
+        props.setter(props.post)
+        props.def('ingr')
+      }}
+    >
       {setCounter()}
       <img
         className={cardStyles.image}

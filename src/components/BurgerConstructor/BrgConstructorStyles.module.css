@@ -34,7 +34,6 @@
     align-items: center;
     width: calc(100% - 8px);
     gap: 8px;
-    cursor: pointer
 }
 
 .order {
