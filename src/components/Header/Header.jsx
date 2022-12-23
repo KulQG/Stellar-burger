@@ -5,7 +5,7 @@ import NavigationComponent from '../NavigationComponent/NavigationComponent'
 
 export default function Header() {
   return (
-    <div className={headerStyles.content}>
+    <header className={headerStyles.content}>
       <div className={headerStyles.leftPanels}>
         <NavigationComponent text="Конструктор" icon="burger" />
         <NavigationComponent text="Лента заказов" icon="list" />
@@ -14,6 +14,6 @@ export default function Header() {
       <div className={headerStyles.rightPanel}>
         <NavigationComponent text="Личный кабинет" icon="profile" />
       </div>
-    </div>
+    </header>
   )
 }

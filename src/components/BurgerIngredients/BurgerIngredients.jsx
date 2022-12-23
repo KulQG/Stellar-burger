@@ -6,7 +6,7 @@ import BIngrStyles from './BurgerIngredients.module.css'
 
 export default function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one')
-  const [cards, setCards] = React.useState(props.arr)
+  //const [cards, setCards] = React.useState(props.arr)
 
   //разделение ингредиентов
   const headersWithCards = () => {
@@ -15,7 +15,7 @@ export default function BurgerIngredients(props) {
     let main = []
     let sauces = []
 
-    cards.forEach((card) => {
+    props.arr.forEach((card) => {
       if (card.type === 'bun') {
         buns.push(card)
       } else if (card.type === 'main') {
@@ -25,21 +25,30 @@ export default function BurgerIngredients(props) {
       }
     })
 
-    //возврат разметки карточки 
+    //возврат разметки карточки
     //для каждого уникального массива
     const mapMethod = (arr) => {
       return arr.map((card) => {
-        return (<Card post={card} key={card._id} />)
+        return (
+          <Card
+            setter={props.setter}
+            arr={props.arr}
+            openPopup={props.openPopup}
+            def={props.def}
+            post={card}
+            key={card._id}
+          />
+        )
       })
     }
 
     return (
       <>
-        <h2 className="text text_type_main-medium" >Булки</h2>
+        <h2 className="text text_type_main-medium">Булки</h2>
         <div className={BIngrStyles.cards}>{mapMethod(buns)}</div>
-        <h2 className="text text_type_main-medium" >Соусы</h2>
+        <h2 className="text text_type_main-medium">Соусы</h2>
         <div className={BIngrStyles.cards}>{mapMethod(sauces)}</div>
-        <h2 className="text text_type_main-medium" >Начинки</h2>
+        <h2 className="text text_type_main-medium">Начинки</h2>
         <div className={BIngrStyles.cards}>{mapMethod(main)}</div>
       </>
     )
@@ -73,5 +82,8 @@ export default function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-  arr: PropTypes.array.isRequired
+  arr: PropTypes.array.isRequired,
+  setter: PropTypes.func.isRequired,
+  openPopup: PropTypes.func.isRequired,
+  def: PropTypes.func.isRequired
 }

@@ -10,12 +10,15 @@ export default function TotalConstructor(props) {
 
   return (
     <main className={ConstructorStyles.main}>
-      <BurgerIngredients arr={props.arr} />
-      <BurgerConstructor arr={props.arr} />
+      <BurgerIngredients setter={props.setter} arr={props.arr} openPopup={props.openPopup} def={props.def} />
+      <BurgerConstructor arr={props.arr} openPopup={props.openPopup} def={props.def}/>
     </main>
   )
 }
 
 TotalConstructor.propTypes = {
-  arr: PropTypes.array.isRequired
+  arr: PropTypes.array.isRequired,
+  setter: PropTypes.func.isRequired,
+  openPopup: PropTypes.func.isRequired,
+  def: PropTypes.func.isRequired
 }

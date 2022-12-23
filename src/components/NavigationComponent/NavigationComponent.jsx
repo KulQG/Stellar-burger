@@ -36,7 +36,7 @@ export default function NavigationComponent(props) {
   return (
     <div className={navigStyles.chapter} onClick={handleClick}>
       {setIcons()}
-      <p style={{ userSelect: 'none' }} className={classText}>{props.text}</p>
+      <p className={`${classText} ${navigStyles.text}`}>{props.text}</p>
     </div>
   )
 }
