@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import cardStyles from './Card.module.css'
 import PropTypes from 'prop-types'
+import { CheckPopupContext, PopupContext, SetterContext } from '../contexts'
 
 export default function Card(props) {
   //const [card, setCard] = React.useState(props)
+  const setter = useContext(SetterContext)
+  const openPopup = useContext(PopupContext)
+  const def = useContext(CheckPopupContext)
 
   const setCounter = () => {
     if (props.post.__v >= 1) {
@@ -24,9 +28,9 @@ export default function Card(props) {
       id={props.post._id}
       className={cardStyles.card}
       onClick={() => {
-        props.openPopup()
-        props.setter(props.post)
-        props.def('ingr')
+        openPopup()
+        setter(props.post)
+        def('ingr')
       }}
     >
       {setCounter()}
@@ -45,9 +49,5 @@ export default function Card(props) {
 }
 
 Card.propTypes = {
-  setter: PropTypes.func.isRequired,
-  arr:PropTypes.array.isRequired,
-  openPopup:PropTypes.func.isRequired,
-  def:PropTypes.func.isRequired,
   post:PropTypes.object.isRequired,
 }

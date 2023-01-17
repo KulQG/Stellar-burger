@@ -7,6 +7,7 @@ import ModalOverlay from '../ModalOverlay/ModalOverlay'
 import OrderDetails from '../OrderDetails/OrderDetails'
 import IngredientsDetails from '../IngredientsDetails/IngredientsDetails'
 import Modal from '../Modal/Modal'
+import { CardsContext, CheckPopupContext, PopupContext, SetterContext } from '../contexts'
 
 function App() {
   //состояние для загрузки карточек
@@ -62,21 +63,22 @@ function App() {
 
   const opening = () => {
     if (isOpen) {
-      return (<Modal close={closePopup}>{definePopup(popup)}</Modal>)
+      return <Modal close={closePopup}>{definePopup(popup)}</Modal>
     }
   }
 
   return (
-    <>
-      <Header />
-      <TotalConstructor
-        setter={setCard}
-        arr={state.cardData}
-        openPopup={openPopup}
-        def={setPopup}
-      />
-      {opening()}
-    </>
+    <CardsContext.Provider value={state.cardData}>
+      <SetterContext.Provider value={setCard}>
+        <PopupContext.Provider value={openPopup}>
+          <CheckPopupContext.Provider value={setPopup}>
+            <Header />
+            <TotalConstructor/>
+            {opening()}
+          </CheckPopupContext.Provider>
+        </PopupContext.Provider>
+      </SetterContext.Provider>
+    </CardsContext.Provider>
   )
 }
 

@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Card from '../Card/Card'
 import BIngrStyles from './BurgerIngredients.module.css'
+import { CardsContext } from '../contexts'
 
 export default function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one')
   //const [cards, setCards] = React.useState(props.arr)
+  const arr = useContext(CardsContext)
+
 
   //разделение ингредиентов
   const headersWithCards = () => {
@@ -15,7 +18,7 @@ export default function BurgerIngredients(props) {
     let main = []
     let sauces = []
 
-    props.arr.forEach((card) => {
+    arr.forEach((card) => {
       if (card.type === 'bun') {
         buns.push(card)
       } else if (card.type === 'main') {
@@ -31,10 +34,6 @@ export default function BurgerIngredients(props) {
       return arr.map((card) => {
         return (
           <Card
-            setter={props.setter}
-            arr={props.arr}
-            openPopup={props.openPopup}
-            def={props.def}
             post={card}
             key={card._id}
           />
@@ -79,11 +78,4 @@ export default function BurgerIngredients(props) {
       </div>
     </div>
   )
-}
-
-BurgerIngredients.propTypes = {
-  arr: PropTypes.array.isRequired,
-  setter: PropTypes.func.isRequired,
-  openPopup: PropTypes.func.isRequired,
-  def: PropTypes.func.isRequired
 }

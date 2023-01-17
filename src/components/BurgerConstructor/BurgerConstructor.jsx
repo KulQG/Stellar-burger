@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
@@ -8,8 +8,13 @@ import {
 import blueBun from '../../images/blue-bun.png'
 import BrgConstructorStyles from './BrgConstructorStyles.module.css'
 import PropTypes from 'prop-types'
+import { CardsContext, CheckPopupContext, PopupContext } from '../contexts'
 
-export default function BurgerConstructor(props) {
+export default function BurgerConstructor() {
+  const arr = useContext(CardsContext)
+  const openPopup = useContext(PopupContext)
+  const def = useContext(CheckPopupContext)
+
   //функция нужна для возврата карточек из массива
   const fill = (arr) => {
     //удаление булок из массива
@@ -51,7 +56,7 @@ export default function BurgerConstructor(props) {
           price={200}
           thumbnail={blueBun}
         />
-        <div className={BrgConstructorStyles.filling}>{fill(props.arr)}</div>
+        <div className={BrgConstructorStyles.filling}>{fill(arr)}</div>
         <ConstructorElement
           type="bottom"
           isLocked={true}
@@ -62,7 +67,7 @@ export default function BurgerConstructor(props) {
       </div>
       <div className={BrgConstructorStyles.order}>
         <div className={BrgConstructorStyles.price}>
-          <p className="text text_type_digits-medium">{counter(props.arr)}</p>
+          <p className="text text_type_digits-medium">{counter(arr)}</p>
           <CurrencyIcon type="primary" />
         </div>
         <Button
@@ -70,8 +75,8 @@ export default function BurgerConstructor(props) {
           type="primary"
           size="large"
           onClick={() => {
-            props.openPopup()
-            props.def('order')
+            openPopup()
+            def('order')
           }}
         >
           Оформить заказ
@@ -81,8 +86,3 @@ export default function BurgerConstructor(props) {
   )
 }
 
-BurgerConstructor.propTypes = {
-  arr: PropTypes.array.isRequired,
-  openPopup: PropTypes.func.isRequired,
-  def: PropTypes.func.isRequired
-}
