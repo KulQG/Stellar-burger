@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState,useContext, useReducer, useEffect } from 'react'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
@@ -7,7 +7,6 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import blueBun from '../../images/blue-bun.png'
 import BrgConstructorStyles from './BrgConstructorStyles.module.css'
-import PropTypes from 'prop-types'
 import { CardsContext, CheckPopupContext, PopupContext } from '../contexts'
 
 export default function BurgerConstructor() {
@@ -38,12 +37,47 @@ export default function BurgerConstructor() {
 
     return <>{mapMethod(filling)}</>
   }
-
+  
   //подсчет итоговой стоимости бургера
+
+  //Я использую useEffect, так как state полгружался раньше, чем данные
+  //из сервера и не менялся. Поэтому я сделал так, чтобы сначала
+  //загружался массив, а уже потом генерировалась общая цена
+  useEffect(() => {
+    if (arr) {
+      dispatch({type: 'data', payload: counter(arr)})
+    }
+  }, [arr])
+
+  //функция счетчик, складывающий все price
   const counter = (arr) => {
     const prices = arr.map((card) => card.price)
     const reduc = prices.reduce((acc, current) => acc + current, 0)
     return reduc
+  }
+
+  //Когда приходят данные я меняю price со значением counter(arr)
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'data':
+        return { price: action.payload }
+      case 'increment':
+        return { price: state.price + 1 }
+      case 'decrement':
+        return { price: state.price - 1 }
+      default:
+        return { price: state.price }
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, { price: 0 })
+
+  const incrementClick = () => {
+    dispatch({ type: 'increment' })
+  }
+
+  const decrementClick = () => {
+    dispatch({ type: 'decrement' })
   }
 
   return (
@@ -56,7 +90,9 @@ export default function BurgerConstructor() {
           price={200}
           thumbnail={blueBun}
         />
-        <div className={BrgConstructorStyles.filling}>{fill(arr)}</div>
+        <div className={BrgConstructorStyles.filling}>
+          {fill(arr)}
+        </div>
         <ConstructorElement
           type="bottom"
           isLocked={true}
@@ -67,7 +103,7 @@ export default function BurgerConstructor() {
       </div>
       <div className={BrgConstructorStyles.order}>
         <div className={BrgConstructorStyles.price}>
-          <p className="text text_type_digits-medium">{counter(arr)}</p>
+          <p className="text text_type_digits-medium">{state.price}</p>
           <CurrencyIcon type="primary" />
         </div>
         <Button
@@ -85,4 +121,3 @@ export default function BurgerConstructor() {
     </div>
   )
 }
-
