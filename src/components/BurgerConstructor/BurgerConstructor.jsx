@@ -62,9 +62,9 @@ export default function BurgerConstructor() {
       case 'data':
         return { price: action.payload }
       case 'increment':
-        return { price: state.price + 1 }
+        return { price: state.price + action.payload }
       case 'decrement':
-        return { price: state.price - 1 }
+        return { price: state.price - action.payload }
       default:
         return { price: state.price }
     }
@@ -72,12 +72,12 @@ export default function BurgerConstructor() {
 
   const [state, dispatch] = useReducer(reducer, { price: 0 })
 
-  const incrementClick = () => {
-    dispatch({ type: 'increment' })
+  const incrementClick = (value) => {
+    dispatch({ type: 'increment', payload: value })
   }
 
-  const decrementClick = () => {
-    dispatch({ type: 'decrement' })
+  const decrementClick = (value) => {
+    dispatch({ type: 'decrement', payload: value })
   }
 
   return (
@@ -111,8 +111,8 @@ export default function BurgerConstructor() {
           type="primary"
           size="large"
           onClick={() => {
-            openPopup()
             def('order')
+            openPopup()
           }}
         >
           Оформить заказ

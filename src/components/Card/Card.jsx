@@ -8,12 +8,11 @@ import PropTypes from 'prop-types'
 import { CheckPopupContext, PopupContext, SetterContext } from '../contexts'
 
 export default function Card(props) {
-  //const [card, setCard] = React.useState(props)
   const setter = useContext(SetterContext)
   const openPopup = useContext(PopupContext)
   const def = useContext(CheckPopupContext)
 
-  const setCounter = () => {
+  /*const setCounter = () => {
     if (props.post.__v >= 1) {
       return (
         <div className={cardStyles.count}>
@@ -21,7 +20,7 @@ export default function Card(props) {
         </div>
       )
     }
-  }
+  }*/
 
   return (
     <div
@@ -33,7 +32,7 @@ export default function Card(props) {
         def('ingr')
       }}
     >
-      {setCounter()}
+      {/*setCounter()*/}
       <img
         className={cardStyles.image}
         src={props.post.image}
@@ -49,5 +48,5 @@ export default function Card(props) {
 }
 
 Card.propTypes = {
-  post:PropTypes.object.isRequired,
+  post:PropTypes.shape.isRequired,
 }
