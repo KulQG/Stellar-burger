@@ -1,4 +1,4 @@
-import React, { useState,useContext, useReducer, useEffect } from 'react'
+import React, { useState, useContext, useReducer, useEffect } from 'react'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
@@ -7,12 +7,13 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import blueBun from '../../images/blue-bun.png'
 import BrgConstructorStyles from './BrgConstructorStyles.module.css'
-import { CardsContext, CheckPopupContext, PopupContext } from '../contexts'
+import { CardsContext, CheckPopupContext, PopupContext, SetterContext } from '../contexts'
 
 export default function BurgerConstructor() {
   const arr = useContext(CardsContext)
   const openPopup = useContext(PopupContext)
   const def = useContext(CheckPopupContext)
+  const {card, setOrderData} = useContext(SetterContext)
 
   //функция нужна для возврата карточек из массива
   const fill = (arr) => {
@@ -37,7 +38,7 @@ export default function BurgerConstructor() {
 
     return <>{mapMethod(filling)}</>
   }
-  
+
   //подсчет итоговой стоимости бургера
 
   //Я использую useEffect, так как state полгружался раньше, чем данные
@@ -45,7 +46,7 @@ export default function BurgerConstructor() {
   //загружался массив, а уже потом генерировалась общая цена
   useEffect(() => {
     if (arr) {
-      dispatch({type: 'data', payload: counter(arr)})
+      dispatch({ type: 'data', payload: counter(arr) })
     }
   }, [arr])
 
@@ -80,6 +81,47 @@ export default function BurgerConstructor() {
     dispatch({ type: 'decrement', payload: value })
   }
 
+  //отправка и получение api///////////////////////////////
+  //Здесь будет храниться номер заказа
+  const [order, setOrder] = useState({num: ''})
+  //когда будет нажата кнопка активируется useEffect
+  const [click, setClick] = useState(false)
+
+  //массив из id карточек для передачи на сервер
+  const ids = () => {
+    const idArr = arr.map((card) => card._id)
+    return idArr
+  }
+
+  useEffect(() => {
+    const postData = async () => {
+      try {
+        const res = await fetch(
+          'https://norma.nomoreparties.space/api/orders',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              'ingredients': ids(),
+            }),
+          },
+        )
+        if (res.ok) {
+          const data = await res.json()
+          //setOrder({num: data.order.number})
+          setOrderData(`${data.order.number}`)
+        } else {
+          Promise.reject(`Error ${res.status}`)
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    postData()
+  }, [click])
+
   return (
     <div className={BrgConstructorStyles.total}>
       <div className={BrgConstructorStyles.elements}>
@@ -90,9 +132,7 @@ export default function BurgerConstructor() {
           price={200}
           thumbnail={blueBun}
         />
-        <div className={BrgConstructorStyles.filling}>
-          {fill(arr)}
-        </div>
+        <div className={BrgConstructorStyles.filling}>{fill(arr)}</div>
         <ConstructorElement
           type="bottom"
           isLocked={true}
@@ -113,6 +153,7 @@ export default function BurgerConstructor() {
           onClick={() => {
             def('order')
             openPopup()
+            setClick(!click)
           }}
         >
           Оформить заказ

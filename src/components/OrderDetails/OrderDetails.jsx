@@ -7,7 +7,7 @@ export default function OrderDetails(props) {
   return (
     <div className={orderClass.box}>
       <h2 className={`text text_type_digits-large ${orderClass.title}`}>
-        034536
+        {props.order}
       </h2>
       <h3 className={`text text_type_main-medium ${orderClass.subtitle}`}>
         идентификатор заказа

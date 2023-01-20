@@ -3,7 +3,6 @@ import appStyles from './App.module.css'
 import Header from '../Header/Header'
 import TotalConstructor from '../TotalConstructor/TotalConstructor'
 import { address } from '../../utils/consts.js'
-import ModalOverlay from '../ModalOverlay/ModalOverlay'
 import OrderDetails from '../OrderDetails/OrderDetails'
 import IngredientsDetails from '../IngredientsDetails/IngredientsDetails'
 import Modal from '../Modal/Modal'
@@ -38,6 +37,8 @@ function App() {
 
   //состояние для передачи в попап данных
   const [card, setCard] = React.useState({})
+  const [orderData, setOrderData] = React.useState('')
+  console.log(orderData)
 
   //состояние открытого и закрытого попапа
   const [isOpen, setIsOpen] = React.useState(false)
@@ -57,7 +58,7 @@ function App() {
     if (p === 'ingr') {
       return <IngredientsDetails card={card} />
     } else if (p === 'order') {
-      return <OrderDetails />
+      return <OrderDetails order={orderData} />
     }
   }
 
@@ -69,7 +70,7 @@ function App() {
 
   return (
     <CardsContext.Provider value={state.cardData}>
-      <SetterContext.Provider value={setCard}>
+      <SetterContext.Provider value={{setCard, setOrderData}}>
         <PopupContext.Provider value={openPopup}>
           <CheckPopupContext.Provider value={setPopup}>
             <Header />
