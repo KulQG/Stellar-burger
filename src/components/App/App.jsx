@@ -6,7 +6,15 @@ import { address } from '../../utils/consts.js'
 import OrderDetails from '../OrderDetails/OrderDetails'
 import IngredientsDetails from '../IngredientsDetails/IngredientsDetails'
 import Modal from '../Modal/Modal'
-import { CardsContext, CheckPopupContext, PopupContext, SetterContext } from '../contexts'
+import { useSelector, useDispatch } from 'react-redux';
+import { getFeed } from '../../services/actions';
+import {
+  CardsContext,
+  CheckPopupContext,
+  PopupContext,
+  SetterContext,
+} from '../contexts'
+
 
 function App() {
   //состояние для загрузки карточек
@@ -14,9 +22,13 @@ function App() {
     isLoading: true,
     cardData: [],
   })
+  
 
+  const feed = useSelector(store => store.feedReducer.feed)
+  console.log(feed)
+  const dispatch = useDispatch()
   //запрос карточек с сервера
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     const getData = async () => {
       try {
         setState({ ...state, loading: true })
@@ -33,12 +45,16 @@ function App() {
       }
     }
     getData()
+  }, [])*/
+  React.useEffect(()=> {
+    dispatch(getFeed())
+    setState({...state, cardData: feed})
+    console.log(state)
   }, [])
 
   //состояние для передачи в попап данных
   const [card, setCard] = React.useState({})
   const [orderData, setOrderData] = React.useState('')
-  console.log(orderData)
 
   //состояние открытого и закрытого попапа
   const [isOpen, setIsOpen] = React.useState(false)
@@ -70,11 +86,11 @@ function App() {
 
   return (
     <CardsContext.Provider value={state.cardData}>
-      <SetterContext.Provider value={{setCard, setOrderData}}>
+      <SetterContext.Provider value={{ setCard, setOrderData }}>
         <PopupContext.Provider value={openPopup}>
           <CheckPopupContext.Provider value={setPopup}>
             <Header />
-            <TotalConstructor/>
+            <TotalConstructor />
             {opening()}
           </CheckPopupContext.Provider>
         </PopupContext.Provider>
