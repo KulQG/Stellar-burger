@@ -56,7 +56,7 @@ function App() {
   }
 
   return (
-      <SetterContext.Provider value={{ setCard, setOrderData }}>
+      <SetterContext.Provider value={setCard}>
         <PopupContext.Provider value={openPopup}>
           <CheckPopupContext.Provider value={setPopup}>
             <Header />
