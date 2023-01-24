@@ -46,7 +46,3 @@ export default function Card(props) {
     </div>
   )
 }
-
-Card.propTypes = {
-  post:PropTypes.shape.isRequired,
-}

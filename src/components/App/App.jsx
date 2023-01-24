@@ -17,39 +17,10 @@ import {
 
 
 function App() {
-  //состояние для загрузки карточек
-  const [state, setState] = React.useState({
-    isLoading: true,
-    cardData: [],
-  })
-  
-
-  const feed = useSelector(store => store.feedReducer.feed)
-  console.log(feed)
   const dispatch = useDispatch()
   //запрос карточек с сервера
-  /*React.useEffect(() => {
-    const getData = async () => {
-      try {
-        setState({ ...state, loading: true })
-        const res = await fetch(address)
-        if (res.ok) {
-          let data
-          data = await res.json()
-          setState({ cardData: data.data, isLoading: false })
-        } else {
-          Promise.reject(`Ошибка ${res.status}`)
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getData()
-  }, [])*/
   React.useEffect(()=> {
     dispatch(getFeed())
-    setState({...state, cardData: feed})
-    console.log(state)
   }, [])
 
   //состояние для передачи в попап данных
@@ -85,7 +56,6 @@ function App() {
   }
 
   return (
-    <CardsContext.Provider value={state.cardData}>
       <SetterContext.Provider value={{ setCard, setOrderData }}>
         <PopupContext.Provider value={openPopup}>
           <CheckPopupContext.Provider value={setPopup}>
@@ -95,7 +65,6 @@ function App() {
           </CheckPopupContext.Provider>
         </PopupContext.Provider>
       </SetterContext.Provider>
-    </CardsContext.Provider>
   )
 }
 

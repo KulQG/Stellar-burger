@@ -8,9 +8,10 @@ import {
 import blueBun from '../../images/blue-bun.png'
 import BrgConstructorStyles from './BrgConstructorStyles.module.css'
 import { CardsContext, CheckPopupContext, PopupContext, SetterContext } from '../contexts'
+import { useSelector } from 'react-redux'
 
 export default function BurgerConstructor() {
-  const arr = useContext(CardsContext)
+  const arr = useSelector(store => store.feedReducer.feed)
   const openPopup = useContext(PopupContext)
   const def = useContext(CheckPopupContext)
   const {card, setOrderData} = useContext(SetterContext)

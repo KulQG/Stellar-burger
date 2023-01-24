@@ -4,12 +4,11 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Card from '../Card/Card'
 import BIngrStyles from './BurgerIngredients.module.css'
 import { CardsContext } from '../contexts'
+import { useSelector } from 'react-redux'
 
 export default function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one')
-  //const [cards, setCards] = React.useState(props.arr)
-  const arr = useContext(CardsContext)
-
+  const arr = useSelector(store => store.feedReducer.feed)
 
   //разделение ингредиентов
   const headersWithCards = () => {

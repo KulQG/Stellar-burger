@@ -13,18 +13,19 @@ export function getFeed() {
     fetch(address)
       .then((res) => {
         if (res.ok) {
-          const data = res.json()
-          dispatch({
-            type: GET_FEED_SUCCESS,
-            feed: data,
-          })
-          console.log(data)
+          return res.json()
         } else {
           dispatch({
             type: GET_FEED_FAILED,
           })
           console.log('ошибка при получении данных' + res.status)
         }
+      })
+      .then(data => {
+        dispatch({
+            type: GET_FEED_SUCCESS,
+            feed: data.data,
+          })
       })
       .catch((err) => {
         dispatch({
