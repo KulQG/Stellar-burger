@@ -3,9 +3,9 @@ import {
   GET_FEED_SUCCESS,
   GET_FEED_FAILED,
   address,
-  POST_ORDER,
-  POST_ORDER_FAILED,
-  POST_ORDER_SUCCESS,
+  GET_ORDER,
+  GET_ORDER_FAILED,
+  GET_ORDER_SUCCESS,
   postAddress,
 } from '../../utils/consts'
 
@@ -40,14 +40,14 @@ export function getFeed() {
   }
 }
 
-/*export function getOrder(arr) {
+export function getOrder(arr) {
   return function (dispatch) {
-    //const ids = () => {
-    //  const idArr = arr.map((card) => card._id)
-    //  return idArr
-    //}
+    const ids = () => {
+      const idArr = arr.map((card) => card._id)
+      return idArr
+    }
     dispatch({
-      type: POST_ORDER,
+      type: GET_ORDER,
     })
     fetch(postAddress, {
       method: 'POST',
@@ -55,7 +55,7 @@ export function getFeed() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        ingredients: ids()
+        ingredients: ids(),
       }),
     })
       .then((res) => {
@@ -63,22 +63,23 @@ export function getFeed() {
           return res.json()
         } else {
           dispatch({
-            type: POST_ORDER_FAILED,
+            type: GET_ORDER_FAILED,
           })
           console.log('ошибка при получении данных' + res.status)
         }
       })
       .then((data) => {
         dispatch({
-          type: POST_ORDER_SUCCESS,
+          type: GET_ORDER_SUCCESS,
           order: data.order.number,
         })
+        console.log(data)
       })
       .catch((err) => {
         dispatch({
-          type: POST_ORDER_FAILED,
+          type: GET_ORDER_FAILED,
         })
         console.log('ошибка' + err)
       })
   }
-}*/
+}

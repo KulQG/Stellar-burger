@@ -15,9 +15,9 @@ const initialStateFeed = {
 }
 
 const initialStateOrder = {
-  order: null,
   orderRequest: false,
   orderFailed: false,
+  order: 0,
 }
 
 export const feedReducer = (state = initialStateFeed, action) => {

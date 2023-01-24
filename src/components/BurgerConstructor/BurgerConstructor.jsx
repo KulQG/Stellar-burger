@@ -8,7 +8,8 @@ import {
 import blueBun from '../../images/blue-bun.png'
 import BrgConstructorStyles from './BrgConstructorStyles.module.css'
 import { CardsContext, CheckPopupContext, PopupContext, SetterContext } from '../contexts'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getOrder } from '../../services/actions'
 
 export default function BurgerConstructor() {
   const arr = useSelector(store => store.feedReducer.feed)
@@ -94,33 +95,10 @@ export default function BurgerConstructor() {
     return idArr
   }
 
+  const dispatcher = useDispatch()
+
   useEffect(() => {
-    const postData = async () => {
-      try {
-        const res = await fetch(
-          'https://norma.nomoreparties.space/api/orders',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              'ingredients': ids(),
-            }),
-          },
-        )
-        if (res.ok) {
-          const data = await res.json()
-          //setOrder({num: data.order.number})
-          setOrderData(`${data.order.number}`)
-        } else {
-          Promise.reject(`Error ${res.status}`)
-        }
-      } catch (e) {
-        console.log(e)
-      }
-    }
-    postData()
+    dispatcher(getOrder(arr))
   }, [click])
 
   return (
