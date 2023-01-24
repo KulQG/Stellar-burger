@@ -12,15 +12,13 @@ export default function Card(props) {
   const openPopup = useContext(PopupContext)
   const def = useContext(CheckPopupContext)
 
-  /*const setCounter = () => {
-    if (props.post.__v >= 1) {
+  const setCounter = () => {
       return (
         <div className={cardStyles.count}>
-          <Counter count={props.post.__v} size="default" extraClass="m-1" />
+          <Counter count={1} size="default" extraClass="m-1" />
         </div>
       )
-    }
-  }*/
+  }
 
   return (
     <div
@@ -32,7 +30,7 @@ export default function Card(props) {
         def('ingr')
       }}
     >
-      {/*setCounter()*/}
+      {setCounter()}
       <img
         className={cardStyles.image}
         src={props.post.image}
