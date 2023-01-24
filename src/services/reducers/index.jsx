@@ -17,7 +17,7 @@ const initialStateFeed = {
 const initialStateOrder = {
   orderRequest: false,
   orderFailed: false,
-  order: 0,
+  order: null,
 }
 
 export const feedReducer = (state = initialStateFeed, action) => {
@@ -60,8 +60,8 @@ export const orderReducer = (state = initialStateOrder, action) => {
     }
     case GET_ORDER_SUCCESS: {
       return {
-        ...state,
-        order: action.feed,
+        orderFailed: false,
+        order: action.order,
         orderRequest: false,
       }
     }
