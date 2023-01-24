@@ -1,13 +1,26 @@
 import { combineReducers } from 'redux'
-import { GET_FEED, GET_FEED_SUCCESS, GET_FEED_FAILED } from '../../utils/consts'
+import {
+  GET_FEED,
+  GET_FEED_SUCCESS,
+  GET_FEED_FAILED,
+  GET_ORDER,
+  GET_ORDER_FAILED,
+  GET_ORDER_SUCCESS,
+} from '../../utils/consts'
 
-const initialState = {
+const initialStateFeed = {
   feedRequest: false,
   feedFailed: false,
   feed: [],
 }
 
-export const feedReducer = (state = initialState, action) => {
+const initialStateOrder = {
+  order: null,
+  orderRequest: false,
+  orderFailed: false,
+}
+
+export const feedReducer = (state = initialStateFeed, action) => {
   switch (action.type) {
     case GET_FEED: {
       return {
@@ -36,4 +49,33 @@ export const feedReducer = (state = initialState, action) => {
   }
 }
 
-export const rootReducer = combineReducers({ feedReducer })
+export const orderReducer = (state = initialStateOrder, action) => {
+  switch (action.type) {
+    case GET_ORDER: {
+      return {
+        ...state,
+        orderRequest: true,
+        orderFailed: false,
+      }
+    }
+    case GET_ORDER_SUCCESS: {
+      return {
+        ...state,
+        order: action.feed,
+        orderRequest: false,
+      }
+    }
+    case GET_ORDER_FAILED: {
+      return {
+        ...state,
+        orderFailed: true,
+        orderRequest: false,
+      }
+    }
+    default: {
+      return state
+    }
+  }
+}
+
+export const rootReducer = combineReducers({ feedReducer, orderReducer })
