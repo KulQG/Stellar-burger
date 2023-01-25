@@ -20,6 +20,7 @@ export default function BurgerConstructor() {
   const fill = (arr) => {
     //удаление булок из массива
     const filling = arr.filter((card) => card.type !== 'bun')
+    dispatcher({type: 'GET_FILLING', payload: filling})
 
     //возврат каждой карточки
     const mapMethod = (arr) => {
@@ -38,6 +39,10 @@ export default function BurgerConstructor() {
     }
 
     return <>{mapMethod(filling)}</>
+  }
+
+  const mainConstructor = () => {
+
   }
 
   //подсчет итоговой стоимости бургера

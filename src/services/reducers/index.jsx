@@ -44,10 +44,10 @@ export const feedReducer = (state = initialStateFeed, action) => {
 }
 
 const initialStateOrder = {
-    orderRequest: false,
-    orderFailed: false,
-    order: null,
-  }
+  orderRequest: false,
+  orderFailed: false,
+  order: null,
+}
 
 export const orderReducer = (state = initialStateOrder, action) => {
   switch (action.type) {
@@ -79,23 +79,47 @@ export const orderReducer = (state = initialStateOrder, action) => {
 }
 
 const currentCardState = {
-    post: null
+  post: null,
 }
 
 const currentCard = (state = currentCardState, action) => {
-    switch (action.type) {
-        case 'GET_CURRENT_CARD': {
-            return {
-                post: action.payload
-            }
-        }
-        case 'REMOVE_CURRENT_CARD': {
-            return {
-                post: null
-            }
-        }
-        default: {return state}
+  switch (action.type) {
+    case 'GET_CURRENT_CARD': {
+      return {
+        post: action.payload,
+      }
     }
+    case 'REMOVE_CURRENT_CARD': {
+      return {
+        post: null,
+      }
+    }
+    default: {
+      return state
+    }
+  }
 }
 
-export const rootReducer = combineReducers({ feedReducer, orderReducer, currentCard })
+const constructor = {
+  fill: [],
+}
+
+const getConstructor = (state = constructor, action) => {
+  switch (action.type) {
+    case 'GET_FILLING': {
+      return {
+        fill: action.payload,
+      }
+    }
+    default: {
+      return state
+    }
+  }
+}
+
+export const rootReducer = combineReducers({
+  feedReducer,
+  orderReducer,
+  currentCard,
+  getConstructor,
+})
