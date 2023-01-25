@@ -73,7 +73,6 @@ export function getOrder(arr) {
           type: GET_ORDER_SUCCESS,
           order: data.order.number,
         })
-        console.log(data)
       })
       .catch((err) => {
         dispatch({

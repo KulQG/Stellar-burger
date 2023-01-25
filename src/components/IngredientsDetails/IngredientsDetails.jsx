@@ -1,8 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import classes from './IngredientsDetails.module.css'
 
-export default function IngredientsDetails({card}) {
-
+export default function IngredientsDetails() {
+  const card = useSelector(store => store.currentCard.post)
   return (
     <div className={classes.box}>
       <h2 className="text text_type_main-large">Детали ингредиента</h2>

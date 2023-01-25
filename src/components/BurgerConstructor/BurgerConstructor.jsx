@@ -15,7 +15,6 @@ export default function BurgerConstructor() {
   const arr = useSelector(store => store.feedReducer.feed)
   const openPopup = useContext(PopupContext)
   const def = useContext(CheckPopupContext)
-  const {card, setOrderData} = useContext(SetterContext)
 
   //функция нужна для возврата карточек из массива
   const fill = (arr) => {
@@ -84,16 +83,8 @@ export default function BurgerConstructor() {
   }
 
   //отправка и получение api///////////////////////////////
-  //Здесь будет храниться номер заказа
-  const [order, setOrder] = useState({num: ''})
   //когда будет нажата кнопка активируется useEffect
   const [click, setClick] = useState(false)
-
-  //массив из id карточек для передачи на сервер
-  const ids = () => {
-    const idArr = arr.map((card) => card._id)
-    return idArr
-  }
 
   const dispatcher = useDispatch()
 

@@ -14,12 +14,6 @@ const initialStateFeed = {
   feed: [],
 }
 
-const initialStateOrder = {
-  orderRequest: false,
-  orderFailed: false,
-  order: null,
-}
-
 export const feedReducer = (state = initialStateFeed, action) => {
   switch (action.type) {
     case GET_FEED: {
@@ -48,6 +42,12 @@ export const feedReducer = (state = initialStateFeed, action) => {
     }
   }
 }
+
+const initialStateOrder = {
+    orderRequest: false,
+    orderFailed: false,
+    order: null,
+  }
 
 export const orderReducer = (state = initialStateOrder, action) => {
   switch (action.type) {
@@ -78,4 +78,24 @@ export const orderReducer = (state = initialStateOrder, action) => {
   }
 }
 
-export const rootReducer = combineReducers({ feedReducer, orderReducer })
+const currentCardState = {
+    post: null
+}
+
+const currentCard = (state = currentCardState, action) => {
+    switch (action.type) {
+        case 'GET_CURRENT_CARD': {
+            return {
+                post: action.payload
+            }
+        }
+        case 'REMOVE_CURRENT_CARD': {
+            return {
+                post: null
+            }
+        }
+        default: {return state}
+    }
+}
+
+export const rootReducer = combineReducers({ feedReducer, orderReducer, currentCard })

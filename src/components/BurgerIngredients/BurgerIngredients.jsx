@@ -6,7 +6,7 @@ import BIngrStyles from './BurgerIngredients.module.css'
 import { CardsContext } from '../contexts'
 import { useSelector } from 'react-redux'
 
-export default function BurgerIngredients(props) {
+export default function BurgerIngredients() {
   const [current, setCurrent] = React.useState('one')
   const arr = useSelector(store => store.feedReducer.feed)
 

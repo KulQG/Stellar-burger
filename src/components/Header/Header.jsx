@@ -10,7 +10,7 @@ export default function Header() {
         <NavigationComponent text="Конструктор" icon="burger" />
         <NavigationComponent text="Лента заказов" icon="list" />
       </div>
-      <Logo />
+      <Logo className={headerStyles.logo}/>
       <div className={headerStyles.rightPanel}>
         <NavigationComponent text="Личный кабинет" icon="profile" />
       </div>

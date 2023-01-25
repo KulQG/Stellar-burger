@@ -6,6 +6,7 @@ import {
 import cardStyles from './Card.module.css'
 import PropTypes from 'prop-types'
 import { CheckPopupContext, PopupContext, SetterContext } from '../contexts'
+import { useDispatch } from 'react-redux'
 
 export default function Card(props) {
   const setter = useContext(SetterContext)
@@ -20,6 +21,8 @@ export default function Card(props) {
       )
   }
 
+  const dispatch = useDispatch()
+
   return (
     <div
       id={props.post._id}
@@ -28,6 +31,7 @@ export default function Card(props) {
         openPopup()
         setter(props.post)
         def('ingr')
+        dispatch({type: 'GET_CURRENT_CARD', payload: props.post})
       }}
     >
       {setCounter()}
