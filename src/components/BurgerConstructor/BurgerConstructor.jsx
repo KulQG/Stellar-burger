@@ -22,10 +22,11 @@ export default function BurgerConstructor() {
   const openPopup = useContext(PopupContext)
   const def = useContext(CheckPopupContext)
 
+  //удаление булок из массива
+  const filling = arr.filter((card) => card.type !== 'bun')
+
   //функция нужна для возврата карточек из массива
   const fill = (arr) => {
-    //удаление булок из массива
-    const filling = arr.filter((card) => card.type !== 'bun')
     dispatcher({ type: 'GET_FILLING', payload: filling })
 
     //возврат каждой карточки
@@ -71,7 +72,7 @@ export default function BurgerConstructor() {
           />
         )
       }
-    } else if (bun === 'red') {
+    } else {
       if (indicator === 1) {
         return (
           <ConstructorElement
@@ -105,13 +106,13 @@ export default function BurgerConstructor() {
     if (arr) {
       dispatch({ type: 'data', payload: counter(arr) })
       //выносит конструктор в стор
-      dispatcher({type: 'GET_FILLING', payload: arr})
+      dispatcher({ type: 'GET_FILLING', payload: arr })
     }
   }, [arr])
 
   //функция счетчик, складывающий все price
   const counter = (arr) => {
-    const prices = arr.map((card) => card.price)
+    const prices = filling.map((card) => card.price)
     const reduc = prices.reduce((acc, current) => acc + current, 0)
     return reduc
   }
@@ -153,11 +154,13 @@ export default function BurgerConstructor() {
   const [, drop] = useDrop({
     accept: 'ingr',
     drop(item) {
-      dispatcher({
-        type: 'UPDATE_TYPE',
-        payload: item,
-      })
-    }
+      if (item.type !== 'bun') {
+        dispatcher({
+          type: 'UPDATE_FILL',
+          payload: item,
+        })
+      }
+    },
   })
 
   return (

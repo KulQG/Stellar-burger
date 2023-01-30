@@ -1,10 +1,11 @@
 const initialState = {
-    ingredients: []
+    ingredients: [],
+    buns: []
 }
 
 export const drag = (state = initialState, action) => {
     switch (action.type) {
-        case 'UPDATE_TYPE': {
+        case 'UPDATE_FILL': {
             return {
                 ...state,
                 ingredients: [...state.ingredients, action.payload]
