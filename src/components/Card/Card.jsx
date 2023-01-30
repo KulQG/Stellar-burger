@@ -7,6 +7,7 @@ import cardStyles from './Card.module.css'
 import PropTypes from 'prop-types'
 import { CheckPopupContext, PopupContext, SetterContext } from '../contexts'
 import { useDispatch } from 'react-redux'
+import { useDrag } from 'react-dnd'
 
 export default function Card(props) {
   const setter = useContext(SetterContext)
@@ -14,24 +15,34 @@ export default function Card(props) {
   const def = useContext(CheckPopupContext)
 
   const setCounter = () => {
-      return (
-        <div className={cardStyles.count}>
-          <Counter count={1} size="default" extraClass="m-1" />
-        </div>
-      )
+    return (
+      <div className={cardStyles.count}>
+        <Counter count={1} size="default" extraClass="m-1" />
+      </div>
+    )
   }
 
   const dispatch = useDispatch()
 
+  const [{ isDrag }, dragRef] = useDrag({
+    type: 'ingr',
+    item: props.post._id,
+    collect: (monitor) => ({
+      isDrag: monitor.isDragging(),
+    }),
+  })
+
   return (
+    !isDrag &&
     <div
+      ref={dragRef}
       id={props.post._id}
       className={cardStyles.card}
       onClick={() => {
         openPopup()
         setter(props.post)
         def('ingr')
-        dispatch({type: 'GET_CURRENT_CARD', payload: props.post})
+        dispatch({ type: 'GET_CURRENT_CARD', payload: props.post })
       }}
     >
       {setCounter()}
