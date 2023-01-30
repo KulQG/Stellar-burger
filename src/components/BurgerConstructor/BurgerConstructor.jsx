@@ -153,7 +153,7 @@ export default function BurgerConstructor() {
   const [, drop] = useDrop({
     accept: 'ingr',
     drop(item) {
-      dispatch({
+      dispatcher({
         type: 'UPDATE_TYPE',
         payload: item,
       })
