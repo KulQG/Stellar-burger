@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Card from '../Card/Card'
@@ -7,7 +7,7 @@ import { CardsContext } from '../contexts'
 import { useSelector } from 'react-redux'
 
 export default function BurgerIngredients() {
-  const [current, setCurrent] = React.useState('Булки')
+  const [current, setCurrent] = useState('Булки')
   const arr = useSelector((store) => store.feedReducer.feed)
   const contRef = React.useRef(null)
 

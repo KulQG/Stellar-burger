@@ -7,6 +7,8 @@ import {
   GET_ORDER_FAILED,
   GET_ORDER_SUCCESS,
 } from '../../utils/consts'
+import { drag } from './draggle'
+import { dropTargetReducer } from './target'
 
 const initialStateFeed = {
   feedRequest: false,
@@ -122,4 +124,6 @@ export const rootReducer = combineReducers({
   orderReducer,
   currentCard,
   getConstructor,
+  drag, 
+  dropTargetReducer,
 })

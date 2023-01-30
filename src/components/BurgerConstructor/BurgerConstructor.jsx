@@ -7,12 +7,17 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import blueBun from '../../images/blue-bun.png'
 import BrgConstructorStyles from './BrgConstructorStyles.module.css'
-import { CardsContext, CheckPopupContext, PopupContext, SetterContext } from '../contexts'
+import {
+  CardsContext,
+  CheckPopupContext,
+  PopupContext,
+  SetterContext,
+} from '../contexts'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrder } from '../../services/actions'
 
 export default function BurgerConstructor() {
-  const arr = useSelector(store => store.feedReducer.feed)
+  const arr = useSelector((store) => store.feedReducer.feed)
   const openPopup = useContext(PopupContext)
   const def = useContext(CheckPopupContext)
 
@@ -20,7 +25,7 @@ export default function BurgerConstructor() {
   const fill = (arr) => {
     //удаление булок из массива
     const filling = arr.filter((card) => card.type !== 'bun')
-    dispatcher({type: 'GET_FILLING', payload: filling})
+    dispatcher({ type: 'GET_FILLING', payload: filling })
 
     //возврат каждой карточки
     const mapMethod = (arr) => {
@@ -41,8 +46,53 @@ export default function BurgerConstructor() {
     return <>{mapMethod(filling)}</>
   }
 
-  const mainConstructor = () => {
-
+  //вставляет булку
+  const baker = (bun, indicator) => {
+    if (bun === 'blue') {
+      if (indicator === 1) {
+        return (
+          <ConstructorElement
+            type="top"
+            isLocked={true}
+            text="Краторная булка N-200i (верх)"
+            price={200}
+            thumbnail={blueBun}
+          />
+        )
+      } else if (indicator === 2) {
+        return (
+          <ConstructorElement
+            type="bottom"
+            isLocked={true}
+            text="Краторная булка N-200i (низ)"
+            price={200}
+            thumbnail={blueBun}
+          />
+        )
+      }
+    } else if (bun === 'red') {
+      if (indicator === 1) {
+        return (
+          <ConstructorElement
+            type="top"
+            isLocked={true}
+            text="Краторная булка N-200i (верх)"
+            price={200}
+            thumbnail={blueBun}
+          />
+        )
+      } else if (indicator === 2) {
+        return (
+          <ConstructorElement
+            type="bottom"
+            isLocked={true}
+            text="Краторная булка N-200i (низ)"
+            price={200}
+            thumbnail={blueBun}
+          />
+        )
+      }
+    }
   }
 
   //подсчет итоговой стоимости бургера
@@ -53,6 +103,8 @@ export default function BurgerConstructor() {
   useEffect(() => {
     if (arr) {
       dispatch({ type: 'data', payload: counter(arr) })
+      //добавляет начальный массив для редьюсера drag
+      dispatcher({type: 'ADD_ARR', arr: arr})
     }
   }, [arr])
 
@@ -100,21 +152,9 @@ export default function BurgerConstructor() {
   return (
     <div className={BrgConstructorStyles.total}>
       <div className={BrgConstructorStyles.elements}>
-        <ConstructorElement
-          type="top"
-          isLocked={true}
-          text="Краторная булка N-200i (верх)"
-          price={200}
-          thumbnail={blueBun}
-        />
+        {baker('blue', 1)}
         <div className={BrgConstructorStyles.filling}>{fill(arr)}</div>
-        <ConstructorElement
-          type="bottom"
-          isLocked={true}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={blueBun}
-        />
+        {baker('blue', 2)}
       </div>
       <div className={BrgConstructorStyles.order}>
         <div className={BrgConstructorStyles.price}>
