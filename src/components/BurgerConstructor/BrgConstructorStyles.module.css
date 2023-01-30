@@ -18,6 +18,7 @@
 }
 
 .filling {
+    min-height: 50px;
     box-sizing: content-box;
     max-height: 464px;
     display: flex;
@@ -26,7 +27,7 @@
     gap: 16px;
     margin-right: -16px;
     width: calc(100% + 21px);
-
+    border: 1px solid red
 }
 
 .fillingElement {

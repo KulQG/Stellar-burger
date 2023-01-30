@@ -26,7 +26,7 @@ export default function Card(props) {
 
   const [{ isDrag }, dragRef] = useDrag({
     type: 'ingr',
-    item: props.post._id,
+    item: props.post,
     collect: (monitor) => ({
       isDrag: monitor.isDragging(),
     }),

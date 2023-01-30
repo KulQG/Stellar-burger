@@ -15,9 +15,10 @@ import {
 } from '../contexts'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrder } from '../../services/actions'
+import { useDrop } from 'react-dnd'
 
 export default function BurgerConstructor() {
-  const arr = useSelector((store) => store.feedReducer.feed)
+  const arr = useSelector((store) => store.drag.ingredients)
   const openPopup = useContext(PopupContext)
   const def = useContext(CheckPopupContext)
 
@@ -47,7 +48,7 @@ export default function BurgerConstructor() {
   }
 
   //вставляет булку
-  const baker = (bun, indicator) => {
+  const baker = (bun = 'blue', indicator) => {
     if (bun === 'blue') {
       if (indicator === 1) {
         return (
@@ -103,8 +104,8 @@ export default function BurgerConstructor() {
   useEffect(() => {
     if (arr) {
       dispatch({ type: 'data', payload: counter(arr) })
-      //добавляет начальный массив для редьюсера drag
-      dispatcher({type: 'ADD_ARR', arr: arr})
+      //выносит конструктор в стор
+      dispatcher({type: 'GET_FILLING', payload: arr})
     }
   }, [arr])
 
@@ -149,11 +150,23 @@ export default function BurgerConstructor() {
     dispatcher(getOrder(arr))
   }, [click])
 
+  const [, drop] = useDrop({
+    accept: 'ingr',
+    drop(item) {
+      dispatch({
+        type: 'UPDATE_TYPE',
+        payload: item,
+      })
+    }
+  })
+
   return (
     <div className={BrgConstructorStyles.total}>
       <div className={BrgConstructorStyles.elements}>
         {baker('blue', 1)}
-        <div className={BrgConstructorStyles.filling}>{fill(arr)}</div>
+        <div ref={drop} className={BrgConstructorStyles.filling}>
+          {fill(arr)}
+        </div>
         {baker('blue', 2)}
       </div>
       <div className={BrgConstructorStyles.order}>
