@@ -5,6 +5,7 @@ import Card from '../Card/Card'
 import BIngrStyles from './BurgerIngredients.module.css'
 import { CardsContext } from '../contexts'
 import { useSelector } from 'react-redux'
+import { v4 as uuidv4 } from 'uuid'
 
 export default function BurgerIngredients() {
   const [current, setCurrent] = useState('Булки')
@@ -32,7 +33,8 @@ export default function BurgerIngredients() {
     //для каждого уникального массива
     const mapMethod = (arr) => {
       return arr.map((card) => {
-        return <Card post={card} key={card._id} />
+        const id = uuidv4()
+        return <Card post={card} key={id} />
       })
     }
 

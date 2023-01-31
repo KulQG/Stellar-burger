@@ -16,6 +16,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrder } from '../../services/actions'
 import { useDrop } from 'react-dnd'
+import { v4 as uuidv4 } from 'uuid'
 
 export default function BurgerConstructor() {
   const arr = useSelector((store) => store.drag.ingredients)
@@ -32,13 +33,15 @@ export default function BurgerConstructor() {
     //возврат каждой карточки
     const mapMethod = (arr) => {
       return arr.map((card) => {
+        const id = uuidv4()
         return (
-          <div className={BrgConstructorStyles.fillingElement} key={card._id}>
+          <div className={BrgConstructorStyles.fillingElement} key={id}>
             <DragIcon type="secondary" />
             <ConstructorElement
               text={card.name}
               price={card.price}
               thumbnail={card.image}
+              handleClose={() => decrementClick(card.price, card.id)}
             />
           </div>
         )
@@ -111,8 +114,8 @@ export default function BurgerConstructor() {
   }, [arr])
 
   //функция счетчик, складывающий все price
-  const counter = (arr) => {
-    const prices = filling.map((card) => card.price)
+  const counter = () => {
+    const prices = arr.map((card) => card.price)
     const reduc = prices.reduce((acc, current) => acc + current, 0)
     return reduc
   }
@@ -122,8 +125,6 @@ export default function BurgerConstructor() {
     switch (action.type) {
       case 'data':
         return { price: action.payload }
-      case 'increment':
-        return { price: state.price + action.payload }
       case 'decrement':
         return { price: state.price - action.payload }
       default:
@@ -133,12 +134,9 @@ export default function BurgerConstructor() {
 
   const [state, dispatch] = useReducer(reducer, { price: 0 })
 
-  const incrementClick = (value) => {
-    dispatch({ type: 'increment', payload: value })
-  }
-
-  const decrementClick = (value) => {
+  const decrementClick = (value, data) => {
     dispatch({ type: 'decrement', payload: value })
+    dispatcher({type: 'DELETE_FILL', payload: data})
   }
 
   //отправка и получение api///////////////////////////////
@@ -151,23 +149,31 @@ export default function BurgerConstructor() {
     dispatcher(getOrder(arr))
   }, [click])
 
-  const [, drop] = useDrop({
+  const [, dropIngr] = useDrop({
     accept: 'ingr',
     drop(item) {
-      if (item.type !== 'bun') {
-        dispatcher({
-          type: 'UPDATE_FILL',
-          payload: item,
-        })
-      }
+      dispatcher({
+        type: 'UPDATE_FILL',
+        payload: item.id,
+      })
     },
+  })
+
+  const [, dropBun] = useDrop({
+    accept: 'bun',
+    drop(item) {
+      dispatcher({
+        type: 'UPDATE_BUN',
+        payload: item
+      })
+    }
   })
 
   return (
     <div className={BrgConstructorStyles.total}>
       <div className={BrgConstructorStyles.elements}>
         {baker('blue', 1)}
-        <div ref={drop} className={BrgConstructorStyles.filling}>
+        <div ref={dropIngr} className={BrgConstructorStyles.filling}>
           {fill(arr)}
         </div>
         {baker('blue', 2)}
