@@ -154,7 +154,7 @@ export default function BurgerConstructor() {
     drop(item) {
       dispatcher({
         type: 'UPDATE_FILL',
-        payload: item.id,
+        payload: item,
       })
     },
   })
