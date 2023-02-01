@@ -1,11 +1,8 @@
-import { useDrop, useDrag } from 'react-dnd'
+import { useDrag } from 'react-dnd'
 import { v4 as uuidv4 } from 'uuid'
 import styles from './FillItem.module.css'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
-import {
-  CurrencyIcon,
-  DragIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components'
+import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 export default function FillItem(props) {
   const id = uuidv4()

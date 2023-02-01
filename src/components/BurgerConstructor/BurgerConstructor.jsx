@@ -20,13 +20,8 @@ export default function BurgerConstructor() {
   const def = useContext(CheckPopupContext)
   const [priceBun, setPriceBun] = useState(bun.price)
 
-  //удаление булок из массива
-  const filling = arr.filter((card) => card.type !== 'bun')
-
   //функция нужна для возврата карточек из массива
   const fill = (arr) => {
-    dispatcher({ type: 'GET_FILLING', payload: filling })
-
     //возврат каждой карточки
     const mapMethod = (arr) => {
       return arr.map((card) => {
@@ -40,7 +35,7 @@ export default function BurgerConstructor() {
       })
     }
 
-    return <>{mapMethod(filling)}</>
+    return <>{mapMethod(arr)}</>
   }
 
   const [, dropItem] = useDrop({
@@ -89,7 +84,7 @@ export default function BurgerConstructor() {
       }
       dispatch({ type: 'data', payload: counter(arr) })
       //выносит конструктор в стор
-      dispatcher({ type: 'GET_FILLING', payload: arr })
+      dispatcher({ type: 'GET_FILLING', payload: [...arr, bun] })
     }
   }, [arr, bun])
 

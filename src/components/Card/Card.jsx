@@ -6,7 +6,7 @@ import {
 import cardStyles from './Card.module.css'
 import PropTypes from 'prop-types'
 import { CheckPopupContext, PopupContext, SetterContext } from '../contexts'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useDrag } from 'react-dnd'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -14,13 +14,18 @@ export default function Card(props) {
   const setter = useContext(SetterContext)
   const openPopup = useContext(PopupContext)
   const def = useContext(CheckPopupContext)
+  const constructor = useSelector((s) => s.drag.ingredients)
+
+  const count = constructor.filter((item) => item._id === props.post._id)
 
   const setCounter = () => {
-    return (
-      <div className={cardStyles.count}>
-        <Counter count={1} size="default" extraClass="m-1" />
-      </div>
-    )
+    if (count.length > 0) {
+      return (
+        <div className={cardStyles.count}>
+          <Counter count={count.length} size="default" extraClass="m-1" />
+        </div>
+      )
+    }
   }
 
   const dispatch = useDispatch()
