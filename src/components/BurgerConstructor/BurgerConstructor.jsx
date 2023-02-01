@@ -6,14 +6,12 @@ import {
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import BrgConstructorStyles from './BrgConstructorStyles.module.css'
-import {
-  CheckPopupContext,
-  PopupContext,
-} from '../contexts'
+import { CheckPopupContext, PopupContext } from '../contexts'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrder } from '../../services/actions'
-import { useDrop } from 'react-dnd'
+import { useDrop, useDrag } from 'react-dnd'
 import { v4 as uuidv4 } from 'uuid'
+import FillItem from '../FillItem/FillItem.jsx'
 
 export default function BurgerConstructor() {
   const arr = useSelector((store) => store.drag.ingredients)
@@ -21,7 +19,6 @@ export default function BurgerConstructor() {
   const openPopup = useContext(PopupContext)
   const def = useContext(CheckPopupContext)
   const [priceBun, setPriceBun] = useState(bun.price)
-  console.log(bun.price)
 
   //удаление булок из массива
   const filling = arr.filter((card) => card.type !== 'bun')
@@ -34,15 +31,10 @@ export default function BurgerConstructor() {
     const mapMethod = (arr) => {
       return arr.map((card) => {
         const id = uuidv4()
+
         return (
-          <div className={BrgConstructorStyles.fillingElement} key={id}>
-            <DragIcon type="secondary" />
-            <ConstructorElement
-              text={card.name}
-              price={card.price}
-              thumbnail={card.image}
-              handleClose={() => decrementClick(card.price, card.id)}
-            />
+          <div ref={dropItem} key={id}>
+            <FillItem card={card} plus={decrementClick}></FillItem>
           </div>
         )
       })
@@ -51,31 +43,36 @@ export default function BurgerConstructor() {
     return <>{mapMethod(filling)}</>
   }
 
+  const [, dropItem] = useDrop({
+    accept: 'constructorItem',
+    drop(item) {},
+  })
+
   //вставляет булку
   const baker = (indicator) => {
-      if (indicator === 1) {
-        return (
-          <div ref={dropBun}>
-            <ConstructorElement
+    if (indicator === 1) {
+      return (
+        <div ref={dropBun}>
+          <ConstructorElement
             type={'top'}
             isLocked={true}
             text={`${bun.name} (верх)`}
             price={bun.price}
             thumbnail={bun.image}
           />
-          </div>
-        )
-      } else if (indicator === 2) {
-        return (
-          <ConstructorElement
-            type={'bottom'}
-            isLocked={true}
-            text={`${bun.name} (низ)`}
-            price={bun.price}
-            thumbnail={bun.image}
-          />
-        )
-      }
+        </div>
+      )
+    } else if (indicator === 2) {
+      return (
+        <ConstructorElement
+          type={'bottom'}
+          isLocked={true}
+          text={`${bun.name} (низ)`}
+          price={bun.price}
+          thumbnail={bun.image}
+        />
+      )
+    }
   }
 
   //подсчет итоговой стоимости бургера
@@ -94,7 +91,7 @@ export default function BurgerConstructor() {
       //выносит конструктор в стор
       dispatcher({ type: 'GET_FILLING', payload: arr })
     }
-  }, [arr,bun])
+  }, [arr, bun])
 
   //Когда приходят данные я меняю price со значением counter(arr)
   function reducer(state, action) {
@@ -112,7 +109,7 @@ export default function BurgerConstructor() {
 
   const decrementClick = (value, data) => {
     dispatch({ type: 'decrement', payload: value })
-    dispatcher({type: 'DELETE_FILL', payload: data})
+    dispatcher({ type: 'DELETE_FILL', payload: data })
   }
 
   //отправка и получение api///////////////////////////////
@@ -140,10 +137,10 @@ export default function BurgerConstructor() {
     drop(item) {
       dispatcher({
         type: 'UPDATE_BUN',
-        payload: item
+        payload: item,
       })
       setPriceBun(bun.price)
-    }
+    },
   })
 
   return (
