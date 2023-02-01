@@ -14,7 +14,7 @@ export default function Card(props) {
   const setter = useContext(SetterContext)
   const openPopup = useContext(PopupContext)
   const def = useContext(CheckPopupContext)
-  const constructor = useSelector((s) => s.drag.ingredients)
+  const constructor = useSelector((s) => s.getConstructor.fill)
 
   const count = constructor.filter((item) => item._id === props.post._id)
 
