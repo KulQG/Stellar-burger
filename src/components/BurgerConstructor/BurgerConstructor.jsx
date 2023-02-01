@@ -5,13 +5,10 @@ import {
   CurrencyIcon,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import blueBun from '../../images/blue-bun.png'
 import BrgConstructorStyles from './BrgConstructorStyles.module.css'
 import {
-  CardsContext,
   CheckPopupContext,
   PopupContext,
-  SetterContext,
 } from '../contexts'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrder } from '../../services/actions'
@@ -20,8 +17,11 @@ import { v4 as uuidv4 } from 'uuid'
 
 export default function BurgerConstructor() {
   const arr = useSelector((store) => store.drag.ingredients)
+  const bun = useSelector((store) => store.drag.buns)
   const openPopup = useContext(PopupContext)
   const def = useContext(CheckPopupContext)
+  const [priceBun, setPriceBun] = useState(bun.price)
+  console.log(bun.price)
 
   //удаление булок из массива
   const filling = arr.filter((card) => card.type !== 'bun')
@@ -52,52 +52,30 @@ export default function BurgerConstructor() {
   }
 
   //вставляет булку
-  const baker = (bun = 'blue', indicator) => {
-    if (bun === 'blue') {
+  const baker = (indicator) => {
       if (indicator === 1) {
         return (
-          <ConstructorElement
-            type="top"
+          <div ref={dropBun}>
+            <ConstructorElement
+            type={'top'}
             isLocked={true}
-            text="Краторная булка N-200i (верх)"
-            price={200}
-            thumbnail={blueBun}
+            text={`${bun.name} (верх)`}
+            price={bun.price}
+            thumbnail={bun.image}
           />
+          </div>
         )
       } else if (indicator === 2) {
         return (
           <ConstructorElement
-            type="bottom"
+            type={'bottom'}
             isLocked={true}
-            text="Краторная булка N-200i (низ)"
-            price={200}
-            thumbnail={blueBun}
+            text={`${bun.name} (низ)`}
+            price={bun.price}
+            thumbnail={bun.image}
           />
         )
       }
-    } else {
-      if (indicator === 1) {
-        return (
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text="Краторная булка N-200i (верх)"
-            price={200}
-            thumbnail={blueBun}
-          />
-        )
-      } else if (indicator === 2) {
-        return (
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text="Краторная булка N-200i (низ)"
-            price={200}
-            thumbnail={blueBun}
-          />
-        )
-      }
-    }
   }
 
   //подсчет итоговой стоимости бургера
@@ -107,18 +85,16 @@ export default function BurgerConstructor() {
   //загружался массив, а уже потом генерировалась общая цена
   useEffect(() => {
     if (arr) {
+      const counter = () => {
+        const prices = arr.map((card) => card.price)
+        const reduc = prices.reduce((acc, current) => acc + current, priceBun)
+        return reduc
+      }
       dispatch({ type: 'data', payload: counter(arr) })
       //выносит конструктор в стор
       dispatcher({ type: 'GET_FILLING', payload: arr })
     }
-  }, [arr])
-
-  //функция счетчик, складывающий все price
-  const counter = () => {
-    const prices = arr.map((card) => card.price)
-    const reduc = prices.reduce((acc, current) => acc + current, 0)
-    return reduc
-  }
+  }, [arr,bun])
 
   //Когда приходят данные я меняю price со значением counter(arr)
   function reducer(state, action) {
@@ -166,17 +142,18 @@ export default function BurgerConstructor() {
         type: 'UPDATE_BUN',
         payload: item
       })
+      setPriceBun(bun.price)
     }
   })
 
   return (
     <div className={BrgConstructorStyles.total}>
       <div className={BrgConstructorStyles.elements}>
-        {baker('blue', 1)}
+        {baker(1)}
         <div ref={dropIngr} className={BrgConstructorStyles.filling}>
           {fill(arr)}
         </div>
-        {baker('blue', 2)}
+        {baker(2)}
       </div>
       <div className={BrgConstructorStyles.order}>
         <div className={BrgConstructorStyles.price}>
