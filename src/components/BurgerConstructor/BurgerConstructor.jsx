@@ -108,6 +108,7 @@ export default function BurgerConstructor() {
     dispatcher(getOrder(arr))
   }, [click])
 
+  //принятие карточек из BurgerIngredients
   const [, dropIngr] = useDrop({
     accept: 'ingr',
     drop(item) {

@@ -1,17 +1,17 @@
 import { useDrag, useDrop } from 'react-dnd'
-import { v4 as uuidv4 } from 'uuid'
 import styles from './FillItem.module.css'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch } from 'react-redux'
 
 export default function FillItem(props) {
-  const id = uuidv4()
   const dispatch = useDispatch()
-
+  const cardIndex = props.index
+ 
+  /////сортировка
   const [{ isDrag }, dragRef] = useDrag({
     type: 'constructorItem',
-    item: props.card,
+    item: { ...props.card, cardIndex },
     collect: (m) => ({
       isDrag: m.isDragging(),
     }),
@@ -20,7 +20,7 @@ export default function FillItem(props) {
   const [, dropItem] = useDrop({
     accept: 'constructorItem',
     drop(item) {
-      const dragIndex = item.index
+      const dragIndex = item.cardIndex
       const hoverIndex = props.index
       moveCard(dragIndex, hoverIndex)
       item.index = hoverIndex
@@ -34,13 +34,20 @@ export default function FillItem(props) {
     dispatch({ type: 'SORTING', payload: newCardList })
   }
 
+  const style =()=> {
+    if (isDrag) {
+        return styles.transparent
+    } else {
+        return styles.fillingElement
+    }
+  }
+
   return (
-    !isDrag && (
     <div
       ref={(node) => {
         dragRef(dropItem(node))
       }}
-      className={styles.fillingElement}
+      className={style()}
     >
       <DragIcon type="secondary" />
       <ConstructorElement
@@ -50,6 +57,5 @@ export default function FillItem(props) {
         handleClose={() => props.plus(props.card.price, props.card.id)}
       />
     </div>
-    )
   )
 }
