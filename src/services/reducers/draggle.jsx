@@ -38,6 +38,12 @@ export const drag = (state = initialState, action) => {
         ),
       }
     }
+    case 'SORTING': {
+      return {
+        ...state,
+        ingredients: action.payload,
+      }
+    }
     default: {
       return state
     }

@@ -21,27 +21,18 @@ export default function BurgerConstructor() {
   const [priceBun, setPriceBun] = useState(bun.price)
 
   //функция нужна для возврата карточек из массива
-  const fill = (arr) => {
+  const fill = () => {
     //возврат каждой карточки
-    const mapMethod = (arr) => {
-      return arr.map((card) => {
+    const mapMethod = (array) => {
+      return array.map((card, index) => {
         const id = uuidv4()
 
-        return (
-          <div ref={dropItem} key={id}>
-            <FillItem card={card} plus={decrementClick}></FillItem>
-          </div>
-        )
+        return <FillItem arr={arr} key={id} card={card} index={index} plus={decrementClick} />
       })
     }
 
     return <>{mapMethod(arr)}</>
   }
-
-  const [, dropItem] = useDrop({
-    accept: 'constructorItem',
-    drop(item) {},
-  })
 
   //вставляет булку
   const baker = (indicator) => {
