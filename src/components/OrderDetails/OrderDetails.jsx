@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 export default function OrderDetails(props) {
   const order = useSelector(store => store.orderReducer.order)
-  //console.log(order)
+  
   return (
     <div className={orderClass.box}>
       <h2 className={`text text_type_digits-large ${orderClass.title}`}>

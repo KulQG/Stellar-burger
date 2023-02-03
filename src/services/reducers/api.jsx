@@ -69,6 +69,7 @@ export const orderReducer = (state = initialStateOrder, action) => {
         ...state,
         orderFailed: true,
         orderRequest: false,
+        order: 'ошибка получения данных'
       }
     }
     default: {

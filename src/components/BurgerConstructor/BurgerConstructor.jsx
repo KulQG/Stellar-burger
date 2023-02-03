@@ -105,7 +105,7 @@ export default function BurgerConstructor() {
   const dispatcher = useDispatch()
 
   useEffect(() => {
-    dispatcher(getOrder(arr))
+    dispatcher(getOrder([...arr, bun]))
   }, [click])
 
   //принятие карточек из BurgerIngredients
