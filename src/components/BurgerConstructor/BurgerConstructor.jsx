@@ -1,23 +1,19 @@
-import React, { useState, useContext, useReducer, useEffect } from 'react'
+import React, { useState, useReducer, useEffect } from 'react'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
-  CurrencyIcon,
-  DragIcon,
+  CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import BrgConstructorStyles from './BrgConstructorStyles.module.css'
-import { CheckPopupContext, PopupContext } from '../contexts'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrder } from '../../services/actions'
-import { useDrop, useDrag } from 'react-dnd'
+import { useDrop } from 'react-dnd'
 import { v4 as uuidv4 } from 'uuid'
 import FillItem from '../FillItem/FillItem.jsx'
 
 export default function BurgerConstructor() {
   const arr = useSelector((store) => store.drag.ingredients)
   const bun = useSelector((store) => store.drag.buns)
-  const openPopup = useContext(PopupContext)
-  const def = useContext(CheckPopupContext)
   const [priceBun, setPriceBun] = useState(bun.price)
 
   //функция нужна для возврата карточек из массива
@@ -149,8 +145,8 @@ export default function BurgerConstructor() {
           type="primary"
           size="large"
           onClick={() => {
-            def('order')
-            openPopup()
+            dispatcher({type: 'SET_ORDER_POPUP'})
+            dispatcher({type: 'OPEN_POPUP'})
             setClick(!click)
           }}
         >

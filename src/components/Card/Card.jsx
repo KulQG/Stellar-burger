@@ -1,19 +1,14 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import cardStyles from './Card.module.css'
-import PropTypes from 'prop-types'
-import { CheckPopupContext, PopupContext, SetterContext } from '../contexts'
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrag } from 'react-dnd'
 import { v4 as uuidv4 } from 'uuid'
 
 export default function Card(props) {
-  const setter = useContext(SetterContext)
-  const openPopup = useContext(PopupContext)
-  const def = useContext(CheckPopupContext)
   const constructor = useSelector((s) => s.getConstructor.fill)
 
   const count = constructor.filter((item) => item._id === props.post._id)
@@ -52,9 +47,8 @@ export default function Card(props) {
         id={props.post._id}
         className={cardStyles.card}
         onClick={() => {
-          openPopup()
-          setter(props.post)
-          def('ingr')
+          dispatch({type: 'SET_INGR_POPUP'})
+          dispatch({type: 'OPEN_POPUP'})
           dispatch({ type: 'GET_CURRENT_CARD', payload: props.post })
         }}
       >

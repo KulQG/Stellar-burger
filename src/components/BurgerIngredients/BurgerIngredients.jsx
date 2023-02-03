@@ -1,9 +1,7 @@
-import React, { useContext, useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Card from '../Card/Card'
 import BIngrStyles from './BurgerIngredients.module.css'
-import { CardsContext } from '../contexts'
 import { useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 

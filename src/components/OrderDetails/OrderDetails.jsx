@@ -4,9 +4,9 @@ import orderClass from './OrderDetails.module.css'
 import done from '../../images/done.svg'
 import { useSelector } from 'react-redux'
 
-export default function OrderDetails(props) {
+export default function OrderDetails() {
   const order = useSelector(store => store.orderReducer.order)
-  
+
   return (
     <div className={orderClass.box}>
       <h2 className={`text text_type_digits-large ${orderClass.title}`}>
