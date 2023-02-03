@@ -1,8 +1,6 @@
 import React from 'react'
-import appStyles from './App.module.css'
 import Header from '../Header/Header'
 import TotalConstructor from '../TotalConstructor/TotalConstructor'
-import { address } from '../../utils/consts.js'
 import OrderDetails from '../OrderDetails/OrderDetails'
 import IngredientsDetails from '../IngredientsDetails/IngredientsDetails'
 import Modal from '../Modal/Modal'

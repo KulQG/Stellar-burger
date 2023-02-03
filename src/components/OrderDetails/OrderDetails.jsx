@@ -1,5 +1,4 @@
 import React from 'react'
-import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import orderClass from './OrderDetails.module.css'
 import done from '../../images/done.svg'
 import { useSelector } from 'react-redux'
