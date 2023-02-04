@@ -95,14 +95,8 @@ export default function BurgerConstructor() {
   }
 
   //отправка и получение api///////////////////////////////
-  //когда будет нажата кнопка активируется useEffect
-  const [click, setClick] = useState(false)
 
   const dispatcher = useDispatch()
-
-  useEffect(() => {
-    dispatcher(getOrder([...arr, bun]))
-  }, [click])
 
   //принятие карточек из BurgerIngredients
   const [, dropIngr] = useDrop({
@@ -147,7 +141,7 @@ export default function BurgerConstructor() {
           onClick={() => {
             dispatcher({type: 'SET_ORDER_POPUP'})
             dispatcher({type: 'OPEN_POPUP'})
-            setClick(!click)
+            dispatcher(getOrder([...arr, bun]))
           }}
         >
           Оформить заказ
