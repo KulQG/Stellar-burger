@@ -1,13 +1,15 @@
 import React from 'react'
-import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import orderClass from './OrderDetails.module.css'
 import done from '../../images/done.svg'
+import { useSelector } from 'react-redux'
 
-export default function OrderDetails(props) {
+export default function OrderDetails() {
+  const order = useSelector(store => store.orderReducer.order)
+
   return (
     <div className={orderClass.box}>
       <h2 className={`text text_type_digits-large ${orderClass.title}`}>
-        034536
+        {order}
       </h2>
       <h3 className={`text text_type_main-medium ${orderClass.subtitle}`}>
         идентификатор заказа

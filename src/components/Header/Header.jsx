@@ -7,10 +7,10 @@ export default function Header() {
   return (
     <header className={headerStyles.content}>
       <div className={headerStyles.leftPanels}>
-        <NavigationComponent text="Конструктор" icon="burger" />
+        <NavigationComponent  text="Конструктор" icon="burger" />
         <NavigationComponent text="Лента заказов" icon="list" />
       </div>
-      <Logo />
+      <Logo className={headerStyles.logo}/>
       <div className={headerStyles.rightPanel}>
         <NavigationComponent text="Личный кабинет" icon="profile" />
       </div>

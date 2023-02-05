@@ -1,12 +1,14 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Card from '../Card/Card'
 import BIngrStyles from './BurgerIngredients.module.css'
+import { useSelector } from 'react-redux'
+import { v4 as uuidv4 } from 'uuid'
 
-export default function BurgerIngredients(props) {
-  const [current, setCurrent] = React.useState('one')
-  //const [cards, setCards] = React.useState(props.arr)
+export default function BurgerIngredients() {
+  const [current, setCurrent] = useState('Булки')
+  const arr = useSelector((store) => store.feedReducer.feed)
+  const contRef = React.useRef(null)
 
   //разделение ингредиентов
   const headersWithCards = () => {
@@ -15,7 +17,7 @@ export default function BurgerIngredients(props) {
     let main = []
     let sauces = []
 
-    props.arr.forEach((card) => {
+    arr.forEach((card) => {
       if (card.type === 'bun') {
         buns.push(card)
       } else if (card.type === 'main') {
@@ -29,16 +31,8 @@ export default function BurgerIngredients(props) {
     //для каждого уникального массива
     const mapMethod = (arr) => {
       return arr.map((card) => {
-        return (
-          <Card
-            setter={props.setter}
-            arr={props.arr}
-            openPopup={props.openPopup}
-            def={props.def}
-            post={card}
-            key={card._id}
-          />
-        )
+        const id = uuidv4()
+        return <Card post={card} key={id} />
       })
     }
 
@@ -54,16 +48,40 @@ export default function BurgerIngredients(props) {
     )
   }
 
+  //Реализация сроллинга и изменения табов
+  React.useEffect(() => {
+    const container = contRef.current
+    const handleScroll = () => {
+      const distance = container.scrollTop
+      if (distance === 0) {
+        setCurrent('Булки')
+      } else if (distance >= 353 && distance<=938) {
+        setCurrent('Соусы')
+      } else if (distance >= 939) {
+        setCurrent('Начинки')
+      }
+    }
+
+    contRef.current.addEventListener('scroll', handleScroll)
+    return () => {
+      contRef.current.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   const tab = () => {
     return (
       <nav className={BIngrStyles.tabs}>
-        <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+        <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>
           Булки
         </Tab>
-        <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+        <Tab value="Соусы" active={current === 'Соусы'} onClick={setCurrent}>
           Соусы
         </Tab>
-        <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+        <Tab
+          value="Начинки"
+          active={current === 'Начинки'}
+          onClick={setCurrent}
+        >
           Начинки
         </Tab>
       </nav>
@@ -74,16 +92,9 @@ export default function BurgerIngredients(props) {
     <div className={BIngrStyles.catalog}>
       <h1 className="text text_type_main-large">Соберите Бургер</h1>
       {tab()}
-      <div className={BIngrStyles.products}>
-        <div className={BIngrStyles.cards}>{headersWithCards()}</div>
+      <div ref={contRef} className={BIngrStyles.products}>
+        {headersWithCards()}
       </div>
     </div>
   )
-}
-
-BurgerIngredients.propTypes = {
-  arr: PropTypes.array.isRequired,
-  setter: PropTypes.func.isRequired,
-  openPopup: PropTypes.func.isRequired,
-  def: PropTypes.func.isRequired
 }
