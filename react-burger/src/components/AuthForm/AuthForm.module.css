@@ -1,0 +1,43 @@
+.wrapper {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+}
+
+.header {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+}
+
+.auth {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 288px;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    width: 480px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+}
+.heading {
+    margin: 0;
+    text-align: center;
+}
+.uiLinks {
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

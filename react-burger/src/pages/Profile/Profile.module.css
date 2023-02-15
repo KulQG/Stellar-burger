@@ -1,0 +1,36 @@
+.wrapper {
+    height: 100vh;
+    width: 100%;
+}
+
+.profile {
+    position: absolute;
+    top: 228px;
+    left: 380px;
+    display: flex;
+    gap: 60px;
+}
+
+.edit {
+    width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.panel {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.link {
+    height: 64px;
+    text-decoration: none;
+    color: #8585AD;
+}
+
+.linkWrap {
+    text-decoration: none;
+}
