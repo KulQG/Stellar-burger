@@ -13,6 +13,8 @@ import Register from '../../pages/Register/Register'
 import ForgotPassword from '../../pages/Forgot-password/Forgot-password'
 import ResetPassword from '../../pages/Reset-Password/Reset-Password'
 import Profile from '../../pages/Profile/Profile'
+import Ingredients from '../../pages/Ingredients/Ingredients'
+import IngredientPage from '../../pages/IngredientPage/IngredientPage'
 
 function App() {
   return (
@@ -24,6 +26,9 @@ function App() {
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/ingredients' element={<Ingredients />}>
+          <Route path=':id' element={<IngredientPage />} />
+        </Route>
       </Routes>
     </Router>
   )
