@@ -27,4 +27,9 @@
     max-width: 1280px;
     margin: 16px auto;
     display: flex;
+    color: #8585AD;
+}
+
+.link_active {
+    color: white
 }
