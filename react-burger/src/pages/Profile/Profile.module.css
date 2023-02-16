@@ -34,3 +34,7 @@
 .linkWrap {
     text-decoration: none;
 }
+
+.linkWrap_active {
+    color: white;
+}

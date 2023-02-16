@@ -7,6 +7,7 @@ import { currentCard } from './currentCard'
 import { getConstructor } from './constructor'
 import { checkPopup } from './popups'
 import { setPopup } from './popups'
+import { postForgotReducer } from './postEmail'
 
 export const rootReducer = combineReducers({
   feedReducer,
@@ -16,5 +17,6 @@ export const rootReducer = combineReducers({
   drag,
   dropTargetReducer,
   checkPopup,
-  setPopup
+  setPopup,
+  postForgotReducer
 })

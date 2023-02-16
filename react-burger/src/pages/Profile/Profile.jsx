@@ -6,7 +6,7 @@ import {
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './Profile.module.css'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
 import Header from '../../components/Header/Header'
 
@@ -29,21 +29,23 @@ export default function Profile() {
       <div className={styles.profile}>
         <div className={styles.panel}>
           <div className={styles.navig}>
-            <Link className={styles.linkWrap}>
+            <NavLink
+              className={styles.linkWrap}
+            >
               <p className={`text text_type_main-medium ${styles.link} `}>
                 Профиль
               </p>
-            </Link>
-            <Link className={styles.linkWrap}>
+            </NavLink>
+            <NavLink className={styles.linkWrap}>
               <p className={`text text_type_main-medium ${styles.link} `}>
                 История заказов
               </p>
-            </Link>
-            <Link className={styles.linkWrap}>
+            </NavLink>
+            <NavLink className={styles.linkWrap}>
               <p className={`text text_type_main-medium ${styles.link} `}>
                 Выход
               </p>
-            </Link>
+            </NavLink>
           </div>
           <p className="text text_type_main-default text_color_inactive">
             В этом разделе вы можете изменить свои персональные данные

@@ -1,20 +1,25 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from 'react'
 import {
-    PasswordInput,
-    Input
+  PasswordInput,
+  Input,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './Reset-Password.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
 
 export default function ResetPassword() {
-    const [password, setPassword] = React.useState('')
-    const onChangePassword = (e) => {
-      setPassword(e.target.value)
-    }
-    const [code, setCode] = React.useState('')
-    const inputRef = React.useRef(null)
+  const [password, setPassword] = React.useState('')
+  const onChangePassword = (e) => {
+    setPassword(e.target.value)
+  }
+  const [code, setCode] = React.useState('')
+  const inputRef = React.useRef(null)
+
+  const navigate = useNavigate()
+  const click = () => {
+    navigate('/login', { replace: true })
+  }
 
   const getForm = () => {
     return (
@@ -37,7 +42,7 @@ export default function ResetPassword() {
           extraClass="ml-1"
         />
         <Link>
-          <Button htmlType="button" type="primary" size="medium">
+          <Button onClick={click()} htmlType="button" type="primary" size="medium">
             Сохранить
           </Button>
         </Link>

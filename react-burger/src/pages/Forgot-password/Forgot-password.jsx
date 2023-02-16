@@ -1,16 +1,27 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from 'react'
-import {
-  EmailInput,
-} from '@ya.praktikum/react-developer-burger-ui-components'
+import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './Forgot-password.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
+import { useDispatch, useSelector } from 'react-redux'
+import { forgotPassword } from '../../services/actions'
 
 export default function ForgotPassword() {
+  const postEmail = useSelector((s) => s.postForgotReducer.postEmail)
   const [email, setEmail] = React.useState('')
   const onChangeEmail = (e) => {
     setEmail(e.target.value)
+  }
+
+  const dispatch = useDispatch()
+
+  const navigate = useNavigate()
+  function click(e) {
+    dispatch(forgotPassword(email))
+    if (postEmail) {
+      navigate('/reset-password')
+    }
   }
 
   const getForm = () => {
@@ -23,11 +34,9 @@ export default function ForgotPassword() {
           size={'default'}
           placeholder="Укажите e-mail"
         />
-        <Link>
-          <Button htmlType="button" type="primary" size="medium">
-            Восстановить
-          </Button>
-        </Link>
+        <Button onClick={click} htmlType="button" type="primary" size="medium">
+          Восстановить
+        </Button>
       </>
     )
   }

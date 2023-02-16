@@ -5,9 +5,8 @@ import {
   EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './Login.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
-import Header from '../../components/Header/Header'
 
 export default function Login() {
   const [email, setEmail] = React.useState('')
@@ -18,6 +17,11 @@ export default function Login() {
   const [password, setPassword] = React.useState('')
   const onChangePassword = (e) => {
     setPassword(e.target.value)
+  }
+
+  const navigate = useNavigate()
+  const onClick = () => {
+    navigate('/', { replace: true })
   }
 
   const getForm = () => {
@@ -37,7 +41,12 @@ export default function Login() {
           placeholder={'Пароль'}
         />
         <Link to="/">
-          <Button htmlType="button" type="primary" size="medium">
+          <Button
+            onClick={onClick()}
+            htmlType="button"
+            type="primary"
+            size="medium"
+          >
             Войти
           </Button>
         </Link>
@@ -52,7 +61,7 @@ export default function Login() {
           <p className="text text_type_main-default">
             Вы — новый пользователь?
           </p>
-          <Link className={styles.text} to='/register' >
+          <Link className={styles.text} to="/register">
             <p
               className={`${styles.text} ${styles.textLink} text text_type_main-default`}
             >
@@ -62,7 +71,7 @@ export default function Login() {
         </div>
         <div className={styles.link}>
           <p className="text text_type_main-default"> Забыли пароль?</p>
-          <Link className={styles.text} to='/forgot-password' >
+          <Link className={styles.text} to="/forgot-password">
             <p
               className={`${styles.text} ${styles.textLink} text text_type_main-default`}
             >
