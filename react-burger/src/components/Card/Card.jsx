@@ -7,6 +7,7 @@ import cardStyles from './Card.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrag } from 'react-dnd'
 import { v4 as uuidv4 } from 'uuid'
+import { Link } from 'react-router-dom'
 
 export default function Card(props) {
   const constructor = useSelector((s) => s.getConstructor.fill)
@@ -42,28 +43,30 @@ export default function Card(props) {
 
   return (
     !isDrag && (
-      <div
-        ref={dragRef}
-        id={props.post._id}
-        className={cardStyles.card}
-        onClick={() => {
-          dispatch({type: 'SET_INGR_POPUP'})
-          dispatch({type: 'OPEN_POPUP'})
-          dispatch({ type: 'GET_CURRENT_CARD', payload: props.post })
-        }}
-      >
-        {setCounter()}
-        <img
-          className={cardStyles.image}
-          src={props.post.image}
-          alt={props.post.name}
-        />
-        <div className={cardStyles.price}>
-          <p className="text text_type_digits-default">{props.post.price}</p>
-          <CurrencyIcon type="primary" />
+      <Link className={cardStyles.link} to={`/ingredients/${props.post._id}`}>
+        <div
+          ref={dragRef}
+          id={props.post._id}
+          className={cardStyles.card}
+          onClick={() => {
+          //  dispatch({ type: 'SET_INGR_POPUP' })
+          //  dispatch({ type: 'OPEN_POPUP' })
+            dispatch({ type: 'GET_CURRENT_CARD', payload: props.post })
+          }}
+        >
+          {setCounter()}
+          <img
+            className={cardStyles.image}
+            src={props.post.image}
+            alt={props.post.name}
+          />
+          <div className={cardStyles.price}>
+            <p className="text text_type_digits-default">{props.post.price}</p>
+            <CurrencyIcon type="primary" />
+          </div>
+          <p className="text text_type_main-default">{props.post.name}</p>
         </div>
-        <p className="text text_type_main-default">{props.post.name}</p>
-      </div>
+      </Link>
     )
   )
 }

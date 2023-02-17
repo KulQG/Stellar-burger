@@ -32,8 +32,6 @@ export default function NavigationComponent(props) {
     }
   }
 
-  console.log(isActiveNow)
-
   //в зависимости от стейта определяется открыт компонент или нет
   const classIcon = `${!isActive ? 'secondary' : 'primary'}`
   const classText = `${

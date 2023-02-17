@@ -25,3 +25,8 @@
     top: 0px;
     right: -140px;
 }
+
+.link {
+    text-decoration: none;
+    color: #F2F2F3;
+}
