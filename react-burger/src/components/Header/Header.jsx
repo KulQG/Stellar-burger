@@ -9,10 +9,6 @@ export default function Header() {
     type: 'burger',
   })
 
-  //useEffect(() => {
-  //  console.log(isActive)
-  //}, [isActive])
-
   return (
     <header className={headerStyles.content}>
       <div className={headerStyles.leftPanels}>

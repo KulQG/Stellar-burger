@@ -63,9 +63,6 @@ export default function BurgerIngredients() {
     }
 
     contRef.current.addEventListener('scroll', handleScroll)
-    //return () => {
-    //  contRef.current.removeEventListener('scroll', handleScroll)
-    //}
   }, [])
 
   const tab = () => {

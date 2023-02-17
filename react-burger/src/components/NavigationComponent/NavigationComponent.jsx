@@ -9,7 +9,6 @@ export default function NavigationComponent(props) {
   const [isActive, setIsActive] = React.useState(false)
   const isActiveNow = props.isActive
   const setActive = props.setActive
-  //console.log(setActive)
 
   //хедер передает пропс с нужной иконкой
   const setIcons = () => {
