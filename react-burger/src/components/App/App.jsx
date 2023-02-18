@@ -6,10 +6,8 @@ import Register from '../../pages/Register/Register'
 import ForgotPassword from '../../pages/Forgot-password/Forgot-password'
 import ResetPassword from '../../pages/Reset-Password/Reset-Password'
 import Profile from '../../pages/Profile/Profile'
-import Ingredients from '../../pages/Ingredients/Ingredients'
 import IngredientPage from '../../pages/IngredientPage/IngredientPage'
 import NotFound from '../../pages/404/404'
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 
 function App() {
   return (

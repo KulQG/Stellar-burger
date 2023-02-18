@@ -8,6 +8,8 @@ import {
 import styles from './Register.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
+import { useDispatch, useSelector } from 'react-redux'
+import { register } from '../../services/actions'
 
 export default function Register() {
   const [email, setEmail] = React.useState('')
@@ -22,10 +24,21 @@ export default function Register() {
   const [name, setName] = React.useState('')
   const inputRef = React.useRef(null)
 
+  const dispatch = useDispatch()
+  const answer = useSelector((s) => s.registerReducer.register)
+  console.log(answer)
+
   const navigate = useNavigate()
-  const click = () => {
-    navigate('/login', { replace: true })
+  const click = (e) => {
+    e.preventDefault()
+    dispatch(register([email, password, name]))
   }
+
+  React.useEffect(() => {
+    if (answer.success) {
+      navigate('/login', { replace: true })
+    }
+  }, [answer])
 
   const getForm = () => {
     return (
@@ -54,11 +67,9 @@ export default function Register() {
           name={'password'}
           placeholder={'Пароль'}
         />
-        <Link to="/login">
-          <Button onClick={click()} htmlType="button" type="primary" size="medium">
-            Зарегистрироваться
-          </Button>
-        </Link>
+        <Button onClick={click} htmlType="button" type="primary" size="medium">
+          Зарегистрироваться
+        </Button>
       </>
     )
   }

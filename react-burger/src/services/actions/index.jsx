@@ -8,6 +8,8 @@ import {
   GET_ORDER_SUCCESS,
   postAddress,
   postEmailAddress,
+  registerAddress,
+  authAddress,
 } from '../../utils/consts'
 
 export function getFeed() {
@@ -50,7 +52,7 @@ export function getOrder(arr) {
     dispatch({
       type: GET_ORDER,
     })
-    fetch(postAddress, {
+    fetch(authAddress, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -115,6 +117,91 @@ export function forgotPassword(email) {
       .catch((err) => {
         dispatch({
           type: 'POST_EMAIL_FAILED',
+        })
+        console.log('ошибка' + err)
+      })
+  }
+}
+
+export function register([email, password, name]) {
+  return function (dispatch) {
+    dispatch({ type: 'REGISTER' })
+    fetch(registerAddress, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        name: name,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        } else {
+          dispatch({
+            type: 'REGISTER_FAILED',
+          })
+          console.log('ошибка при получении данных' + res.status)
+        }
+      })
+      .then((data) => {
+        dispatch({
+          type: 'REGISTER_SUCCESS',
+          payload: data,
+        })
+      })
+      .catch((err) => {
+        dispatch({
+          type: 'REGISTER_FAILED',
+        })
+        console.log('ошибка' + err)
+      })
+  }
+}
+
+export function auth([email, password]) {
+  return function (dispatch) {
+    dispatch({ type: 'AUTH' })
+    fetch(authAddress, {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        } else {
+          dispatch({
+            type: 'AUTH_FAILED',
+          })
+          console.log('ошибка при получении данных' + res.status)
+        }
+      })
+      .then((data) => {
+        dispatch({
+          type: 'AUTH_SUCCESS',
+          payload: data,
+        })
+      })
+      .catch((err) => {
+        dispatch({
+          type: 'AUTH_FAILED',
         })
         console.log('ошибка' + err)
       })

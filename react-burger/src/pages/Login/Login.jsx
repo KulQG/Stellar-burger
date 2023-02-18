@@ -1,5 +1,5 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import React from 'react'
+import React, {useEffect} from 'react'
 import {
   PasswordInput,
   EmailInput,
@@ -7,6 +7,8 @@ import {
 import styles from './Login.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
+import { useDispatch, useSelector } from 'react-redux'
+import { auth } from '../../services/actions'
 
 export default function Login() {
   const [email, setEmail] = React.useState('')
@@ -19,10 +21,20 @@ export default function Login() {
     setPassword(e.target.value)
   }
 
+  const authState = useSelector(s => s.authReducer.auth)
+
+  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const onClick = () => {
-    navigate('/', { replace: true })
+  const onClick = (e) => {
+    e.preventDefault()
+    dispatch(auth([email, password]))
   }
+
+  useEffect(() => {
+    if (authState.success) {
+      navigate('/', { replace: true })
+      }
+  }, [authState])
 
   const getForm = () => {
     return (
@@ -40,16 +52,14 @@ export default function Login() {
           name={'password'}
           placeholder={'Пароль'}
         />
-        <Link to="/">
           <Button
-            onClick={onClick()}
+            onClick={onClick}
             htmlType="button"
             type="primary"
             size="medium"
           >
             Войти
           </Button>
-        </Link>
       </>
     )
   }

@@ -8,6 +8,8 @@ import { getConstructor } from './constructor'
 import { checkPopup } from './popups'
 import { setPopup } from './popups'
 import { postForgotReducer } from './postEmail'
+import { registerReducer } from './registerApi'
+import { authReducer } from './authApi'
 
 export const rootReducer = combineReducers({
   feedReducer,
@@ -18,5 +20,7 @@ export const rootReducer = combineReducers({
   dropTargetReducer,
   checkPopup,
   setPopup,
-  postForgotReducer
+  postForgotReducer,
+  registerReducer,
+  authReducer
 })
