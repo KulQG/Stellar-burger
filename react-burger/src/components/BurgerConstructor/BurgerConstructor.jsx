@@ -1,15 +1,14 @@
 import React, { useState, useReducer, useEffect } from 'react'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import {
-  CurrencyIcon
-} from '@ya.praktikum/react-developer-burger-ui-components'
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import BrgConstructorStyles from './BrgConstructorStyles.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrder } from '../../services/actions'
 import { useDrop } from 'react-dnd'
 import { v4 as uuidv4 } from 'uuid'
 import FillItem from '../FillItem/FillItem.jsx'
+import { useNavigate } from 'react-router-dom'
 
 export default function BurgerConstructor() {
   const arr = useSelector((store) => store.drag.ingredients)
@@ -23,7 +22,15 @@ export default function BurgerConstructor() {
       return array.map((card, index) => {
         const id = uuidv4()
 
-        return <FillItem arr={arr} key={id} card={card} index={index} plus={decrementClick} />
+        return (
+          <FillItem
+            arr={arr}
+            key={id}
+            card={card}
+            index={index}
+            plus={decrementClick}
+          />
+        )
       })
     }
 
@@ -120,6 +127,18 @@ export default function BurgerConstructor() {
     },
   })
 
+  const user = useSelector((s) => s.authReducer.auth)
+  const navigate = useNavigate()
+  const direct = () => {
+    if (!user.success) {
+      navigate('/login')
+    } else {
+      dispatcher({type: 'SET_ORDER_POPUP'})
+      dispatcher({type: 'OPEN_POPUP'})
+      dispatcher(getOrder([...arr, bun]))
+    }
+  }
+
   return (
     <div className={BrgConstructorStyles.total}>
       <div className={BrgConstructorStyles.elements}>
@@ -139,9 +158,7 @@ export default function BurgerConstructor() {
           type="primary"
           size="large"
           onClick={() => {
-            dispatcher({type: 'SET_ORDER_POPUP'})
-            dispatcher({type: 'OPEN_POPUP'})
-            dispatcher(getOrder([...arr, bun]))
+            direct()
           }}
         >
           Оформить заказ

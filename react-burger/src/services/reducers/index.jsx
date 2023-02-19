@@ -10,6 +10,7 @@ import { setPopup } from './popups'
 import { postForgotReducer } from './postEmail'
 import { registerReducer } from './registerApi'
 import { authReducer } from './authApi'
+import { resetPasswordReducer } from './resetPassword'
 
 export const rootReducer = combineReducers({
   feedReducer,
@@ -22,5 +23,6 @@ export const rootReducer = combineReducers({
   setPopup,
   postForgotReducer,
   registerReducer,
-  authReducer
+  authReducer,
+  resetPasswordReducer
 })

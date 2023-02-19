@@ -7,6 +7,8 @@ import {
 import styles from './Reset-Password.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
+import { useDispatch, useSelector } from 'react-redux'
+import { resetPassword } from '../../services/actions'
 
 export default function ResetPassword() {
   const [password, setPassword] = React.useState('')
@@ -17,9 +19,17 @@ export default function ResetPassword() {
   const inputRef = React.useRef(null)
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const click = () => {
-    navigate('/login', { replace: true })
+    dispatch(resetPassword(password))
   }
+
+  const reset = useSelector(s => s.resetPasswordReducer.postPassword)
+  React.useEffect(() => {
+    if (reset.success) {
+      navigate('/login', { replace: true })
+    }
+  },[reset])
 
   const getForm = () => {
     return (

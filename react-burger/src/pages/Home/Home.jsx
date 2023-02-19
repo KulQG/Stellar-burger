@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getFeed } from '../../services/actions'
 
 export default function Home() {
+
   const dispatch = useDispatch()
   //запрос карточек с сервера
   React.useEffect(() => {

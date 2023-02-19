@@ -10,6 +10,9 @@ import {
   postEmailAddress,
   registerAddress,
   authAddress,
+  setCookie,
+  resetPasswordAddress,
+  getCookie,
 } from '../../utils/consts'
 
 export function getFeed() {
@@ -52,7 +55,7 @@ export function getOrder(arr) {
     dispatch({
       type: GET_ORDER,
     })
-    fetch(authAddress, {
+    fetch(postAddress, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -117,6 +120,44 @@ export function forgotPassword(email) {
       .catch((err) => {
         dispatch({
           type: 'POST_EMAIL_FAILED',
+        })
+        console.log('ошибка' + err)
+      })
+  }
+}
+
+export function resetPassword(password) {
+  return function (dispatch) {
+    dispatch({ type: 'POST_PASSWORD' })
+    fetch(resetPasswordAddress, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        password: password,
+        token: getCookie('token')
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        } else {
+          dispatch({
+            type: 'POST_PASSWORD_FAILED',
+          })
+          console.log('ошибка при получении данных' + res.status)
+        }
+      })
+      .then((data) => {
+        dispatch({
+          type: 'POST_PASSWORD_SUCCESS',
+          postPassword: data.success,
+        })
+      })
+      .catch((err) => {
+        dispatch({
+          type: 'POST_PASSWORD_FAILED',
         })
         console.log('ошибка' + err)
       })
@@ -198,6 +239,11 @@ export function auth([email, password]) {
           type: 'AUTH_SUCCESS',
           payload: data,
         })
+        let authToken = data.accessToken
+        let splitedAuthToken = authToken.split('Bearer ')[1]
+        if (splitedAuthToken) {
+          setCookie('token', splitedAuthToken)
+        }
       })
       .catch((err) => {
         dispatch({

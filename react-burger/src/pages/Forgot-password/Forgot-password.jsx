@@ -1,5 +1,5 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import React from 'react'
+import React, {useEffect} from 'react'
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './Forgot-password.module.css'
 import { Link, useNavigate } from 'react-router-dom'
@@ -23,6 +23,12 @@ export default function ForgotPassword() {
       navigate('/reset-password')
     }
   }
+
+  useEffect(() => {
+    if (postEmail) {
+      navigate('/reset-password')
+    } 
+  }, [postEmail])
 
   const getForm = () => {
     return (

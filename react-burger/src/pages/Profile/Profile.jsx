@@ -1,5 +1,5 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import React from 'react'
+import { useEffect, useState, useRef } from 'react'
 import {
   PasswordInput,
   EmailInput,
@@ -9,19 +9,27 @@ import styles from './Profile.module.css'
 import { Link, NavLink } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
 import Header from '../../components/Header/Header'
+import { useSelector } from 'react-redux'
 
 export default function Profile() {
-  const [email, setEmail] = React.useState('')
+  const user = useSelector((s) => s.authReducer.auth.user)
+
+  const [email, setEmail] = useState('')
   const onChangeEmail = (e) => {
     setEmail(e.target.value)
   }
 
-  const [password, setPassword] = React.useState('')
+  const [password, setPassword] = useState('')
   const onChangePassword = (e) => {
     setPassword(e.target.value)
   }
-  const [name, setName] = React.useState('')
-  const inputRef = React.useRef(null)
+  const [name, setName] = useState('')
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    setEmail(user.email)
+    setName(user.name)
+  }, [user])
 
   return (
     <div className={styles.wrapper}>
@@ -29,9 +37,7 @@ export default function Profile() {
       <div className={styles.profile}>
         <div className={styles.panel}>
           <div className={styles.navig}>
-            <NavLink
-              className={styles.linkWrap}
-            >
+            <NavLink className={styles.linkWrap}>
               <p className={`text text_type_main-medium ${styles.link} `}>
                 Профиль
               </p>

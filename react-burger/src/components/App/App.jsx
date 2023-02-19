@@ -8,19 +8,29 @@ import ResetPassword from '../../pages/Reset-Password/Reset-Password'
 import Profile from '../../pages/Profile/Profile'
 import IngredientPage from '../../pages/IngredientPage/IngredientPage'
 import NotFound from '../../pages/404/404'
+import { ProtectedRouteElement } from '../../pages/ProtectedRouteElement'
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/login" element={<Login />}></Route>
+        <Route path='/' element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/forgot-password"
+          element={<ProtectedRouteElement element={<ForgotPassword />} />}
+        />
+        <Route
+          path="/reset-password"
+          element={<ProtectedRouteElement element={<ResetPassword />} />}
+        />
+        <Route
+          path="/profile"
+          element={<ProtectedRouteElement element={<Profile />} />}
+        />
         <Route path="/ingredients/:id" element={<IngredientPage />} />
-        <Route path='*' element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   )
