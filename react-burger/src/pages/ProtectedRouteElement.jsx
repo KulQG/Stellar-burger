@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Route, Navigate } from 'react-router-dom'
 
 export const ProtectedRouteElement = ({ element }) => {
-  const user = useSelector((s) => s.authReducer.auth.success)
+  const user = useSelector((s) => s.getUserReducer.getUser.success)
   const [isLoaded, setLoaded] = useState(false)
 
   const init = async () => {

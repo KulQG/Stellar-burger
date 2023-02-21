@@ -5,7 +5,8 @@ import OrderDetails from '../../components/OrderDetails/OrderDetails'
 import IngredientsDetails from '../../components/IngredientsDetails/IngredientsDetails'
 import Modal from '../../components/Modal/Modal'
 import { useSelector, useDispatch } from 'react-redux'
-import { getFeed } from '../../services/actions'
+import { getUser } from '../../services/actions/getUser'
+import { getFeed } from '../../services/actions/getFeed'
 
 export default function Home() {
 
@@ -13,6 +14,7 @@ export default function Home() {
   //запрос карточек с сервера
   React.useEffect(() => {
     dispatch(getFeed())
+    dispatch(getUser())
   }, [])
 
   const isPopup = useSelector(s => s.setPopup.popupState)

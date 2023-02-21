@@ -16,6 +16,7 @@ export const registerAddress = 'https://norma.nomoreparties.space/api/auth/regis
 export const authAddress = 'https://norma.nomoreparties.space/api/auth/login'
 export const logoutAddress = 'https://norma.nomoreparties.space/api/auth/logout'
 export const updateCookieAddress = 'https://norma.nomoreparties.space/api/auth/token'
+export const getUserAddress = 'https://norma.nomoreparties.space/api/auth/user'
 
 export function setCookie(name, value, props) {
     props = props || {};

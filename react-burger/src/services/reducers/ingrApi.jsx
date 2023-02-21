@@ -1,9 +1,3 @@
-import {
-  GET_FEED,
-  GET_FEED_SUCCESS,
-  GET_FEED_FAILED,
-} from '../../utils/consts'
-
 const initialStateFeed = {
   feedRequest: false,
   feedFailed: false,
@@ -12,21 +6,21 @@ const initialStateFeed = {
 
 export const feedReducer = (state = initialStateFeed, action) => {
   switch (action.type) {
-    case GET_FEED: {
+    case 'GET_FEED': {
       return {
         ...state,
         feedRequest: true,
         feedFailed: false,
       }
     }
-    case GET_FEED_SUCCESS: {
+    case 'GET_FEED_SUCCESS': {
       return {
         ...state,
         feed: action.feed,
         feedRequest: false,
       }
     }
-    case GET_FEED_FAILED: {
+    case 'GET_FEED_FAILED': {
       return {
         ...state,
         feedFailed: true,

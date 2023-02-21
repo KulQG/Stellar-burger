@@ -11,6 +11,7 @@ import { postForgotReducer } from './postEmail'
 import { registerReducer } from './registerApi'
 import { authReducer } from './authApi'
 import { resetPasswordReducer } from './resetPassword'
+import { getUserReducer } from './getUserApi'
 
 export const rootReducer = combineReducers({
   feedReducer,
@@ -24,5 +25,6 @@ export const rootReducer = combineReducers({
   postForgotReducer,
   registerReducer,
   authReducer,
-  resetPasswordReducer
+  resetPasswordReducer,
+  getUserReducer
 })

@@ -9,7 +9,7 @@ import styles from './Register.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
 import { useDispatch, useSelector } from 'react-redux'
-import { register } from '../../services/actions'
+import { register } from '../../services/actions/register'
 
 export default function Register() {
   const [email, setEmail] = React.useState('')
@@ -26,7 +26,6 @@ export default function Register() {
 
   const dispatch = useDispatch()
   const answer = useSelector((s) => s.registerReducer.register)
-  console.log(answer)
 
   const navigate = useNavigate()
   const click = (e) => {

@@ -8,7 +8,7 @@ import styles from './Login.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
 import { useDispatch, useSelector } from 'react-redux'
-import { auth } from '../../services/actions'
+import { auth } from '../../services/actions/auth'
 import { Navigate } from 'react-router-dom'
 
 export default function Login() {

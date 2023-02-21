@@ -8,7 +8,7 @@ import styles from './Reset-Password.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetPassword } from '../../services/actions'
+import { resetPassword } from '../../services/actions/reset-password'
 
 export default function ResetPassword() {
   const [password, setPassword] = React.useState('')

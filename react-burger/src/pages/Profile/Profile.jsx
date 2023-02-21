@@ -12,7 +12,7 @@ import Header from '../../components/Header/Header'
 import { useSelector } from 'react-redux'
 
 export default function Profile() {
-  const user = useSelector((s) => s.authReducer.auth.user)
+  const user = useSelector((s) => s.getUserReducer.getUser.user)
 
   const [email, setEmail] = useState('')
   const onChangeEmail = (e) => {

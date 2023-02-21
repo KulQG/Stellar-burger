@@ -5,7 +5,7 @@ import styles from './Forgot-password.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
 import { useDispatch, useSelector } from 'react-redux'
-import { forgotPassword } from '../../services/actions'
+import { forgotPassword } from '../../services/actions/forgot-password'
 
 export default function ForgotPassword() {
   const postEmail = useSelector((s) => s.postForgotReducer.postEmail)

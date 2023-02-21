@@ -4,7 +4,7 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import BrgConstructorStyles from './BrgConstructorStyles.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getOrder } from '../../services/actions'
+import { getOrder } from '../../services/actions/getOrder'
 import { useDrop } from 'react-dnd'
 import { v4 as uuidv4 } from 'uuid'
 import FillItem from '../FillItem/FillItem.jsx'
@@ -127,7 +127,7 @@ export default function BurgerConstructor() {
     },
   })
 
-  const user = useSelector((s) => s.authReducer.auth)
+  const user = useSelector((s) => s.getUserReducer.getUser)
   const navigate = useNavigate()
   const direct = () => {
     if (!user.success) {
