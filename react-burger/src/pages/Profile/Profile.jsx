@@ -43,7 +43,6 @@ export default function Profile() {
 
   const textLink = {
     textDecoration: 'none',
-    //color: '#4C4CFF',
   }
   const activeText = {
     color: 'white',
@@ -55,8 +54,8 @@ export default function Profile() {
       <Header />
       <div className={styles.profile}>
         <div className={styles.panel}>
-          <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
-            <div>
+          <div style={{display: 'flex', flexDirection: 'column'}}>
+            <div className={styles.link}>
               <NavLink to='/profile'
                 className={({ isActive }) =>
                   isActive
@@ -68,7 +67,7 @@ export default function Profile() {
                 Профиль
               </NavLink>
             </div>
-            <div>
+            <div className={styles.link}>
               <NavLink to='orders'
                 className={({ isActive }) =>
                   isActive
@@ -80,7 +79,7 @@ export default function Profile() {
                 История заказов
               </NavLink>
             </div>
-            <div>
+            <div className={styles.link}>
               <NavLink to={'logout'}
                 className={({ isActive }) =>
                   isActive
