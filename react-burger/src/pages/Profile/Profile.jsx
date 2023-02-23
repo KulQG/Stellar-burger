@@ -43,7 +43,7 @@ export default function Profile() {
 
   const textLink = {
     textDecoration: 'none',
-    color: '#4C4CFF',
+    //color: '#4C4CFF',
   }
   const activeText = {
     color: 'white',
@@ -60,34 +60,34 @@ export default function Profile() {
               <NavLink to='/profile'
                 className={({ isActive }) =>
                   isActive
-                    ? `text text_type_main-medium text_color_inactive`
-                    : `text text_type_main-medium`
+                    ? `text text_type_main-medium`
+                    : `text text_type_main-medium text_color_inactive`
                 }
-                style={{textDecoration: 'none'}}
+                style={({isActive}) => isActive ? activeText : textLink}
               >
                 Профиль
               </NavLink>
             </div>
             <div>
-              <NavLink
+              <NavLink to='orders'
                 className={({ isActive }) =>
                   isActive
-                    ? `text text_type_main-medium text_color_inactive`
-                    : `text text_type_main-medium`
+                    ? `text text_type_main-medium`
+                    : `text text_type_main-medium text_color_inactive`
                 }
-                style={{textDecoration: 'none'}}
+                style={({isActive}) => isActive ? activeText : textLink}
               >
                 История заказов
               </NavLink>
             </div>
             <div>
-              <NavLink
+              <NavLink to={'logout'}
                 className={({ isActive }) =>
                   isActive
-                    ? `text text_type_main-medium text_color_inactive`
-                    : `text text_type_main-medium`
+                    ? `text text_type_main-medium`
+                    : `text text_type_main-medium text_color_inactive`
                 }
-                style={{textDecoration: 'none'}}
+                style={({isActive}) => isActive ? activeText : textLink}
               >
                 Выход
               </NavLink>

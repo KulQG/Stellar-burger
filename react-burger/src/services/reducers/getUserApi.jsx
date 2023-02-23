@@ -30,6 +30,14 @@ export const getUserReducer = (state = initialState, action) => {
         getUserRequest: false,
       }
     }
+    case 'DELETE_USER': {
+      return {
+        ...state,
+        getUser: {
+          success: false
+        }
+      }
+    }
     default: {
       return state
     }
