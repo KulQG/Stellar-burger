@@ -10,13 +10,7 @@ import { getFeed } from '../../services/actions/getFeed'
 import { updateToken } from '../../services/actions/updateToken'
 
 export default function Home() {
-
   const dispatch = useDispatch()
-  //запрос карточек с сервера
-  React.useEffect(() => {
-    dispatch(getFeed())
-  }, [])
-
   const isPopup = useSelector(s => s.setPopup.popupState)
   const checkingPopup = useSelector(s => s.checkPopup)
 

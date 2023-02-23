@@ -11,10 +11,12 @@ import NotFound from '../../pages/404/404'
 import { ProtectedRouteElement } from '../../pages/ProtectedRouteElement'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUser } from '../../services/actions/getUser'
+import { getFeed } from '../../services/actions/getFeed'
 
 function App() {
   const dispatch = useDispatch()
-  dispatch(getUser())                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+  dispatch(getFeed())
+  dispatch(getUser())
   return (
     <Router>
       <Routes>
