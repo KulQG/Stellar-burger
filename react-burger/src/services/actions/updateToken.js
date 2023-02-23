@@ -1,27 +1,16 @@
-import {
-    authAddress,
-    setCookie,
-} from '../../utils/consts'
+import { updateCookieAddress, setCookie } from "../../utils/consts"
+import { getUser } from "./getUser"
 
-export function auth([email, password]) {
+export function updateToken() {
     return function (dispatch) {
-        dispatch({ type: 'AUTH' })
-        fetch(authAddress, {
+        dispatch({ type: 'UPDATE-TOKEN' })
+        fetch(updateCookieAddress, {
             method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                email: email,
-                password: password,
+                token: localStorage.getItem('refreshToken')
             }),
         })
             .then((res) => {
@@ -29,24 +18,27 @@ export function auth([email, password]) {
                     return res.json()
                 } else {
                     dispatch({
-                        type: 'AUTH_FAILED',
+                        type: 'UPDATE-TOKEN_FAILED',
                     })
                     console.log('ошибка при получении данных' + res.status)
                 }
             })
             .then((data) => {
                 dispatch({
-                    type: 'AUTH_SUCCESS',
+                    type: 'UPDATE-TOKEN_SUCCESS',
                     payload: data,
                 })
+                console.log(data)
                 let authToken = data.accessToken
                 setCookie('token', authToken)
+                localStorage.clear()
                 const refreshToken = data.refreshToken
                 localStorage.setItem('refreshToken', refreshToken)
+                dispatch(getUser())
             })
             .catch((err) => {
                 dispatch({
-                    type: 'AUTH_FAILED',
+                    type: 'UPDATE-TOKEN_FAILED',
                 })
                 console.log('ошибка' + err)
             })

@@ -9,7 +9,8 @@ import styles from './Profile.module.css'
 import { Link, NavLink } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
 import Header from '../../components/Header/Header'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { patchUser } from '../../services/actions/patchUser'
 
 export default function Profile() {
   const user = useSelector((s) => s.getUserReducer.getUser.user)
@@ -26,38 +27,77 @@ export default function Profile() {
   const [name, setName] = useState('')
   const inputRef = useRef(null)
 
-  useEffect(() => {
+  const getPrevData = () => {
     setEmail(user.email)
     setName(user.name)
+  }
+
+  const dispatch = useDispatch()
+  const patchUserHandler = () => {
+    dispatch(patchUser([email, name, password]))
+  }
+
+  useEffect(() => {
+    getPrevData()
   }, [user])
+
+  const textLink = {
+    textDecoration: 'none',
+    color: '#4C4CFF',
+  }
+  const activeText = {
+    color: 'white',
+    textDecoration: 'none',
+  }
 
   return (
     <div className={styles.wrapper}>
       <Header />
       <div className={styles.profile}>
         <div className={styles.panel}>
-          <div className={styles.navig}>
-            <NavLink className={styles.linkWrap}>
-              <p className={`text text_type_main-medium ${styles.link} `}>
+          <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
+            <div>
+              <NavLink to='/profile'
+                className={({ isActive }) =>
+                  isActive
+                    ? `text text_type_main-medium text_color_inactive`
+                    : `text text_type_main-medium`
+                }
+                style={{textDecoration: 'none'}}
+              >
                 Профиль
-              </p>
-            </NavLink>
-            <NavLink className={styles.linkWrap}>
-              <p className={`text text_type_main-medium ${styles.link} `}>
+              </NavLink>
+            </div>
+            <div>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? `text text_type_main-medium text_color_inactive`
+                    : `text text_type_main-medium`
+                }
+                style={{textDecoration: 'none'}}
+              >
                 История заказов
-              </p>
-            </NavLink>
-            <NavLink className={styles.linkWrap}>
-              <p className={`text text_type_main-medium ${styles.link} `}>
+              </NavLink>
+            </div>
+            <div>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? `text text_type_main-medium text_color_inactive`
+                    : `text text_type_main-medium`
+                }
+                style={{textDecoration: 'none'}}
+              >
                 Выход
-              </p>
-            </NavLink>
+              </NavLink>
+            </div>
           </div>
           <p className="text text_type_main-default text_color_inactive">
             В этом разделе вы можете изменить свои персональные данные
           </p>
         </div>
-        <div className={styles.edit}>
+        <form className={styles.edit}>
           <Input
             type={'text'}
             placeholder={'Имя'}
@@ -81,7 +121,25 @@ export default function Profile() {
             name={'password'}
             placeholder={'Пароль'}
           />
-        </div>
+          <div className={styles.submitBox}>
+            <Button
+              onClick={getPrevData}
+              htmlType="button"
+              type="secondary"
+              size="medium"
+            >
+              Отмена
+            </Button>
+            <Button
+              onClick={patchUserHandler}
+              htmlType="button"
+              type="primary"
+              size="medium"
+            >
+              Сохранить
+            </Button>
+          </div>
+        </form>
       </div>
     </div>
   )

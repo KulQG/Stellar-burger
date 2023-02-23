@@ -4,17 +4,22 @@ import {
 } from '../../utils/consts'
 import { updateToken } from './updateToken'
 
-export function getUser() {
+export function patchUser([email, name, password]) {
     return function (dispatch) {
         dispatch({
             type: 'GET_USER',
         })
         fetch(getUserAddress, {
-            method: 'GET',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 'authorization': `${getCookie('token')}`
-            }
+            },
+            body: JSON.stringify({
+                email: email,
+                name: name,
+                password: password
+            })
         })
             .then((res) => {
                 if (res.ok) {

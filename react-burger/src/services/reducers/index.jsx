@@ -12,6 +12,7 @@ import { registerReducer } from './registerApi'
 import { authReducer } from './authApi'
 import { resetPasswordReducer } from './resetPassword'
 import { getUserReducer } from './getUserApi'
+import { updateTokenReducer } from './updateToken'
 
 export const rootReducer = combineReducers({
   feedReducer,
@@ -26,5 +27,6 @@ export const rootReducer = combineReducers({
   registerReducer,
   authReducer,
   resetPasswordReducer,
-  getUserReducer
+  getUserReducer,
+  updateTokenReducer
 })

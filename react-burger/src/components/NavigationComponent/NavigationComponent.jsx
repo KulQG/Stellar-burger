@@ -1,14 +1,13 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import PropTypes from 'prop-types'
 import navigStyles from './NavigationComponent.module.css'
 import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ListIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export default function NavigationComponent(props) {
   const [isActive, setIsActive] = React.useState(false)
-  const isActiveNow = props.isActive
-  const setActive = props.setActive
 
   //хедер передает пропс с нужной иконкой
   const setIcons = () => {
@@ -23,14 +22,16 @@ export default function NavigationComponent(props) {
     }
   }
 
-  const click = () => {
-    setActive({type: props.icon})
-    if (isActiveNow === props.icon) {
+  const location = useLocation()
+  useEffect(() => {
+    if (location.pathname==='/' && props.icon==='burger') {
+      setIsActive(true)
+    } else if (location.pathname==='/profile' && props.icon==='profile') {
       setIsActive(true)
     } else {
       setIsActive(false)
     }
-  }
+  }, [location])
 
   //в зависимости от стейта определяется открыт компонент или нет
   const classIcon = `${!isActive ? 'secondary' : 'primary'}`
@@ -39,11 +40,11 @@ export default function NavigationComponent(props) {
       ? 'text text_type_main-default text_color_inactive'
       : 'text text_type_main-default'
   }`
-
   return (
-    <div onClick={click} className={navigStyles.chapter}>
+    <div onClick={props.click} className={navigStyles.chapter}>
       {setIcons()}
       <p className={`${classText} ${navigStyles.text}`}>{props.text}</p>
+      {props.children}
     </div>
   )
 }

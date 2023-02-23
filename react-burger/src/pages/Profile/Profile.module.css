@@ -38,3 +38,7 @@
 .linkWrap_active {
     color: white;
 }
+
+.submitBox {
+    align-self: flex-end;
+}

@@ -9,12 +9,16 @@ import Profile from '../../pages/Profile/Profile'
 import IngredientPage from '../../pages/IngredientPage/IngredientPage'
 import NotFound from '../../pages/404/404'
 import { ProtectedRouteElement } from '../../pages/ProtectedRouteElement'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUser } from '../../services/actions/getUser'
 
 function App() {
+  const dispatch = useDispatch()
+  dispatch(getUser())                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route

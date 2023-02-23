@@ -7,6 +7,7 @@ import Modal from '../../components/Modal/Modal'
 import { useSelector, useDispatch } from 'react-redux'
 import { getUser } from '../../services/actions/getUser'
 import { getFeed } from '../../services/actions/getFeed'
+import { updateToken } from '../../services/actions/updateToken'
 
 export default function Home() {
 
@@ -14,7 +15,6 @@ export default function Home() {
   //запрос карточек с сервера
   React.useEffect(() => {
     dispatch(getFeed())
-    dispatch(getUser())
   }, [])
 
   const isPopup = useSelector(s => s.setPopup.popupState)
