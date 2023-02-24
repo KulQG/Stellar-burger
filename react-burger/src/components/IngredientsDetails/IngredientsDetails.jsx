@@ -1,17 +1,30 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import classes from './IngredientsDetails.module.css'
 
 export default function IngredientsDetails() {
-  const card = useSelector(store => store.currentCard.post)
+  const location = useLocation()
+  const feed = useSelector((s) => s.feedReducer.feed)
+
+  const path = location.pathname
+  const id = path.split('/ingredients/')[1]
+  const card = feed.find((obj) => obj._id === id)
+
   return (
-    <div className={classes.box}>
+     card && <div className={classes.box}>
       <h2 className="text text_type_main-large">Детали ингредиента</h2>
       <div className={classes.card}>
         <div className={classes.img}>
-          <img className={classes.imgContent} src={card.image_large} alt={card.name} />
+          <img
+            className={classes.imgContent}
+            src={card.image_large}
+            alt={card.name}
+          />
         </div>
-        <p className={`text text_type_main-medium ${classes.text}`}>{card.name}</p>
+        <p className={`text text_type_main-medium ${classes.text}`}>
+          {card.name}
+        </p>
         <div className={classes.info}>
           <div className={classes.infoElement}>
             <p className="text text_type_main-default text_color_inactive">
