@@ -23,6 +23,7 @@ export default function Login() {
   }
 
   const authState = useSelector((s) => s.getUserReducer.getUser)
+  const afterAuth = useSelector((s) => s.authReducer.auth)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -98,9 +99,11 @@ export default function Login() {
     )
   }
 
-  return !authState.success ? (
-    <AuthFormWrapper heading={'Вход'} form={getForm} uiLinks={getUILinks} />
-  ) : (
-    <Navigate to="/" replace />
-  )
+  if (!authState.success || !afterAuth.success) {
+    return (
+      <AuthFormWrapper heading={'Вход'} form={getForm} uiLinks={getUILinks} />
+    )
+  } else {
+    return <Navigate to="/" replace />
+  }
 }

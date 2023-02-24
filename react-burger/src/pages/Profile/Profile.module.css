@@ -40,3 +40,8 @@
 .submitBox {
     align-self: flex-end;
 }
+
+.logout {
+    height: 30px;
+    cursor: pointer;
+}

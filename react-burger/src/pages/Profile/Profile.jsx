@@ -11,6 +11,7 @@ import AuthFormWrapper from '../../components/AuthForm/AuthForm'
 import Header from '../../components/Header/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { patchUser } from '../../services/actions/patchUser'
+import { logout } from '../../services/actions/logout'
 
 export default function Profile() {
   const user = useSelector((s) => s.getUserReducer.getUser.user)
@@ -54,42 +55,40 @@ export default function Profile() {
       <Header />
       <div className={styles.profile}>
         <div className={styles.panel}>
-          <div style={{display: 'flex', flexDirection: 'column'}}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div className={styles.link}>
-              <NavLink to='/profile'
+              <NavLink
+                to="/profile"
                 className={({ isActive }) =>
                   isActive
                     ? `text text_type_main-medium`
                     : `text text_type_main-medium text_color_inactive`
                 }
-                style={({isActive}) => isActive ? activeText : textLink}
+                style={({ isActive }) => (isActive ? activeText : textLink)}
               >
                 Профиль
               </NavLink>
             </div>
             <div className={styles.link}>
-              <NavLink to='orders'
+              <NavLink
+                to="orders"
                 className={({ isActive }) =>
                   isActive
                     ? `text text_type_main-medium`
                     : `text text_type_main-medium text_color_inactive`
                 }
-                style={({isActive}) => isActive ? activeText : textLink}
+                style={({ isActive }) => (isActive ? activeText : textLink)}
               >
                 История заказов
               </NavLink>
             </div>
             <div className={styles.link}>
-              <NavLink to={'logout'}
-                className={({ isActive }) =>
-                  isActive
-                    ? `text text_type_main-medium`
-                    : `text text_type_main-medium text_color_inactive`
-                }
-                style={({isActive}) => isActive ? activeText : textLink}
+              <p
+                onClick={() => dispatch(logout())}
+                className={`text text_type_main-medium text_color_inactive ${styles.logout}`}
               >
                 Выход
-              </NavLink>
+              </p>
             </div>
           </div>
           <p className="text text_type_main-default text_color_inactive">

@@ -1,8 +1,8 @@
-import { deleteCookie } from "../../utils/consts"
+import { deleteCookie, logoutAddress } from "../../utils/consts"
 
 export function logout() {
     return function (dispatch) {
-      fetch(postAddress, {
+      fetch(logoutAddress, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
