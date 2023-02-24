@@ -37,7 +37,9 @@ export default function Profile() {
   }
 
   const dispatch = useDispatch()
-  const patchUserHandler = () => {
+
+  const patchUserHandler = (e) => {
+    e.preventDefault()
     dispatch(patchUser([email, name, password]))
   }
 
@@ -66,8 +68,8 @@ export default function Profile() {
             Отмена
           </Button>
           <Button
-            onClick={patchUserHandler}
-            htmlType="button"
+            onSubmit={patchUserHandler}
+            htmlType="submit"
             type="primary"
             size="medium"
           >

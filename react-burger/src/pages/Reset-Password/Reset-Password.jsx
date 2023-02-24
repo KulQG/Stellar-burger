@@ -53,7 +53,7 @@ export default function ResetPassword() {
         />
         <Link>
           <Button
-            onClick={click}
+            onSubmit={click}
             htmlType="button"
             type="primary"
             size="medium"

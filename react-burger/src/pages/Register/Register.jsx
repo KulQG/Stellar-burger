@@ -68,7 +68,7 @@ export default function Register() {
           name={'password'}
           placeholder={'Пароль'}
         />
-        <Button onClick={click} htmlType="button" type="primary" size="medium">
+        <Button onSubmit={click} htmlType="button" type="primary" size="medium">
           Зарегистрироваться
         </Button>
       </>

@@ -30,7 +30,7 @@ export function updateToken() {
                 })
                 console.log(data)
                 let authToken = data.accessToken
-                setCookie('token', authToken)
+                setCookie('token', authToken, '/')
                 localStorage.clear()
                 const refreshToken = data.refreshToken
                 localStorage.setItem('refreshToken', refreshToken)

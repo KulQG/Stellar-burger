@@ -27,6 +27,7 @@ export default function Login() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
   const onClick = (e) => {
     e.preventDefault()
     dispatch(auth([email, password]))
@@ -59,8 +60,8 @@ export default function Login() {
           placeholder={'Пароль'}
         />
         <Button
-          onClick={onClick}
-          htmlType="button"
+          onSubmit={onClick}
+          htmlType="submit"
           type="primary"
           size="medium"
         >

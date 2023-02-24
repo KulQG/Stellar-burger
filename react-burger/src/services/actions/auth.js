@@ -40,7 +40,7 @@ export function auth([email, password]) {
                     payload: data,
                 })
                 let authToken = data.accessToken
-                setCookie('token', authToken)
+                setCookie('token', authToken, '/')
                 const refreshToken = data.refreshToken
                 localStorage.setItem('refreshToken', refreshToken)
             })

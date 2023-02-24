@@ -40,7 +40,7 @@ export default function ForgotPassword() {
           size={'default'}
           placeholder="Укажите e-mail"
         />
-        <Button onClick={click} htmlType="button" type="primary" size="medium">
+        <Button onSubmit={click} htmlType="button" type="primary" size="medium">
           Восстановить
         </Button>
       </>
