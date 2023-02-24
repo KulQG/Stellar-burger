@@ -25,11 +25,11 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route
           path="/forgot-password"
-          element={<ProtectedRouteElement element={<ForgotPassword />} />}
+          element={<ForgotPassword />}
         />
         <Route
           path="/reset-password"
-          element={<ProtectedRouteElement element={<ResetPassword />} />}
+          element={<ResetPassword />}
         />
         <Route
           path="/profile"

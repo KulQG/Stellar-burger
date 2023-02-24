@@ -18,15 +18,33 @@ export default function Header() {
     navigate('profile')
   }
 
+  const logoClick = () => {
+    navigate('/')
+  }
+
   return (
     <header className={headerStyles.content}>
       <div className={headerStyles.leftPanels}>
-        <NavigationComponent click={navigToHome} text="Конструктор" icon="burger" />
-        <NavigationComponent click={navigToList} text="Лента заказов" icon="list" />
+        <NavigationComponent
+          click={navigToHome}
+          text="Конструктор"
+          icon="burger"
+        />
+        <NavigationComponent
+          click={navigToList}
+          text="Лента заказов"
+          icon="list"
+        />
       </div>
-      <Logo className={headerStyles.logo} />
+      <div style={{cursor: 'pointer'}} onClick={logoClick} >
+        <Logo className={headerStyles.logo} />
+      </div>
       <div className={headerStyles.rightPanel}>
-        <NavigationComponent click={navigToProfile} text="Личный кабинет" icon="profile" />
+        <NavigationComponent
+          click={navigToProfile}
+          text="Личный кабинет"
+          icon="profile"
+        />
       </div>
     </header>
   )

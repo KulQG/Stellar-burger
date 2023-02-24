@@ -5,6 +5,7 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalClass from './Modal.module.css'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 const modalRoot = document.getElementById('react-modals')
 
 export default function Modal({ close, children }) {
@@ -24,6 +25,7 @@ export default function Modal({ close, children }) {
   }, [])
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   return ReactDOM.createPortal(
     (<div className={ModalClass.modal}>

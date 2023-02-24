@@ -1,5 +1,5 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   PasswordInput,
   Input,
@@ -82,9 +82,14 @@ export default function ResetPassword() {
 
   const user = useSelector((s) => s.getUserReducer.getUser)
   const forgot = useSelector((s) => s.postForgotReducer.postEmail)
+  const [userState, setUserState] = useState(false)
 
-  if (!user.success) {
-    if (forgot.success) {
+  useEffect(() => {
+    setUserState(true)
+  }, [forgot, user])
+
+  if (userState) {
+    if (!user.success) {
       return (
         <AuthFormWrapper
           heading="Восстановление пароля"
@@ -93,9 +98,7 @@ export default function ResetPassword() {
         />
       )
     } else {
-      return <Navigate to="/forgot-password" replace />
+      return <Navigate to="/" replace />
     }
-  } else {
-    return <Navigate to="/" replace />
   }
 }

@@ -5,17 +5,18 @@ import OrderDetails from '../../components/OrderDetails/OrderDetails'
 import IngredientsDetails from '../../components/IngredientsDetails/IngredientsDetails'
 import Modal from '../../components/Modal/Modal'
 import { useSelector, useDispatch } from 'react-redux'
-import { getUser } from '../../services/actions/getUser'
-import { getFeed } from '../../services/actions/getFeed'
-import { updateToken } from '../../services/actions/updateToken'
+import { useNavigate } from 'react-router-dom'
 
 export default function Home() {
   const dispatch = useDispatch()
   const isPopup = useSelector(s => s.setPopup.popupState)
   const checkingPopup = useSelector(s => s.checkPopup)
 
+  const navigate = useNavigate()
+
   const closePopup = () => {
     dispatch({type: 'CLOSE_POPUP'})
+    navigate('/')
   }
 
   const definePopup = () => {

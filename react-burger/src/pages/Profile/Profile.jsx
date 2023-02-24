@@ -6,8 +6,7 @@ import {
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './Profile.module.css'
-import { Link, NavLink } from 'react-router-dom'
-import AuthFormWrapper from '../../components/AuthForm/AuthForm'
+import { NavLink } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { patchUser } from '../../services/actions/patchUser'
@@ -16,14 +15,18 @@ import { logout } from '../../services/actions/logout'
 export default function Profile() {
   const user = useSelector((s) => s.getUserReducer.getUser.user)
 
+  const [change, setChange] = useState(false)
+
   const [email, setEmail] = useState('')
   const onChangeEmail = (e) => {
     setEmail(e.target.value)
+    setChange(true)
   }
 
   const [password, setPassword] = useState('')
   const onChangePassword = (e) => {
     setPassword(e.target.value)
+    setChange(true)
   }
   const [name, setName] = useState('')
   const inputRef = useRef(null)
@@ -48,6 +51,31 @@ export default function Profile() {
   const activeText = {
     color: 'white',
     textDecoration: 'none',
+  }
+
+  const getSubmitBox = () => {
+    if (change) {
+      return (
+        <div className={styles.submitBox}>
+          <Button
+            onClick={getPrevData}
+            htmlType="button"
+            type="secondary"
+            size="medium"
+          >
+            Отмена
+          </Button>
+          <Button
+            onClick={patchUserHandler}
+            htmlType="button"
+            type="primary"
+            size="medium"
+          >
+            Сохранить
+          </Button>
+        </div>
+      )
+    }
   }
 
   return (
@@ -99,7 +127,10 @@ export default function Profile() {
           <Input
             type={'text'}
             placeholder={'Имя'}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value)
+              setChange(true)
+            }}
             value={name}
             name={'name'}
             ref={inputRef}
@@ -119,24 +150,7 @@ export default function Profile() {
             name={'password'}
             placeholder={'Пароль'}
           />
-          <div className={styles.submitBox}>
-            <Button
-              onClick={getPrevData}
-              htmlType="button"
-              type="secondary"
-              size="medium"
-            >
-              Отмена
-            </Button>
-            <Button
-              onClick={patchUserHandler}
-              htmlType="button"
-              type="primary"
-              size="medium"
-            >
-              Сохранить
-            </Button>
-          </div>
+          {getSubmitBox()}
         </form>
       </div>
     </div>
