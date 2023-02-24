@@ -39,7 +39,7 @@ export default function Login() {
     }
   }, [authState])
 
-  if (authState.success) {
+  if (authState.success || afterAuth.success) {
     navigate('/', { replace: true })
   }
 
@@ -60,7 +60,6 @@ export default function Login() {
           placeholder={'Пароль'}
         />
         <Button
-          onSubmit={onClick}
           htmlType="submit"
           type="primary"
           size="medium"
@@ -102,7 +101,7 @@ export default function Login() {
 
   if (!authState.success || !afterAuth.success) {
     return (
-      <AuthFormWrapper heading={'Вход'} form={getForm} uiLinks={getUILinks} />
+      <AuthFormWrapper submit={onClick} heading={'Вход'} form={getForm} uiLinks={getUILinks} />
     )
   } else {
     return <Navigate to="/" replace />

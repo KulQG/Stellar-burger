@@ -9,7 +9,7 @@ export default function AuthFormWrapper(props) {
         <Header className={styles.header} />
       </div>
       <div className={styles.auth}>
-        <form className={styles.form}>
+        <form onSubmit={props.submit} className={styles.form}>
           <h1 className={`text text_type_main-large ${styles.heading}`}>
             {props.heading}
           </h1>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from '../../pages/Login/Login'
 import Home from '../../pages/Home/Home'
@@ -15,22 +15,18 @@ import { getFeed } from '../../services/actions/getFeed'
 
 function App() {
   const dispatch = useDispatch()
-  dispatch(getFeed())
-  dispatch(getUser())
+  useEffect(() => {
+    dispatch(getFeed())
+    dispatch(getUser())
+  }, [])
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route
-          path="/forgot-password"
-          element={<ForgotPassword />}
-        />
-        <Route
-          path="/reset-password"
-          element={<ResetPassword />}
-        />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route
           path="/profile"
           element={<ProtectedRouteElement element={<Profile />} />}
