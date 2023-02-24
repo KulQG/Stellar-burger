@@ -1,8 +1,8 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './Forgot-password.module.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
 import { useDispatch, useSelector } from 'react-redux'
 import { forgotPassword } from '../../services/actions/forgot-password'
@@ -25,9 +25,9 @@ export default function ForgotPassword() {
   }
 
   useEffect(() => {
-    if ( email.length>0 && postEmail) {
+    if (email.length > 0 && postEmail) {
       navigate('/reset-password')
-    } 
+    }
   }, [postEmail])
 
   const getForm = () => {
@@ -62,11 +62,15 @@ export default function ForgotPassword() {
     )
   }
 
-  return (
+  const user = useSelector((s) => s.getUserReducer.getUser)
+
+  return !user.success ? (
     <AuthFormWrapper
       heading="Восстановление пароля"
       form={getForm}
       uiLinks={getUILinks}
     />
+  ) : (
+    <Navigate to="/" replace />
   )
 }

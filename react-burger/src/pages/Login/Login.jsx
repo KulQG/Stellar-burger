@@ -22,7 +22,7 @@ export default function Login() {
     setPassword(e.target.value)
   }
 
-  const authState = useSelector((s) => s.authReducer.auth)
+  const authState = useSelector((s) => s.getUserReducer.getUser)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -98,7 +98,9 @@ export default function Login() {
     )
   }
 
-  return (
+  return !authState.success ? (
     <AuthFormWrapper heading={'Вход'} form={getForm} uiLinks={getUILinks} />
+  ) : (
+    <Navigate to="/" replace />
   )
 }

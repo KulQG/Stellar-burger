@@ -6,7 +6,7 @@ import {
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './Register.module.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
 import { useDispatch, useSelector } from 'react-redux'
 import { register } from '../../services/actions/register'
@@ -16,6 +16,8 @@ export default function Register() {
   const onChangeEmail = (e) => {
     setEmail(e.target.value)
   }
+
+  const user = useSelector((s) => s.getUserReducer.getUser)
 
   const [password, setPassword] = React.useState('')
   const onChangePassword = (e) => {
@@ -88,11 +90,13 @@ export default function Register() {
     )
   }
 
-  return (
+  return !user.success ? (
     <AuthFormWrapper
       heading="Регистрация"
       form={getForm}
       uiLinks={getUILinks}
     />
+  ) : (
+    <Navigate to="/" replace />
   )
 }

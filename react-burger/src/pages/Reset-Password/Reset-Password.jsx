@@ -5,7 +5,7 @@ import {
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './Reset-Password.module.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetPassword } from '../../services/actions/reset-password'
@@ -24,12 +24,12 @@ export default function ResetPassword() {
     dispatch(resetPassword(password, code))
   }
 
-  const reset = useSelector(s => s.resetPasswordReducer.postPassword)
+  const reset = useSelector((s) => s.resetPasswordReducer.postPassword)
   React.useEffect(() => {
     if (reset.success) {
       navigate('/login', { replace: true })
     }
-  },[reset])
+  }, [reset])
 
   const getForm = () => {
     return (
@@ -52,7 +52,12 @@ export default function ResetPassword() {
           extraClass="ml-1"
         />
         <Link>
-          <Button onClick={click} htmlType="button" type="primary" size="medium">
+          <Button
+            onClick={click}
+            htmlType="button"
+            type="primary"
+            size="medium"
+          >
             Сохранить
           </Button>
         </Link>
@@ -75,11 +80,22 @@ export default function ResetPassword() {
     )
   }
 
-  return (
-    <AuthFormWrapper
-      heading="Восстановление пароля"
-      form={getForm}
-      uiLinks={getUILinks}
-    />
-  )
+  const user = useSelector((s) => s.getUserReducer.getUser)
+  const forgot = useSelector((s) => s.postForgotReducer.postEmail)
+
+  if (!user.success) {
+    if (forgot.success) {
+      return (
+        <AuthFormWrapper
+          heading="Восстановление пароля"
+          form={getForm}
+          uiLinks={getUILinks}
+        />
+      )
+    } else {
+      return <Navigate to="/forgot-password" replace />
+    }
+  } else {
+    return <Navigate to="/" replace />
+  }
 }

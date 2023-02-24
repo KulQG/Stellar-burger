@@ -1,7 +1,9 @@
 const initialStateEmail = {
     postEmailRequest: false,
     postEmailFailed: false,
-    postEmail: null,
+    postEmail: {
+      success: false
+    },
   }
   
   export const postForgotReducer = (state = initialStateEmail, action) => {
