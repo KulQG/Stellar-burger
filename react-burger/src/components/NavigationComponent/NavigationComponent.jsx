@@ -33,6 +33,12 @@ export default function NavigationComponent(props) {
     }
   }, [location])
 
+  const click = () => {
+    if (!isActive) {
+      return props.click()
+    }
+  }
+
   //в зависимости от стейта определяется открыт компонент или нет
   const classIcon = `${!isActive ? 'secondary' : 'primary'}`
   const classText = `${
@@ -41,7 +47,7 @@ export default function NavigationComponent(props) {
       : 'text text_type_main-default'
   }`
   return (
-    <div onClick={props.click} className={navigStyles.chapter}>
+    <div onClick={click} className={navigStyles.chapter}>
       {setIcons()}
       <p className={`${classText} ${navigStyles.text}`}>{props.text}</p>
       {props.children}

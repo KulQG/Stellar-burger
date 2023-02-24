@@ -21,7 +21,7 @@ export default function ResetPassword() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const click = () => {
-    dispatch(resetPassword(password))
+    dispatch(resetPassword(password, code))
   }
 
   const reset = useSelector(s => s.resetPasswordReducer.postPassword)
@@ -52,7 +52,7 @@ export default function ResetPassword() {
           extraClass="ml-1"
         />
         <Link>
-          <Button onClick={click()} htmlType="button" type="primary" size="medium">
+          <Button onClick={click} htmlType="button" type="primary" size="medium">
             Сохранить
           </Button>
         </Link>

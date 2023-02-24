@@ -25,7 +25,7 @@ export default function ForgotPassword() {
   }
 
   useEffect(() => {
-    if (postEmail) {
+    if ( email.length>0 && postEmail) {
       navigate('/reset-password')
     } 
   }, [postEmail])

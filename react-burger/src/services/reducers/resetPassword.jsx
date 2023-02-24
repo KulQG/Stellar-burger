@@ -19,7 +19,7 @@ export const resetPasswordReducer = (state = initialState, action) => {
       return {
         ...state,
         postPasswordFailed: false,
-        postPassword: action.postEmail,
+        postPassword: action.postPassword,
         postPasswordRequest: false,
       }
     }

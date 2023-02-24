@@ -33,7 +33,7 @@ export default function Login() {
 
   useEffect(() => {
     if (authState.success) {
-      navigate('/', { replace: true })
+      return navigate('/', { replace: true })
     }
   }, [authState])
 

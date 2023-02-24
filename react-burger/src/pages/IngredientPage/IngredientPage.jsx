@@ -9,23 +9,6 @@ import styles from './IngredientPage.module.css'
 
 export default function IngredientPage() {
   const page = useSelector((s) => s.ingrPageHandler.page)
-  const location = useLocation()
-  const feed = useSelector(s => s.feedReducer.feed)
-
-  const getCard = () => {
-    const path = location.pathname
-    const id = path.split('/ingredients/')[1]
-    const card = feed.find(obj => obj._id === id)
-    return card
-  }
-
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch({type: 'GET_CURRENT_CARD', payload: getCard()})
-  },[page,location,feed])
-
-  console.log(getCard())
 
   const handler = () => {
     if (page === 'page') {

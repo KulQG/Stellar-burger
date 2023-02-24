@@ -1,7 +1,7 @@
 import { resetPasswordAddress } from "../../utils/consts"
 import { getCookie } from "../../utils/consts"
 
-export function resetPassword(password) {
+export function resetPassword(password, token) {
     return function (dispatch) {
       dispatch({ type: 'POST_PASSWORD' })
       fetch(resetPasswordAddress, {
@@ -11,7 +11,7 @@ export function resetPassword(password) {
         },
         body: JSON.stringify({
           password: password,
-          token: getCookie('token')
+          token: token
         }),
       })
         .then((res) => {
@@ -27,7 +27,7 @@ export function resetPassword(password) {
         .then((data) => {
           dispatch({
             type: 'POST_PASSWORD_SUCCESS',
-            postPassword: data.success,
+            postPassword: data,
           })
         })
         .catch((err) => {
