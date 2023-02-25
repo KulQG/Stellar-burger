@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from '../../pages/Login/Login'
 import Home from '../../pages/Home/Home'
@@ -19,6 +19,8 @@ function App() {
     dispatch(getFeed())
     dispatch(getUser())
   }, [])
+  dispatch(getFeed())
+  dispatch(getUser())
   return (
     <Router>
       <Routes>

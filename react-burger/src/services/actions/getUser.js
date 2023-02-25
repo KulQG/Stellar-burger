@@ -34,9 +34,9 @@ export function getUser() {
                         payload: data,
                     })
                 }
-                //setTimeout(() => {
-                //    dispatch(updateToken())
-                //},20 * 60 * 1000)
+                setTimeout(() => {
+                    dispatch(updateToken())
+                },20 * 60 * 1000)
             })
             .catch((err) => {
                 dispatch({

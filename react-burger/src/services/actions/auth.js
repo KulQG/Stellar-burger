@@ -2,6 +2,7 @@ import {
     authAddress,
     setCookie,
 } from '../../utils/consts'
+import { getUser } from './getUser'
 
 export function auth([email, password]) {
     return function (dispatch) {
@@ -43,6 +44,7 @@ export function auth([email, password]) {
                 setCookie('token', authToken, '/')
                 const refreshToken = data.refreshToken
                 localStorage.setItem('refreshToken', refreshToken)
+                dispatch(getUser())
             })
             .catch((err) => {
                 dispatch({

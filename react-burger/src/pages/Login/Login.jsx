@@ -5,7 +5,7 @@ import {
   EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './Login.module.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../../services/actions/auth'
@@ -23,7 +23,6 @@ export default function Login() {
   }
 
   const authState = useSelector((s) => s.getUserReducer.getUser)
-  const afterAuth = useSelector((s) => s.authReducer.auth)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -33,15 +32,18 @@ export default function Login() {
     dispatch(auth([email, password]))
   }
 
+  const location = useLocation()
+  const locationBefore = location.search.split('?path=')[1]
+
   useEffect(() => {
     if (authState.success) {
-      return navigate('/', { replace: true })
+      if (location.search) {
+        navigate( locationBefore, {replace: true})
+      } else {
+        navigate('/', { replace: true })
+      }
     }
   }, [authState])
-
-  if (authState.success || afterAuth.success) {
-    navigate('/', { replace: true })
-  }
 
   const getForm = () => {
     return (
@@ -99,11 +101,11 @@ export default function Login() {
     )
   }
 
-  if (!authState.success || !afterAuth.success) {
+  if (!authState.success) {
     return (
       <AuthFormWrapper submit={onClick} heading={'Вход'} form={getForm} uiLinks={getUILinks} />
     )
   } else {
-    return <Navigate to="/" replace />
+    return <Navigate to={locationBefore || '/'} replace />
   }
 }

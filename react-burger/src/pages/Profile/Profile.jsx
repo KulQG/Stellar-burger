@@ -14,6 +14,7 @@ import { logout } from '../../services/actions/logout'
 
 export default function Profile() {
   const user = useSelector((s) => s.getUserReducer.getUser.user)
+  
 
   const [change, setChange] = useState(false)
 
