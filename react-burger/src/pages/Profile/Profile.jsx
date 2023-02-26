@@ -15,7 +15,8 @@ import { logout } from '../../services/actions/logout'
 export default function Profile() {
   const user = useSelector((s) => s.getUserReducer.getUser.user)
   
-
+  //если юзер меняет данные формы - изменяется состояние
+  //и кнопки появляются
   const [change, setChange] = useState(false)
 
   const [email, setEmail] = useState('')
@@ -69,7 +70,6 @@ export default function Profile() {
             Отмена
           </Button>
           <Button
-            onSubmit={patchUserHandler}
             htmlType="submit"
             type="primary"
             size="medium"
@@ -126,7 +126,7 @@ export default function Profile() {
             В этом разделе вы можете изменить свои персональные данные
           </p>
         </div>
-        <form className={styles.edit}>
+        <form onSubmit={patchUserHandler} className={styles.edit}>
           <Input
             type={'text'}
             placeholder={'Имя'}

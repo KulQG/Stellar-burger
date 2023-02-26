@@ -68,7 +68,7 @@ export default function Register() {
           name={'password'}
           placeholder={'Пароль'}
         />
-        <Button onSubmit={click} htmlType="button" type="primary" size="medium">
+        <Button htmlType="submit" type="primary" size="medium">
           Зарегистрироваться
         </Button>
       </>
@@ -95,6 +95,7 @@ export default function Register() {
       heading="Регистрация"
       form={getForm}
       uiLinks={getUILinks}
+      submit={click}
     />
   ) : (
     <Navigate to="/" replace />
