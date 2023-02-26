@@ -1,5 +1,5 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   PasswordInput,
   EmailInput,
@@ -12,14 +12,27 @@ import { auth } from '../../services/actions/auth'
 import { Navigate } from 'react-router-dom'
 
 export default function Login() {
+  const [change, setChange] = useState({
+    email: false,
+    password: false,
+  })
+
   const [email, setEmail] = React.useState('')
   const onChangeEmail = (e) => {
     setEmail(e.target.value)
+    setChange({
+      ...change,
+      email: true,
+    })
   }
 
   const [password, setPassword] = React.useState('')
   const onChangePassword = (e) => {
     setPassword(e.target.value)
+    setChange({
+      ...change,
+      password: true,
+    })
   }
 
   const authState = useSelector((s) => s.getUserReducer.getUser)
@@ -38,12 +51,22 @@ export default function Login() {
   useEffect(() => {
     if (authState.success) {
       if (location.search) {
-        navigate( locationBefore, {replace: true})
+        navigate(locationBefore, { replace: true })
       } else {
         navigate('/', { replace: true })
       }
     }
   }, [authState])
+
+  const getButton = () => {
+    if (change.email && change.password) {
+      return (
+        <Button htmlType="submit" type="primary" size="medium">
+          Войти
+        </Button>
+      )
+    }
+  }
 
   const getForm = () => {
     return (
@@ -61,13 +84,7 @@ export default function Login() {
           name={'password'}
           placeholder={'Пароль'}
         />
-        <Button
-          htmlType="submit"
-          type="primary"
-          size="medium"
-        >
-          Войти
-        </Button>
+        {getButton()}
       </>
     )
   }
@@ -103,7 +120,12 @@ export default function Login() {
 
   if (!authState.success) {
     return (
-      <AuthFormWrapper submit={onClick} heading={'Вход'} form={getForm} uiLinks={getUILinks} />
+      <AuthFormWrapper
+        submit={onClick}
+        heading={'Вход'}
+        form={getForm}
+        uiLinks={getUILinks}
+      />
     )
   } else {
     return <Navigate to={locationBefore || '/'} replace />

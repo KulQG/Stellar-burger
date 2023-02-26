@@ -1,5 +1,5 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import React from 'react'
+import React, {useState} from 'react'
 import {
   PasswordInput,
   EmailInput,
@@ -12,9 +12,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { register } from '../../services/actions/register'
 
 export default function Register() {
+  const [change, setChange] = useState({
+    name: false,
+    email: false,
+    password: false
+  })
+
   const [email, setEmail] = React.useState('')
   const onChangeEmail = (e) => {
     setEmail(e.target.value)
+    setChange({
+      ...change,
+      email: true
+    })
   }
 
   const user = useSelector((s) => s.getUserReducer.getUser)
@@ -22,6 +32,10 @@ export default function Register() {
   const [password, setPassword] = React.useState('')
   const onChangePassword = (e) => {
     setPassword(e.target.value)
+    setChange({
+      ...change,
+      password: true
+    })
   }
   const [name, setName] = React.useState('')
   const inputRef = React.useRef(null)
@@ -41,13 +55,29 @@ export default function Register() {
     }
   }, [answer])
 
+  const getButton = () => {
+    if (change.name && change.email && change.password) {
+      return (
+        <Button htmlType="submit" type="primary" size="medium">
+          Зарегистрироваться
+        </Button>
+      )
+    }
+  }
+
   const getForm = () => {
     return (
       <>
         <Input
           type={'text'}
           placeholder={'Имя'}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            setName(e.target.value)
+            setChange({
+              ...change,
+              name: true
+            })
+          }}
           value={name}
           name={'name'}
           ref={inputRef}
@@ -68,9 +98,7 @@ export default function Register() {
           name={'password'}
           placeholder={'Пароль'}
         />
-        <Button htmlType="submit" type="primary" size="medium">
-          Зарегистрироваться
-        </Button>
+        {getButton()}
       </>
     )
   }

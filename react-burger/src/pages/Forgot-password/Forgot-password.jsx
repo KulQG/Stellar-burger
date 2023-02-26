@@ -1,5 +1,5 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './Forgot-password.module.css'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
@@ -9,15 +9,21 @@ import { forgotPassword } from '../../services/actions/forgot-password'
 
 export default function ForgotPassword() {
   const postEmail = useSelector((s) => s.postForgotReducer.postEmail)
+
+  const [change, setChange] = useState(false)
+
   const [email, setEmail] = React.useState('')
+
   const onChangeEmail = (e) => {
     setEmail(e.target.value)
+    setChange(true)
   }
 
   const dispatch = useDispatch()
-
   const navigate = useNavigate()
+
   function click(e) {
+    e.preventDefault()
     dispatch(forgotPassword(email))
     if (postEmail) {
       navigate('/reset-password')
@@ -30,6 +36,16 @@ export default function ForgotPassword() {
     }
   }, [postEmail])
 
+  const getButton = () => {
+    if (change) {
+      return (
+        <Button htmlType="submit" type="primary" size="medium">
+          Восстановить
+        </Button>
+      )
+    }
+  }
+
   const getForm = () => {
     return (
       <>
@@ -40,9 +56,7 @@ export default function ForgotPassword() {
           size={'default'}
           placeholder="Укажите e-mail"
         />
-        <Button onClick={click} htmlType="button" type="primary" size="medium">
-          Восстановить
-        </Button>
+        {getButton()}
       </>
     )
   }
@@ -69,6 +83,7 @@ export default function ForgotPassword() {
       heading="Восстановление пароля"
       form={getForm}
       uiLinks={getUILinks}
+      submit={click}
     />
   ) : (
     <Navigate to="/" replace />

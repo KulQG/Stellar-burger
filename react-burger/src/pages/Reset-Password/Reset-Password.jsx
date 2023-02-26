@@ -11,16 +11,27 @@ import { useDispatch, useSelector } from 'react-redux'
 import { resetPassword } from '../../services/actions/reset-password'
 
 export default function ResetPassword() {
+  const [change, setChange] = useState({
+    password: false,
+    code: false,
+  })
+
   const [password, setPassword] = React.useState('')
   const onChangePassword = (e) => {
     setPassword(e.target.value)
+    setChange({
+      ...change,
+      password: true,
+    })
   }
   const [code, setCode] = React.useState('')
   const inputRef = React.useRef(null)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const click = () => {
+
+  const click = (e) => {
+    e.preventDefault()
     dispatch(resetPassword(password, code))
   }
 
@@ -30,6 +41,16 @@ export default function ResetPassword() {
       navigate('/login', { replace: true })
     }
   }, [reset])
+
+  const getButton = () => {
+    if (change.code && change.password) {
+      return (
+        <Button htmlType="submit" type="primary" size="medium">
+          Сохранить
+        </Button>
+      )
+    }
+  }
 
   const getForm = () => {
     return (
@@ -43,7 +64,10 @@ export default function ResetPassword() {
         <Input
           type={'text'}
           placeholder={'Введите код из письма'}
-          onChange={(e) => setCode(e.target.value)}
+          onChange={(e) => {
+            setCode(e.target.value)
+            setChange({ ...change, code: true })
+          }}
           value={code}
           name={'code'}
           ref={inputRef}
@@ -51,16 +75,7 @@ export default function ResetPassword() {
           size={'default'}
           extraClass="ml-1"
         />
-        <Link>
-          <Button
-            onSubmit={click}
-            htmlType="button"
-            type="primary"
-            size="medium"
-          >
-            Сохранить
-          </Button>
-        </Link>
+        {getButton()}
       </>
     )
   }
@@ -95,6 +110,7 @@ export default function ResetPassword() {
           heading="Восстановление пароля"
           form={getForm}
           uiLinks={getUILinks}
+          submit={click}
         />
       )
     } else {
