@@ -1,0 +1,35 @@
+.content {
+    align-self: center;
+    justify-content: center;
+    box-sizing: border-box;
+    max-width: 1280px;
+    margin: 16px auto;
+    display: flex;
+}
+
+.leftPanels {
+    display: flex;
+    gap: 8px;
+    margin-right: 112px;
+}
+
+.rightPanel {
+    align-self: center;
+    margin-left: 288.85px;
+    width: 180px;
+}
+
+.link {
+    text-decoration: none;
+    align-self: center;
+    justify-content: center;
+    box-sizing: border-box;
+    max-width: 1280px;
+    margin: 16px auto;
+    display: flex;
+    color: #8585AD;
+}
+
+.link_active {
+    color: white
+}

@@ -1,0 +1,28 @@
+ .link {
+    display: flex;
+    height: 24px;
+    justify-content: center;
+    gap: 5px;
+}
+
+.text {
+    margin: 0%;
+    height: 24px;
+    text-decoration: none;
+}
+
+.textLink {
+    text-decoration: none;
+    color: #4C4CFF;
+}
+
+.activeText {
+    color: white;
+    text-decoration: none;
+}
+
+.navigBox {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

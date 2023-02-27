@@ -1,0 +1,32 @@
+.card {
+    box-sizing: border-box;
+    width: 272px;
+    height: 208px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.price {
+    margin: 4px 0;
+    display: flex;
+    gap: 9px;
+}
+
+.image {
+    width: 240px;
+}
+
+.count {
+    position: relative;
+    top: 0px;
+    right: -140px;
+}
+
+.link {
+    text-decoration: none;
+    color: #F2F2F3;
+}
