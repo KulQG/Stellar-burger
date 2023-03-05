@@ -102,7 +102,7 @@ export default function Profile() {
             </div>
             <div className={styles.link}>
               <NavLink
-                to="orders"
+                to="/feed"
                 className={({ isActive }) =>
                   isActive
                     ? `text text_type_main-medium`

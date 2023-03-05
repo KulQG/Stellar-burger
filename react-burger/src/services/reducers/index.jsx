@@ -14,6 +14,7 @@ import { resetPasswordReducer } from './resetPassword'
 import { getUserReducer } from './getUserApi'
 import { updateTokenReducer } from './updateToken'
 import { ingrPageHandler } from './ingrPageHandler'
+import { wsReducer } from './wsReducer'
 
 export const rootReducer = combineReducers({
   feedReducer,
@@ -30,5 +31,6 @@ export const rootReducer = combineReducers({
   resetPasswordReducer,
   getUserReducer,
   updateTokenReducer,
-  ingrPageHandler
+  ingrPageHandler,
+  wsReducer
 })

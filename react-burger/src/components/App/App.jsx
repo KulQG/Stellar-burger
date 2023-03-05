@@ -12,6 +12,7 @@ import { ProtectedRouteElement } from '../../pages/ProtectedRouteElement'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUser } from '../../services/actions/getUser'
 import { getFeed } from '../../services/actions/getFeed'
+import { Feed } from '../../pages/Feed/Feed'
 
 function App() {
   const dispatch = useDispatch()
@@ -34,6 +35,7 @@ function App() {
           element={<ProtectedRouteElement element={<Profile />} />}
         />
         <Route path="/ingredients/:id" element={<IngredientPage />} />
+        <Route path='/feed' element={<Feed />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
