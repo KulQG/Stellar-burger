@@ -24,6 +24,21 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    overflow: auto;
+    margin-right: 8px;
+}
+
+.road::-webkit-scrollbar {
+    box-sizing: content-box;
+    width: 8px;
+}
+
+.road::-webkit-scrollbar-track {
+    background: rgba(47, 47, 55, 1);
+}
+
+.road::-webkit-scrollbar-thumb {
+    background-color: rgba(133, 133, 173, 1);
 }
 
 .data {

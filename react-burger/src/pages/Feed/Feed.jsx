@@ -2,6 +2,7 @@ import Header from "../../components/Header/Header";
 import styles from './Feed.module.css'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
+import { OrderComponent } from "../../components/OrderComponent/OrderComponent";
 
 export function Feed() {
     const dispatch = useDispatch()
@@ -33,13 +34,27 @@ export function Feed() {
         })
     }
 
+    const getOrderComponents = () => {
+        return socket.orders.map((order, index) => {
+            const id = index
+            return (
+                <OrderComponent
+                    key={id}
+                    num={order.number}
+                    name={order.name}
+                    ingrs={order.ingredients}
+                />
+            )
+        })
+    }
+
     return (
         <div className={styles.mainWrap}>
             <Header />
             <div className={styles.page}>
                 <h1 className="text text_type_main-large">Лента заказов</h1>
                 <div className={styles.wrap}>
-                    <div className={styles.road}></div>
+                    <div className={styles.road}>{getOrderComponents()}</div>
                     <div className={styles.data}>
                         <div className={styles.tables}>
                             <div className={styles.table}>
