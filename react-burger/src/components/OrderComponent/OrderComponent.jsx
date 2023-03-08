@@ -55,7 +55,7 @@ export function OrderComponent(props) {
 
     const navig = useNavigate()
     const navigation = () => {
-        navig(`/orders/${props.id}`)
+        navig(`/feed/${props.id}`)
     }
 
     return (
