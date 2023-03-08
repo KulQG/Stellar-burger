@@ -11,7 +11,7 @@ export default function Header() {
   }
 
   const navigToList = () => {
-    navigate('/list')
+    navigate('/feed')
   }
 
   const navigToProfile = () => {

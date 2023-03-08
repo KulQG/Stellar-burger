@@ -1,4 +1,4 @@
-export const socketMiddleware = wsUrl => {
+export const socketMiddleware = () => {
     return store => {
         let socket = null;
 
@@ -7,7 +7,7 @@ export const socketMiddleware = wsUrl => {
             const { type, payload } = action;
 
             if (type === 'WS_CONNECTION_START') {
-                socket = new WebSocket(wsUrl);
+                socket = new WebSocket(payload);
             }
             if (socket) {
 

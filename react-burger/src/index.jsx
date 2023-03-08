@@ -12,7 +12,7 @@ const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose
-const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware('wss://norma.nomoreparties.space/orders/all')))
+const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware()))
 
 const store = createStore(rootReducer, enhancer)
 

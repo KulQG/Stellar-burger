@@ -14,6 +14,8 @@ import { getUser } from '../../services/actions/getUser'
 import { getFeed } from '../../services/actions/getFeed'
 import { Feed } from '../../pages/Feed/Feed'
 import { OrderInfo } from '../../pages/OrderInfo/OrderInfo'
+import { Orders } from '../../pages/Orders/Orders'
+import { EditForm } from '../EditForm/EditForm'
 
 function App() {
   const dispatch = useDispatch()
@@ -33,11 +35,16 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route
           path="/profile"
-          element={<ProtectedRouteElement element={<Profile />} />}
+          element={<ProtectedRouteElement element={
+            <Profile>
+              <EditForm />
+            </Profile>}
+          />}
         />
         <Route path="/ingredients/:id" element={<IngredientPage />} />
-        <Route path='/orders' element={<Feed />} />
-        <Route path='/orders/:id' element={<OrderInfo />} />
+        <Route path='/feed' element={<Feed />} />
+        <Route path='/feed/:id' element={<OrderInfo />} />
+        <Route path='/profile/orders' element={<Orders />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

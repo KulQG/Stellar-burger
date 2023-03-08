@@ -2,12 +2,12 @@ import Header from "../../components/Header/Header";
 import styles from './Feed.module.css'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { OrderComponent } from "../../components/OrderComponent/OrderComponent";
+import { OrderComponents } from "../../components/OrderComponents/OrderComponents";
 
 export function Feed() {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch({ type: 'WS_CONNECTION_START' })
+        dispatch({ type: 'WS_CONNECTION_START', payload: 'wss://norma.nomoreparties.space/orders/all' })
     }, [])
     const socket = useSelector(s => s.wsReducer.orders)
 
@@ -34,29 +34,13 @@ export function Feed() {
         })
     }
 
-    const getOrderComponents = () => {
-        return socket.orders.map((order, index) => {
-            const id = index
-            return (
-                <OrderComponent
-                    key={id}
-                    num={order.number}
-                    name={order.name}
-                    ingrs={order.ingredients}
-                    date={order.updatedAt}
-                    id={order._id}
-                />
-            )
-        })
-    }
-
     return (
         <div className={styles.mainWrap}>
             <Header />
             <div className={styles.page}>
                 <h1 className="text text_type_main-large">Лента заказов</h1>
                 <div className={styles.wrap}>
-                    <div className={styles.road}>{getOrderComponents()}</div>
+                    <OrderComponents socket={socket} />
                     <div className={styles.data}>
                         <div className={styles.tables}>
                             <div className={styles.table}>
