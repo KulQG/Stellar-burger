@@ -43,6 +43,8 @@ export function Feed() {
                     num={order.number}
                     name={order.name}
                     ingrs={order.ingredients}
+                    date={order.updatedAt}
+                    id={order._id}
                 />
             )
         })

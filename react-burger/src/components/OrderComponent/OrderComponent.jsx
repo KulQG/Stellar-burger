@@ -1,5 +1,7 @@
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { IngredientCircle } from '../IngredientCircle/IngredientCircle'
 import styles from './OrderComponent.module.css'
 
 export function OrderComponent(props) {
@@ -22,13 +24,7 @@ export function OrderComponent(props) {
 
             if (hiddenImageCount === 0 && index < 5) {
                 return (
-                    <div
-                        key={id}
-                        className={styles.imgWrap}
-                        style={{ zIndex: zIndex }}
-                    >
-                        <img className={styles.img} src={img} alt="ингредиент" />
-                    </div>
+                    <IngredientCircle id={id} zIndex={zIndex} img={img} />
                 )
             } else if (hiddenImageCount > 0 && index === 5) {
                 return (
@@ -48,13 +44,7 @@ export function OrderComponent(props) {
                 )
             } else if (hiddenImageCount > 0 && index < 5) {
                 return (
-                    <div
-                        key={id}
-                        className={styles.imgWrap}
-                        style={{ zIndex: zIndex }}
-                    >
-                        <img className={styles.img} src={img} alt="ингредиент" />
-                    </div>
+                    <IngredientCircle id={id} zIndex={zIndex} img={img} />
                 )
             }
         })
@@ -63,10 +53,19 @@ export function OrderComponent(props) {
     const prices = objects.map(obj => obj && obj.price)
     const totalPrice = prices.reduce((price, acc) => price + acc, 0)
 
+    const navig = useNavigate()
+    const navigation = () => {
+        navig(`/orders/${props.id}`)
+    }
+
     return (
-        <div key={props.key} className={styles.wrap}>
+        <div key={props._id} className={styles.wrap} onClick={navigation}>
             <div className={styles.date}>
                 <p className="text text_type_digits-default">{props.num}</p>
+                <p className="text text_type_main-default text_color_inactive">
+                    <FormattedDate date={new Date(props.date)} />
+                    {` i-GMT+3`}
+                </p>
             </div>
             <h3 className={`text text_type_main-medium ${styles.name}`}>{props.name}</h3>
             <div className={styles.data}>

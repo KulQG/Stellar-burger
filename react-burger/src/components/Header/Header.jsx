@@ -15,7 +15,7 @@ export default function Header() {
   }
 
   const navigToProfile = () => {
-    navigate('profile')
+    navigate('/profile')
   }
 
   const logoClick = () => {

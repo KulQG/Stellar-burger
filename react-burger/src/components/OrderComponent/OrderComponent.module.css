@@ -8,6 +8,7 @@
     padding: 24px;
     gap: 24px;
     height: 214px;
+    cursor: pointer;
 }
 
 .name {
@@ -18,6 +19,12 @@
 }
 
 .data {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.date {
     width: 100%;
     display: flex;
     justify-content: space-between;
