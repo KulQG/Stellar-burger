@@ -11,9 +11,10 @@ export function OrderInfo() {
 
     const location = useLocation()
     const pathname = location.pathname
-    const id = pathname.split('/orders/')[1]
+    const id = pathname.split('/feed/')[1]
 
     const order = orders.find((obj) => obj._id === id)
+    console.log(order)
     const ingrs = order.ingredients
     const objects = ingrs.map(id => allIngredients.find(ingr => ingr._id === id))
 

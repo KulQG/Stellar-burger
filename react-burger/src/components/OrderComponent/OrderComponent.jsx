@@ -24,7 +24,7 @@ export function OrderComponent(props) {
 
             if (hiddenImageCount === 0 && index < 5) {
                 return (
-                    <IngredientCircle id={id} zIndex={zIndex} img={img} />
+                    <IngredientCircle key={id} id={id} zIndex={zIndex} img={img} />
                 )
             } else if (hiddenImageCount > 0 && index === 5) {
                 return (

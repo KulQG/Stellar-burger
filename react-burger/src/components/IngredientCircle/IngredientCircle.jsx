@@ -2,9 +2,10 @@ import styles from './IngredientCircle.module.css'
 
 export function IngredientCircle (props) {
     const zIndex = props.zIndex
+    const id = props.id
     return (
         <div
-            key={props.id}
+            key={id}
             className={styles.imgWrap}
             style={{ zIndex: zIndex }}
         >
