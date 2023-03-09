@@ -1,21 +1,31 @@
 import styles from './Profile.module.css'
-import { NavLink } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../services/actions/logout'
-import { EditForm } from '../../components/EditForm/EditForm'
 
 export default function Profile(props) {
 
   const dispatch = useDispatch()
 
-  const textLink = {
-    textDecoration: 'none',
+  const location = useLocation()
+  const setActiveLinkOrders = () => {
+    if (location.pathname === `/profile/orders`) {
+      return `text text_type_main-medium`
+    } else {
+      return `text text_type_main-medium text_color_inactive`
+    }
   }
-  const activeText = {
-    color: 'white',
-    textDecoration: 'none',
+
+  const setActiveLinkAccount = () => {
+    if (location.pathname === `/profile`) {
+      return `text text_type_main-medium`
+    } else {
+      return `text text_type_main-medium text_color_inactive`
+    }
   }
+
+  const navigate = useNavigate()
 
   return (
     <div className={styles.wrapper}>
@@ -23,31 +33,11 @@ export default function Profile(props) {
       <div className={styles.profile}>
         <div className={styles.panel}>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div className={styles.link}>
-              <NavLink
-                to="/profile"
-                className={({ isActive }) =>
-                  isActive
-                    ? `text text_type_main-medium`
-                    : `text text_type_main-medium text_color_inactive`
-                }
-                style={({ isActive }) => (isActive ? activeText : textLink)}
-              >
-                Профиль
-              </NavLink>
+            <div onClick={() => navigate('/profile')} className={styles.link}>
+              <p className={setActiveLinkAccount()} >Профиль</p>
             </div>
-            <div className={styles.link}>
-              <NavLink
-                to="orders"
-                className={({ isActive }) =>
-                  isActive
-                    ? `text text_type_main-medium`
-                    : `text text_type_main-medium text_color_inactive`
-                }
-                style={({ isActive }) => (isActive ? activeText : textLink)}
-              >
-                История заказов
-              </NavLink>
+            <div onClick={() => navigate('orders')} className={styles.link}>
+              <p className={setActiveLinkOrders()}>История заказов</p>
             </div>
             <div className={styles.link}>
               <p

@@ -18,10 +18,6 @@ export default function Header() {
     navigate('/profile')
   }
 
-  const logoClick = () => {
-    navigate('/')
-  }
-
   return (
     <header className={headerStyles.content}>
       <div className={headerStyles.leftPanels}>
@@ -36,7 +32,7 @@ export default function Header() {
           icon="list"
         />
       </div>
-      <div style={{cursor: 'pointer'}} onClick={logoClick} >
+      <div style={{cursor: 'pointer'}} onClick={navigToHome} >
         <Logo className={headerStyles.logo} />
       </div>
       <div className={headerStyles.rightPanel}>

@@ -1,4 +1,4 @@
-import { postAddress } from "../../utils/consts"
+import { getCookie, postAddress } from "../../utils/consts"
 
 export function getOrder(arr) {
     return function (dispatch) {
@@ -13,6 +13,7 @@ export function getOrder(arr) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `${getCookie('token')}`
         },
         body: JSON.stringify({
           ingredients: ids(),

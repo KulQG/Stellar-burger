@@ -48,6 +48,36 @@ export function OrderInfo() {
     const prices = objects.map(obj => obj.price)
     const price = prices.reduce((acc, price) => acc + price, 0)
 
+    const getStatus = () => {
+        switch (order.status) {
+            case 'done': {
+                return (
+                    <p className="text text_type_main-default" style={{
+                        marginBottom: '60px', color: "#00CCCC"
+                    }}>
+                        Выполнен
+                    </p>
+                )
+            };
+            case 'created': {
+                return (
+                    <p className="text text_type_main-default" style={{
+                        marginBottom: '60px', color: "#00CCCC"
+                    }}>
+                        Готовится
+                    </p>
+                )
+            };
+            case 'pending': {
+                return <p className="text text_type_main-default" style={{
+                    marginBottom: '60px', color: "red"
+                }}>
+                    Отменен
+                </p>
+            }
+        }
+    }
+
     return (
         <div className={styles.mainWrap}>
             <Header />
@@ -58,11 +88,7 @@ export function OrderInfo() {
                 <h1 style={{ marginBottom: '12px' }} className="text text_type_main-medium">
                     {order.name}
                 </h1>
-                <p className="text text_type_main-default" style={{
-                    marginBottom: '60px', color: "#00CCCC"
-                }}>
-                    Выполнен
-                </p>
+                {getStatus()}
                 <p style={{ marginBottom: '24px' }} className="text text_type_main-medium">
                     Состав:
                 </p>

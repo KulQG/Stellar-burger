@@ -41,10 +41,15 @@ function App() {
             </Profile>}
           />}
         />
+        <Route
+          path='/profile/orders'
+          element={<ProtectedRouteElement
+            element={<Orders />}
+          />}
+        />
         <Route path="/ingredients/:id" element={<IngredientPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route path='/feed/:id' element={<OrderInfo />} />
-        <Route path='/profile/orders' element={<Orders />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
