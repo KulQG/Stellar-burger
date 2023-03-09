@@ -1,6 +1,6 @@
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import { IngredientCircle } from "../../components/IngredientCircle/IngredientCircle";
 import styles from './OrderInfo.module.css'
@@ -9,12 +9,9 @@ export function OrderInfo() {
     const orders = useSelector(s => s.wsReducer.orders.orders)
     const allIngredients = useSelector(s => s.feedReducer.feed)
 
-    const location = useLocation()
-    const pathname = location.pathname
-    const id = pathname.split('/feed/')[1]
-
+    const params = useParams()
+    const id = params.id
     const order = orders.find((obj) => obj._id === id)
-    console.log(order)
     const ingrs = order.ingredients
     const objects = ingrs.map(id => allIngredients.find(ingr => ingr._id === id))
 
@@ -69,11 +66,13 @@ export function OrderInfo() {
                 )
             };
             case 'pending': {
-                return <p className="text text_type_main-default" style={{
-                    marginBottom: '60px', color: "red"
-                }}>
-                    Отменен
-                </p>
+                return (
+                    <p className="text text_type_main-default" style={{
+                        marginBottom: '60px', color: "red"
+                    }}>
+                        Отменен
+                    </p>
+                )
             }
         }
     }

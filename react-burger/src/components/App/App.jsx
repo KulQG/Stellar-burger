@@ -47,6 +47,12 @@ function App() {
             element={<Orders />}
           />}
         />
+        <Route
+          path='/profile/orders/:id'
+          element={<ProtectedRouteElement
+            element={<OrderInfo />}
+          />}
+        />
         <Route path="/ingredients/:id" element={<IngredientPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route path='/feed/:id' element={<OrderInfo />} />

@@ -1,6 +1,6 @@
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { IngredientCircle } from '../IngredientCircle/IngredientCircle'
 import styles from './OrderComponent.module.css'
 
@@ -54,8 +54,13 @@ export function OrderComponent(props) {
     const totalPrice = prices.reduce((price, acc) => price + acc, 0)
 
     const navig = useNavigate()
+    const location = useLocation()
     const navigation = () => {
-        navig(`/feed/${props.id}`)
+        if (location.pathname === '/feed') {
+            navig(`/feed/${props.id}`)
+        } else if (location.pathname === '/profile/orders') {
+            navig(`/profile/orders/${props.id}`)
+        }
     }
 
     return (
