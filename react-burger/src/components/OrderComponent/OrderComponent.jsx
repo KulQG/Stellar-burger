@@ -1,5 +1,5 @@
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { IngredientCircle } from '../IngredientCircle/IngredientCircle'
 import styles from './OrderComponent.module.css'
@@ -55,12 +55,17 @@ export function OrderComponent(props) {
 
     const navig = useNavigate()
     const location = useLocation()
+    const dispatch = useDispatch()
+    
     const navigation = () => {
         if (location.pathname === '/feed') {
             navig(`/feed/${props.id}`)
         } else if (location.pathname === '/profile/orders') {
             navig(`/profile/orders/${props.id}`)
         }
+        dispatch({ type: 'OPEN_POPUP' })
+        dispatch({ type: 'SET_ORDER_INFO_POPUP' })
+        dispatch({ type: 'OPEN_POPUP_ORDER_PAGE' })
     }
 
     return (
