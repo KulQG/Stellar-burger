@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { OrderComponents } from "../../components/OrderComponents/OrderComponents";
+import PopupHandler from "../../components/PopupHandler/PopupHandler";
 import { getCookie } from "../../utils/consts";
 import Profile from "../Profile/Profile";
 
@@ -19,8 +20,11 @@ export function Orders() {
     const socket = useSelector((s) => s.wsReducer.orders)
 
     return (
-        <Profile>
-            <OrderComponents socket={socket} />
-        </Profile>
+        <>
+            <Profile>
+                <OrderComponents socket={socket} />
+            </Profile>
+            <PopupHandler path={'/profile/orders'} />
+        </>
     )
 }

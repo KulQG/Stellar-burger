@@ -31,7 +31,7 @@ export function OrderComponent(props) {
                     <div
                         key={id}
                         className={`${styles.imgWrap}`}
-                        style={{ zIndex: zIndex }}
+                        style={{ zIndex: 1 }}
                     >
                         <div className={styles.sixth} style={{ backgroundImage: `url(${img})` }} >
                             <div className={styles.over}>
@@ -56,7 +56,7 @@ export function OrderComponent(props) {
     const navig = useNavigate()
     const location = useLocation()
     const dispatch = useDispatch()
-    
+
     const navigation = () => {
         if (location.pathname === '/feed') {
             navig(`/feed/${props.id}`)
