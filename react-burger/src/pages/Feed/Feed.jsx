@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 export function Feed() {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch({ type: 'WS_CONNECTION_START', payload: 'wss://norma.nomoreparties.space/orders/all' })
+        dispatch({ type: 'WS_CONNECTION_START' })
 
         return () => {
             dispatch({ type: 'WS_CONNECTION_CLOSE' })

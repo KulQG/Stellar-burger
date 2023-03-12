@@ -1,6 +1,7 @@
 import { updateToken } from "../services/actions/updateToken";
+import { getCookie } from "../utils/consts";
 
-export const socketMiddleware = () => {
+export const userSocketMiddleware = () => {
     return store => {
         let socket = null;
 
@@ -8,8 +9,9 @@ export const socketMiddleware = () => {
             const { dispatch, getState } = store;
             const { type, payload } = action;
 
-            if (type === 'WS_CONNECTION_START') {
-                socket = new WebSocket('wss://norma.nomoreparties.space/orders/all');
+            if (type === 'USER_WS_CONNECTION_START') {
+                const accessToken = getCookie('token').split('Bearer ')[1]
+                socket = new WebSocket(`wss://norma.nomoreparties.space/orders?token=${accessToken}`);
             }
             if (socket) {
 
@@ -18,13 +20,13 @@ export const socketMiddleware = () => {
                     if (event === 'Invalid or missing token') {
                         dispatch(updateToken())
                     } else {
-                        dispatch({ type: 'WS_CONNECTION_SUCCESS', payload: event });
+                        dispatch({ type: 'USER_WS_CONNECTION_SUCCESS', payload: event });
                     }
                 };
 
                 // функция, которая вызывается при ошибке соединения
                 socket.onerror = event => {
-                    dispatch({ type: 'WS_CONNECTION_ERROR', payload: event });
+                    dispatch({ type: 'USER_WS_CONNECTION_ERROR', payload: event });
                 };
 
                 // функция, которая вызывается при получении события от сервера
@@ -32,20 +34,20 @@ export const socketMiddleware = () => {
                     const { data } = event;
                     const parsedData = JSON.parse(data)
                     const { success, ...restParsedData } = parsedData
-                    dispatch({ type: 'WS_GET_MESSAGE', payload: restParsedData });
+                    dispatch({ type: 'USER_WS_GET_MESSAGE', payload: restParsedData });
                 };
                 // функция, которая вызывается при закрытии соединения
                 socket.onclose = event => {
-                    dispatch({ type: 'WS_CONNECTION_CLOSED', payload: event });
+                    dispatch({ type: 'USER_WS_CONNECTION_CLOSED', payload: event });
                 };
 
-                if (type === 'WS_SEND_MESSAGE') {
+                if (type === 'USER_WS_SEND_MESSAGE') {
                     const message = JSON.stringify(payload);
                     // функция для отправки сообщения на сервер
                     socket.send(JSON.stringify(message));
                 }
             }
-            if (type === 'WS_CONNECTION_CLOSE') {
+            if (type === 'USER_WS_CONNECTION_CLOSE') {
                 socket.close(1000)
             }
 

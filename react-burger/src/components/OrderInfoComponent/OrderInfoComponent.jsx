@@ -7,7 +7,12 @@ import { IngredientCircle } from "../../components/IngredientCircle/IngredientCi
 import { getCookie } from '../../utils/consts';
 
 export function OrderInfoComponent() {
-    const orders = useSelector(s => s.wsReducer.orders.orders)
+    const checkOpenWs = useSelector(s => s.checkOpenWs)
+    const commonOrders = useSelector(s => s.wsReducer.orders)
+    const userOrders = useSelector(s => s.userWsReducer.orders)
+
+    const orders = checkOpenWs.feed ? commonOrders.orders : userOrders.orders
+
     const allIngredients = useSelector(s => s.feedReducer.feed)
 
     const [load, setLoad] = useState(false)
@@ -26,13 +31,10 @@ export function OrderInfoComponent() {
             if (path === '/feed') {
                 dispatch({
                     type: 'WS_CONNECTION_START',
-                    payload: 'wss://norma.nomoreparties.space/orders/all'
                 })
             } else {
-                const accessToken = getCookie('token').split('Bearer ')[1]
                 dispatch({
-                    type: 'WS_CONNECTION_START',
-                    payload: `wss://norma.nomoreparties.space/orders?token=${accessToken}`
+                    type: 'USER_WS_CONNECTION_START',
                 })
             }
         }
