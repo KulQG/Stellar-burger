@@ -16,15 +16,20 @@ import { Feed } from '../../pages/Feed/Feed'
 import { OrderInfo } from '../../pages/OrderInfo/OrderInfo'
 import { Orders } from '../../pages/Orders/Orders'
 import { EditForm } from '../EditForm/EditForm'
+import { checkToken } from '../../utils/consts'
 
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getFeed())
-    dispatch(getUser())
+
+    if (checkToken()) {
+      dispatch(getUser())
+    }
   }, [])
+
   dispatch(getFeed())
-  dispatch(getUser())
+
   return (
     <Router>
       <Routes>

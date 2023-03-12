@@ -4,12 +4,17 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { OrderComponents } from "../../components/OrderComponents/OrderComponents";
 import PopupHandler from "../../components/PopupHandler/PopupHandler";
+import { useLocation } from "react-router-dom";
 
 export function Feed() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch({ type: 'WS_CONNECTION_START', payload: 'wss://norma.nomoreparties.space/orders/all' })
-    }, [])
+
+        return () => {
+            dispatch({ type: 'WS_CONNECTION_CLOSE' })
+        }
+    }, [dispatch])
     const socket = useSelector(s => s.wsReducer.orders)
 
     const done = socket.orders.filter(order => order.status === 'done')

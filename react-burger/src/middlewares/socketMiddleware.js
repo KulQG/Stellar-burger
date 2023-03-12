@@ -1,3 +1,5 @@
+import { updateToken } from "../services/actions/updateToken";
+
 export const socketMiddleware = () => {
     return store => {
         let socket = null;
@@ -13,7 +15,11 @@ export const socketMiddleware = () => {
 
                 // функция, которая вызывается при открытии сокета
                 socket.onopen = event => {
-                    dispatch({ type: 'WS_CONNECTION_SUCCESS', payload: event });
+                    if (event === 'Invalid or missing token') {
+                        dispatch(updateToken())
+                    } else {
+                        dispatch({ type: 'WS_CONNECTION_SUCCESS', payload: event });
+                    }
                 };
 
                 // функция, которая вызывается при ошибке соединения
@@ -38,6 +44,9 @@ export const socketMiddleware = () => {
                     // функция для отправки сообщения на сервер
                     socket.send(JSON.stringify(message));
                 }
+            }
+            if (type === 'WS_CONNECTION_CLOSE') {
+                socket.close(1000)
             }
 
             next(action);

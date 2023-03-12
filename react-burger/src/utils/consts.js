@@ -52,3 +52,15 @@ export function getCookie(name) {
 export const deleteCookie = (name) => {
     setCookie(name, null, { expires: -1, path: '/' });
 }
+
+export function checkToken() {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        const [name, value] = cookie.split('=');
+        if (name === 'token') {
+            return true;
+        }
+    }
+    return false;
+}

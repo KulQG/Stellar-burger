@@ -27,6 +27,13 @@ export const wsReducer = (state = initialState, action) => {
                 error: undefined,
                 wsConnected: false
             };
+        case 'WS_CONNECTION_CLOSE': {
+            return {
+                ...state,
+                error: undefined,
+                wsConnected: false
+            }
+        }
         case 'WS_GET_MESSAGE':
             return {
                 ...state,

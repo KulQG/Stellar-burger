@@ -15,7 +15,11 @@ export function Orders() {
             type: 'WS_CONNECTION_START',
             payload: `wss://norma.nomoreparties.space/orders?token=${accessToken}`
         })
-    }, [])
+
+        return () => {
+            dispatch({ type: 'WS_CONNECTION_CLOSE' })
+        }
+    }, [dispatch])
 
     const socket = useSelector((s) => s.wsReducer.orders)
 
