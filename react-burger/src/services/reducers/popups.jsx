@@ -1,6 +1,7 @@
 const initialState = {
   ingr: false,
   order: false,
+  orderInfo: false
 }
 
 export const checkPopup = (state = initialState, action) => {
@@ -10,6 +11,7 @@ export const checkPopup = (state = initialState, action) => {
         ...state,
         ingr: true,
         order: false,
+        orderInfo: false
       }
     }
     case 'SET_ORDER_POPUP': {
@@ -17,6 +19,15 @@ export const checkPopup = (state = initialState, action) => {
         ...state,
         ingr: false,
         order: true,
+        orderInfo: false
+      }
+    }
+    case 'SET_ORDER_INFO_POPUP': {
+      return {
+        ...state,
+        ingr: false,
+        order: false,
+        orderInfo: true
       }
     }
     default: {

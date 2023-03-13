@@ -1,0 +1,7 @@
+.mainWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 122px;
+    margin-bottom: 230px;
+}
