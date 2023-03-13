@@ -28,7 +28,6 @@ function App() {
     }
   }, [])
 
-  dispatch(getFeed())
 
   return (
     <Router>

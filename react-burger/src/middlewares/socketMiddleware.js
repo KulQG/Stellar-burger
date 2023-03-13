@@ -15,11 +15,7 @@ export const socketMiddleware = () => {
 
                 // функция, которая вызывается при открытии сокета
                 socket.onopen = event => {
-                    if (event === 'Invalid or missing token') {
-                        dispatch(updateToken())
-                    } else {
-                        dispatch({ type: 'WS_CONNECTION_SUCCESS', payload: event });
-                    }
+                    dispatch({ type: 'WS_CONNECTION_SUCCESS', payload: event });
                 };
 
                 // функция, которая вызывается при ошибке соединения

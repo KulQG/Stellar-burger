@@ -5,7 +5,6 @@ import { IngredientCircle } from '../IngredientCircle/IngredientCircle'
 import styles from './OrderComponent.module.css'
 
 export function OrderComponent(props) {
-
     const allIngredients = useSelector(s => s.feedReducer.feed)
     const currentIds = props.ingrs
 

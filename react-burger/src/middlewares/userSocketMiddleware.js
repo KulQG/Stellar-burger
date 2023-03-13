@@ -17,11 +17,7 @@ export const userSocketMiddleware = () => {
 
                 // функция, которая вызывается при открытии сокета
                 socket.onopen = event => {
-                    if (event === 'Invalid or missing token') {
-                        dispatch(updateToken())
-                    } else {
-                        dispatch({ type: 'USER_WS_CONNECTION_SUCCESS', payload: event });
-                    }
+                    dispatch({ type: 'USER_WS_CONNECTION_SUCCESS', payload: event });
                 };
 
                 // функция, которая вызывается при ошибке соединения
@@ -34,6 +30,11 @@ export const userSocketMiddleware = () => {
                     const { data } = event;
                     const parsedData = JSON.parse(data)
                     const { success, ...restParsedData } = parsedData
+
+                    if (parsedData.message === 'Invalid or missing token') {
+                        dispatch(updateToken())
+                    }
+                    
                     dispatch({ type: 'USER_WS_GET_MESSAGE', payload: restParsedData });
                 };
                 // функция, которая вызывается при закрытии соединения
