@@ -1,0 +1,63 @@
+.wrap {
+    width: 640px;
+    padding: 20px 0;
+}
+
+.number {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.structure {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+    max-height: 312px;
+    overflow: auto;
+}
+
+.structure::-webkit-scrollbar {
+    box-sizing: content-box;
+    width: 8px;
+}
+
+.structure::-webkit-scrollbar-track {
+    background: rgba(47, 47, 55, 1);
+}
+
+.structure::-webkit-scrollbar-thumb {
+    background-color: rgba(133, 133, 173, 1);
+}
+
+.ingr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    max-width: 608px;
+}
+
+.ingrName {
+    width: 320px;
+    display: flex;
+    justify-content: flex-start;
+    margin-right: auto;
+}
+
+.price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.dateAndPrice {
+    display: flex;
+    justify-content: space-between;
+}
+
+.totalPrice {
+    display: flex;
+    gap: 8px;
+}

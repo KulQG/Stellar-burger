@@ -15,3 +15,21 @@ export const ingrPageHandler = (state = initialState, action) => {
     }
   }
 }
+
+const orderState = {
+  page: 'page',
+}
+
+export const orderPageHandler = (state = orderState, action) => {
+  switch (action.type) {
+    case 'OPEN_POPUP_ORDER_PAGE':{
+      return {
+        ...state,
+        page: 'popup'
+      }
+    }
+    default: {
+      return state
+    }
+  }
+}

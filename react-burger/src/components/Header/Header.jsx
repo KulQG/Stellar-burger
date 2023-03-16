@@ -11,15 +11,11 @@ export default function Header() {
   }
 
   const navigToList = () => {
-    navigate('/list')
+    navigate('/feed')
   }
 
   const navigToProfile = () => {
-    navigate('profile')
-  }
-
-  const logoClick = () => {
-    navigate('/')
+    navigate('/profile')
   }
 
   return (
@@ -36,7 +32,7 @@ export default function Header() {
           icon="list"
         />
       </div>
-      <div style={{cursor: 'pointer'}} onClick={logoClick} >
+      <div style={{cursor: 'pointer'}} onClick={navigToHome} >
         <Logo className={headerStyles.logo} />
       </div>
       <div className={headerStyles.rightPanel}>

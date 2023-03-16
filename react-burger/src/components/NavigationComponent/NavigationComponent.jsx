@@ -28,6 +28,8 @@ export default function NavigationComponent(props) {
       setIsActive(true)
     } else if (location.pathname==='/profile' && props.icon==='profile') {
       setIsActive(true)
+    } else if(location.pathname === '/feed' && props.icon==='list') {
+      setIsActive(true)
     } else {
       setIsActive(false)
     }

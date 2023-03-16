@@ -1,0 +1,18 @@
+.imgWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(63.18deg, #801AB2, #4C4CFF);
+    margin-right: -16px;
+}
+
+.img {
+    width: 60px;
+    height: 60px;
+    background: black;
+    border-radius: 50%;
+    object-fit: cover;
+}
