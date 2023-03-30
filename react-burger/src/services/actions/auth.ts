@@ -4,7 +4,7 @@ import {
 } from '../../utils/consts'
 import { getUser } from './getUser'
 
-export function auth([email, password]) {
+export function auth([email, password]: [string,string]) {
     return function (dispatch) {
         dispatch({ type: 'AUTH' })
         fetch(authAddress, {
