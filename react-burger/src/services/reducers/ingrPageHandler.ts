@@ -1,4 +1,7 @@
-import { OPEN_POPUP_ORDER_PAGE, OPEN_POPUP_INGR_PAGE } from "../actions/constants";
+import {
+  OPEN_POPUP_ORDER_PAGE,
+  OPEN_POPUP_INGR_PAGE,
+} from "../../utils/constantsActions";
 import { IAction } from "../types/data";
 import { IPageHandler } from "../types/data";
 

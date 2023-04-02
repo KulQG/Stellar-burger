@@ -4,7 +4,7 @@ import {
   SET_ORDER_POPUP,
   OPEN_POPUP,
   CLOSE_POPUP,
-} from "../actions/constants";
+} from "../../utils/constantsActions";
 import { IAction } from "../types/data";
 import { IInitialStateStringBool } from "../types/data";
 

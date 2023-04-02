@@ -1,4 +1,4 @@
-import { GET_FILLING } from "../actions/constants"
+import { GET_FILLING } from "../../utils/constantsActions";
 
 const constructor: {fill: Array<any>} = {
   fill: [],

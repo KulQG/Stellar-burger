@@ -2,7 +2,7 @@ import {
   POST_PASSWORD,
   POST_PASSWORD_SUCCESS,
   POST_PASSWORD_FAILED,
-} from "../actions/constants";
+} from "../../utils/constantsActions";
 
 interface IResetPasswordState {
   postPasswordRequest: boolean;

@@ -2,7 +2,7 @@ import {
   REGISTER,
   REGISTER_SUCCESS,
   REGISTER_FAILED,
-} from "../actions/constants";
+} from "../../utils/constantsActions";
 import { IInitialStateEmailForRegister } from "../types/data";
 
 const initialStateEmail: IInitialStateEmailForRegister = {

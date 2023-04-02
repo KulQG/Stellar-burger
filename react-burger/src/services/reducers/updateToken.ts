@@ -2,7 +2,7 @@ import {
   UPDATE_TOKEN,
   UPDATE_TOKEN_FAILED,
   UPDATE_TOKEN_SUCCESS,
-} from "../actions/constants";
+} from "../../utils/constantsActions";
 
 interface updateTokenState {
   updateTokenRequest: boolean;

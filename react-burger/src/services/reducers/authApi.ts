@@ -1,4 +1,4 @@
-import { AUTH, AUTH_SUCCESS, AUTH_FAILED } from "../actions/constants";
+import { AUTH, AUTH_SUCCESS, AUTH_FAILED } from "../../utils/constantsActions";
 import { IAction, IStateForAuth } from "../types/data";
 
 const initialState: IStateForAuth = {

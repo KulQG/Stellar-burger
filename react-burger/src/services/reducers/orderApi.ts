@@ -1,4 +1,8 @@
-import { GET_ORDER, GET_ORDER_FAILED, GET_ORDER_SUCCESS } from "../actions/constants";
+import {
+  GET_ORDER,
+  GET_ORDER_FAILED,
+  GET_ORDER_SUCCESS,
+} from "../../utils/constantsActions";
 import { IInitialStateOrder } from "../types/data";
 
 const initialStateOrder: IInitialStateOrder = {

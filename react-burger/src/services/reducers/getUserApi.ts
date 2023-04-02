@@ -1,4 +1,9 @@
-import { GET_USER, GET_USER_SUCCESS, GET_USER_FAILED, DELETE_USER } from "../actions/constants";
+import {
+  GET_USER,
+  GET_USER_SUCCESS,
+  GET_USER_FAILED,
+  DELETE_USER,
+} from "../../utils/constantsActions";
 import { IAction, IGetUserInitial } from "../types/data";
 
 const initialState: IGetUserInitial = {

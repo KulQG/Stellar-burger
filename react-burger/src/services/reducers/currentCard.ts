@@ -1,4 +1,7 @@
-import { GET_CURRENT_CARD, REMOVE_CURRENT_CARD } from "../actions/constants";
+import {
+  GET_CURRENT_CARD,
+  REMOVE_CURRENT_CARD,
+} from "../../utils/constantsActions";
 import { TCard } from "../types/data";
 
 const currentCardState: { post: null | unknown } = {

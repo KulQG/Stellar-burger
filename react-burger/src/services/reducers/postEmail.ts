@@ -2,7 +2,7 @@ import {
   POST_EMAIL,
   POST_EMAIL_SUCCESS,
   POST_EMAIL_FAILED,
-} from "../actions/constants";
+} from "../../utils/constantsActions";
 import { IInitialStateEmail } from "../types/data";
 
 const initialStateEmail: IInitialStateEmail = {

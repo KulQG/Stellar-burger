@@ -1,4 +1,9 @@
-import { UPDATE_FILL, UPDATE_BUN, DELETE_FILL, SORTING } from "../actions/constants";
+import {
+  UPDATE_FILL,
+  UPDATE_BUN,
+  DELETE_FILL,
+  SORTING,
+} from "../../utils/constantsActions";
 import { TCard, TDraggedCardState } from "../types/data";
 
 const initialState: TDraggedCardState = {

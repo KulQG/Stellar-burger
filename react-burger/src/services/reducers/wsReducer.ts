@@ -9,7 +9,7 @@ import {
   USER_WS_CONNECTION_ERROR,
   USER_WS_CONNECTION_SUCCESS,
   USER_WS_GET_MESSAGE,
-} from "../actions/constants";
+} from "../../utils/constantsActions";
 import { IInitialStateStringBool, IWsState, IWsAction, IAction } from "../types/data";
 
 const initialState: IWsState = {

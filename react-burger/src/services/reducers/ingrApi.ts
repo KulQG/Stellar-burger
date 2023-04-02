@@ -2,7 +2,7 @@ import {
   GET_FEED,
   GET_FEED_SUCCESS,
   GET_FEED_FAILED,
-} from "../actions/constants";
+} from "../../utils/constantsActions";
 
 import { IInitialStateFeed, TArrayCards } from "../types/data";
 
