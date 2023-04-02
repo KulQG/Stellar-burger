@@ -1,3 +1,9 @@
+import {
+  POST_PASSWORD,
+  POST_PASSWORD_SUCCESS,
+  POST_PASSWORD_FAILED,
+} from "../actions/constants";
+
 interface IResetPasswordState {
   postPasswordRequest: boolean;
   postPasswordFailed: boolean;
@@ -19,14 +25,14 @@ export const resetPasswordReducer = (
   action: { type: string; postPassword: any }
 ) => {
   switch (action.type) {
-    case "POST_PASSWORD": {
+    case POST_PASSWORD: {
       return {
         ...state,
         postPasswordRequest: true,
         postPasswordFailed: false,
       };
     }
-    case "POST_PASSWORD_SUCCESS": {
+    case POST_PASSWORD_SUCCESS: {
       return {
         ...state,
         postPasswordFailed: false,
@@ -34,7 +40,7 @@ export const resetPasswordReducer = (
         postPasswordRequest: false,
       };
     }
-    case "POST_PASSWORD_FAILED": {
+    case POST_PASSWORD_FAILED: {
       return {
         ...state,
         postPasswordFailed: true,

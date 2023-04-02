@@ -1,3 +1,9 @@
+import {
+  GET_FEED,
+  GET_FEED_SUCCESS,
+  GET_FEED_FAILED,
+} from "../actions/constants";
+
 interface IInitialStateFeed {
   feedRequest: boolean;
   feedFailed: boolean;
@@ -15,21 +21,21 @@ export const feedReducer = (
   action: { type: string; feed: any }
 ) => {
   switch (action.type) {
-    case "GET_FEED": {
+    case GET_FEED: {
       return {
         ...state,
         feedRequest: true,
         feedFailed: false,
       };
     }
-    case "GET_FEED_SUCCESS": {
+    case GET_FEED_SUCCESS: {
       return {
         ...state,
         feed: action.feed,
         feedRequest: false,
       };
     }
-    case "GET_FEED_FAILED": {
+    case GET_FEED_FAILED: {
       return {
         ...state,
         feedFailed: true,

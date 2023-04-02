@@ -1,3 +1,9 @@
+import {
+  REGISTER,
+  REGISTER_SUCCESS,
+  REGISTER_FAILED,
+} from "../actions/constants";
+
 interface IInitialStateEmail {
   registerRequest: boolean;
   registerFailed: boolean;
@@ -22,14 +28,14 @@ export const registerReducer = (
   }
 ) => {
   switch (action.type) {
-    case "REGISTER": {
+    case REGISTER: {
       return {
         ...state,
         registerRequest: true,
         registerFailed: false,
       };
     }
-    case "REGISTER_SUCCESS": {
+    case REGISTER_SUCCESS: {
       return {
         ...state,
         registerFailed: false,
@@ -37,7 +43,7 @@ export const registerReducer = (
         registerRequest: false,
       };
     }
-    case "REGISTER_FAILED": {
+    case REGISTER_FAILED: {
       return {
         ...state,
         registerFailed: true,

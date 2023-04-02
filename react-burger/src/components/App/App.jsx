@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from '../../pages/Login/Login'
 import Home from '../../pages/Home/Home'
@@ -18,7 +18,7 @@ import { Orders } from '../../pages/Orders/Orders'
 import { EditForm } from '../EditForm/EditForm'
 import { checkToken } from '../../utils/consts'
 
-function App() {
+const App = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getFeed())

@@ -1,3 +1,5 @@
+import { GET_USER, GET_USER_SUCCESS, GET_USER_FAILED, DELETE_USER } from "../actions/constants";
+
 interface IGetUserInitial {
   getUserRequest: boolean;
   getUserFailed: boolean;
@@ -19,14 +21,14 @@ export const getUserReducer = (
   action: { type: string; payload: any }
 ) => {
   switch (action.type) {
-    case "GET_USER": {
+    case GET_USER: {
       return {
         ...state,
         getUserRequest: true,
         getUserFailed: false,
       };
     }
-    case "GET_USER_SUCCESS": {
+    case GET_USER_SUCCESS: {
       return {
         ...state,
         getUserFailed: false,
@@ -34,14 +36,14 @@ export const getUserReducer = (
         getUserRequest: false,
       };
     }
-    case "GET_USER_FAILED": {
+    case GET_USER_FAILED: {
       return {
         ...state,
         getUserFailed: true,
         getUserRequest: false,
       };
     }
-    case "DELETE_USER": {
+    case DELETE_USER: {
       return {
         ...state,
         getUser: {

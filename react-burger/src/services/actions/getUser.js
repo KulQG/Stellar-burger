@@ -3,9 +3,10 @@ import {
     getUserAddress,
 } from '../../utils/consts'
 import { updateToken } from './updateToken'
+import { Dispatch } from 'redux'
 
 export function getUser() {
-    return function (dispatch) {
+    return function (dispatch/*: Dispatch*/) {
         dispatch({
             type: 'GET_USER',
         })
@@ -25,6 +26,7 @@ export function getUser() {
                     })
                     dispatch(updateToken())
                     console.log('ошибка при получении данных' + res.status)
+                    //return Promise.resolve(undefined);
                 }
             })
             .then((data) => {

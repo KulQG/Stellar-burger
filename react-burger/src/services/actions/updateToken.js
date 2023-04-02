@@ -1,8 +1,9 @@
 import { updateCookieAddress, setCookie } from "../../utils/consts"
 import { getUser } from "./getUser"
+import { Dispatch } from "redux"
 
 export function updateToken() {
-    return function (dispatch) {
+    return function (dispatch/*: Dispatch*/) {
         dispatch({ type: 'UPDATE-TOKEN' })
         fetch(updateCookieAddress, {
             method: 'POST',

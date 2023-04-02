@@ -1,3 +1,5 @@
+import { UPDATE_FILL, UPDATE_BUN, DELETE_FILL, SORTING } from "../actions/constants";
+
 interface IDragInitialState {
   ingredients: any[];
   buns: {
@@ -39,19 +41,19 @@ export const drag = (
   action: { type: string; payload: any }
 ) => {
   switch (action.type) {
-    case "UPDATE_FILL": {
+    case UPDATE_FILL: {
       return {
         ...state,
         ingredients: [...state.ingredients, action.payload],
       };
     }
-    case "UPDATE_BUN": {
+    case UPDATE_BUN: {
       return {
         ...state,
         buns: action.payload,
       };
     }
-    case "DELETE_FILL": {
+    case DELETE_FILL: {
       return {
         ...state,
         ingredients: state.ingredients.filter(
@@ -59,7 +61,7 @@ export const drag = (
         ),
       };
     }
-    case "SORTING": {
+    case SORTING: {
       return {
         ...state,
         ingredients: action.payload,

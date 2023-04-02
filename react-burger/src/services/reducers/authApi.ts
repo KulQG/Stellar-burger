@@ -1,3 +1,5 @@
+import { AUTH, AUTH_SUCCESS, AUTH_FAILED } from "../actions/constants";
+
 interface IState {
   authRequest: boolean;
   authFailed: boolean;
@@ -19,14 +21,14 @@ const initialState: IState = {
 
 export const authReducer = (state = initialState, action: IAction): IState => {
   switch (action.type) {
-    case "AUTH": {
+    case AUTH: {
       return {
         ...state,
         authRequest: true,
         authFailed: false,
       };
     }
-    case "AUTH_SUCCESS": {
+    case AUTH_SUCCESS: {
       return {
         ...state,
         authFailed: false,
@@ -34,7 +36,7 @@ export const authReducer = (state = initialState, action: IAction): IState => {
         authRequest: false,
       };
     }
-    case "AUTH_FAILED": {
+    case AUTH_FAILED: {
       return {
         ...state,
         authFailed: true,

@@ -1,3 +1,9 @@
+import {
+  UPDATE_TOKEN,
+  UPDATE_TOKEN_FAILED,
+  UPDATE_TOKEN_SUCCESS,
+} from "../actions/constants";
+
 interface updateTokenState {
   updateTokenRequest: boolean;
   updateTokenFailed: boolean;
@@ -6,7 +12,7 @@ interface updateTokenState {
   };
 }
 
-const initialState = {
+const initialState: updateTokenState = {
   updateTokenRequest: false,
   updateTokenFailed: false,
   updateToken: {
@@ -22,14 +28,14 @@ export const updateTokenReducer = (
   }
 ) => {
   switch (action.type) {
-    case "UPDATE_TOKEN": {
+    case UPDATE_TOKEN: {
       return {
         ...state,
         updateTokenRequest: true,
         updateTokenFailed: false,
       };
     }
-    case "UPDATE_TOKEN_SUCCESS": {
+    case UPDATE_TOKEN_SUCCESS: {
       return {
         ...state,
         updateTokenFailed: false,
@@ -37,7 +43,7 @@ export const updateTokenReducer = (
         updateTokenRequest: false,
       };
     }
-    case "UPDATE_TOKEN_FAILED": {
+    case UPDATE_TOKEN_FAILED: {
       return {
         ...state,
         updateTokenFailed: true,

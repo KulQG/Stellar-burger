@@ -3,9 +3,19 @@ import {
     setCookie,
 } from '../../utils/consts'
 import { getUser } from './getUser'
+import { Dispatch } from 'redux'
+import { store } from '../store/store'
+import { ThunkAction } from 'redux-thunk';
+import { Action, ActionCreator } from 'redux';
 
-export function auth([email, password]: [string,string]) {
-    return function (dispatch) {
+//export type RootState = ReturnType<typeof store.getState>;
+
+//export type AppThunk<TReturn = void> = ActionCreator<
+//  ThunkAction<TReturn, Action, RootState, TApplicationActions>
+//>; 
+
+export function auth([email, password]/*: [string, string]*/) {
+    return function (dispatch/*:Dispatch*/) {
         dispatch({ type: 'AUTH' })
         fetch(authAddress, {
             method: 'POST',
@@ -17,9 +27,6 @@ export function auth([email, password]: [string,string]) {
             },
             redirect: 'follow',
             referrerPolicy: 'no-referrer',
-            headers: {
-                'Content-Type': 'application/json',
-            },
             body: JSON.stringify({
                 email: email,
                 password: password,

@@ -1,3 +1,9 @@
+import {
+  POST_EMAIL,
+  POST_EMAIL_SUCCESS,
+  POST_EMAIL_FAILED,
+} from "../actions/constants";
+
 interface IInitialStateEmail {
   postEmailRequest: boolean;
   postEmailFailed: boolean;
@@ -22,21 +28,21 @@ export const postForgotReducer = (
   }
 ) => {
   switch (action.type) {
-    case "POST_EMAIL": {
+    case POST_EMAIL: {
       return {
         ...state,
         postEmailRequest: true,
         postEmailFailed: false,
       };
     }
-    case "POST_EMAIL_SUCCESS": {
+    case POST_EMAIL_SUCCESS: {
       return {
         postEmailFailed: false,
         postEmail: action.postEmail,
         postEmailRequest: false,
       };
     }
-    case "POST_EMAIL_FAILED": {
+    case POST_EMAIL_FAILED: {
       return {
         ...state,
         postEmailFailed: true,
