@@ -1,10 +1,5 @@
 import { GET_ORDER, GET_ORDER_FAILED, GET_ORDER_SUCCESS } from "../actions/constants";
-
-interface IInitialStateOrder {
-  orderRequest: boolean;
-  orderFailed: boolean;
-  order: null | number | string;
-}
+import { IInitialStateOrder } from "../types/data";
 
 const initialStateOrder: IInitialStateOrder = {
   orderRequest: false,

@@ -3,14 +3,7 @@ import {
   POST_EMAIL_SUCCESS,
   POST_EMAIL_FAILED,
 } from "../actions/constants";
-
-interface IInitialStateEmail {
-  postEmailRequest: boolean;
-  postEmailFailed: boolean;
-  postEmail: {
-    success: boolean;
-  };
-}
+import { IInitialStateEmail } from "../types/data";
 
 const initialStateEmail: IInitialStateEmail = {
   postEmailRequest: false,
@@ -24,7 +17,7 @@ export const postForgotReducer = (
   state = initialStateEmail,
   action: {
     type: string;
-    postEmail: any;
+    postEmail: string | null;
   }
 ) => {
   switch (action.type) {

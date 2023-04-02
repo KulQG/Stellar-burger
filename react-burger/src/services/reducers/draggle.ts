@@ -1,24 +1,7 @@
 import { UPDATE_FILL, UPDATE_BUN, DELETE_FILL, SORTING } from "../actions/constants";
+import { TCard, TDraggedCardState } from "../types/data";
 
-interface IDragInitialState {
-  ingredients: any[];
-  buns: {
-    _id: string;
-    name: string;
-    type: string;
-    proteins: number;
-    fat: number;
-    carbohydrates: number;
-    calories: number;
-    price: number;
-    image: string;
-    image_mobile: string;
-    image_large: string;
-    __v: number;
-  };
-}
-
-const initialState: IDragInitialState = {
+const initialState: TDraggedCardState = {
   ingredients: [],
   buns: {
     _id: "60d3b41abdacab0026a733c6",
@@ -38,7 +21,7 @@ const initialState: IDragInitialState = {
 
 export const drag = (
   state = initialState,
-  action: { type: string; payload: any }
+  action: {type: string, payload: TCard}
 ) => {
   switch (action.type) {
     case UPDATE_FILL: {

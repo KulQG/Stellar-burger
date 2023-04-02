@@ -22,7 +22,7 @@ const initialState: IResetPasswordState = {
 
 export const resetPasswordReducer = (
   state = initialState,
-  action: { type: string; postPassword: any }
+  action: { type: string; postPassword: string | null }
 ) => {
   switch (action.type) {
     case POST_PASSWORD: {

@@ -1,17 +1,7 @@
 import { AUTH, AUTH_SUCCESS, AUTH_FAILED } from "../actions/constants";
+import { IAction, IStateForAuth } from "../types/data";
 
-interface IState {
-  authRequest: boolean;
-  authFailed: boolean;
-  auth: { success: boolean } | string;
-}
-
-interface IAction {
-  type: string;
-  payload?: any;
-}
-
-const initialState: IState = {
+const initialState: IStateForAuth = {
   authRequest: false,
   authFailed: false,
   auth: {
@@ -19,7 +9,7 @@ const initialState: IState = {
   },
 };
 
-export const authReducer = (state = initialState, action: IAction): IState => {
+export const authReducer = (state = initialState, action: IAction): IStateForAuth => {
   switch (action.type) {
     case AUTH: {
       return {

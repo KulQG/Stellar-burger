@@ -1,12 +1,6 @@
 import { OPEN_POPUP_ORDER_PAGE, OPEN_POPUP_INGR_PAGE } from "../actions/constants";
-
-interface IPageHandler {
-  page: "page" | "popup";
-}
-
-interface IPageHandlerAction {
-  type: string;
-}
+import { IAction } from "../types/data";
+import { IPageHandler } from "../types/data";
 
 const initialState: IPageHandler = {
   page: "page",
@@ -14,7 +8,7 @@ const initialState: IPageHandler = {
 
 export const ingrPageHandler = (
   state = initialState,
-  action: IPageHandlerAction
+  action: IAction
 ) => {
   switch (action.type) {
     case OPEN_POPUP_INGR_PAGE: {
@@ -35,7 +29,7 @@ const orderState: IPageHandler = {
 
 export const orderPageHandler = (
   state = orderState,
-  action: IPageHandlerAction
+  action: IAction
 ) => {
   switch (action.type) {
     case OPEN_POPUP_ORDER_PAGE: {

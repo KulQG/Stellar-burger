@@ -1,12 +1,5 @@
 import { GET_USER, GET_USER_SUCCESS, GET_USER_FAILED, DELETE_USER } from "../actions/constants";
-
-interface IGetUserInitial {
-  getUserRequest: boolean;
-  getUserFailed: boolean;
-  getUser: {
-    success: boolean;
-  };
-}
+import { IAction, IGetUserInitial } from "../types/data";
 
 const initialState: IGetUserInitial = {
   getUserRequest: false,
@@ -18,7 +11,7 @@ const initialState: IGetUserInitial = {
 
 export const getUserReducer = (
   state = initialState,
-  action: { type: string; payload: any }
+  action: IAction
 ) => {
   switch (action.type) {
     case GET_USER: {

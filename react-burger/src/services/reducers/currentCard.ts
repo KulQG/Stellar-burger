@@ -1,4 +1,5 @@
 import { GET_CURRENT_CARD, REMOVE_CURRENT_CARD } from "../actions/constants";
+import { TCard } from "../types/data";
 
 const currentCardState: { post: null | unknown } = {
   post: null,
@@ -6,7 +7,7 @@ const currentCardState: { post: null | unknown } = {
 
 export const currentCard = (
   state = currentCardState,
-  action: { type: string; payload: unknown }
+  action: {type: string, payload: TCard}
 ) => {
   switch (action.type) {
     case GET_CURRENT_CARD: {

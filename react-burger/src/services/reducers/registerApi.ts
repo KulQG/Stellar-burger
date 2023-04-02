@@ -3,16 +3,9 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAILED,
 } from "../actions/constants";
+import { IInitialStateEmailForRegister } from "../types/data";
 
-interface IInitialStateEmail {
-  registerRequest: boolean;
-  registerFailed: boolean;
-  register: {
-    success: boolean;
-  };
-}
-
-const initialStateEmail: IInitialStateEmail = {
+const initialStateEmail: IInitialStateEmailForRegister = {
   registerRequest: false,
   registerFailed: false,
   register: {
@@ -24,7 +17,7 @@ export const registerReducer = (
   state = initialStateEmail,
   action: {
     type: string;
-    payload: any;
+    payload: string | null;
   }
 ) => {
   switch (action.type) {

@@ -5,24 +5,16 @@ import {
   OPEN_POPUP,
   CLOSE_POPUP,
 } from "../actions/constants";
+import { IAction } from "../types/data";
+import { IInitialStateStringBool } from "../types/data";
 
-interface IInitialStatePopups {
-  ingr: boolean;
-  order: boolean;
-  orderInfo: boolean;
-}
-
-type TActionPopups = {
-  type: string;
-};
-
-const initialState: IInitialStatePopups = {
+const initialState: IInitialStateStringBool = {
   ingr: false,
   order: false,
   orderInfo: false,
 };
 
-export const checkPopup = (state = initialState, action: TActionPopups) => {
+export const checkPopup = (state = initialState, action: IAction) => {
   switch (action.type) {
     case SET_INGR_POPUP: {
       return {
@@ -57,7 +49,7 @@ export const checkPopup = (state = initialState, action: TActionPopups) => {
 const setPopupState: { popupState: boolean } = {
   popupState: false,
 };
-export const setPopup = (state = setPopupState, action: TActionPopups) => {
+export const setPopup = (state = setPopupState, action: IAction) => {
   switch (action.type) {
     case OPEN_POPUP: {
       return {

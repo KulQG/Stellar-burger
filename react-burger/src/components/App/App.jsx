@@ -17,14 +17,19 @@ import { OrderInfo } from '../../pages/OrderInfo/OrderInfo'
 import { Orders } from '../../pages/Orders/Orders'
 import { EditForm } from '../EditForm/EditForm'
 import { checkToken } from '../../utils/consts'
+import { updateToken } from '../../services/actions/updateToken'
 
 const App = () => {
+
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(getFeed())
 
     if (checkToken()) {
       dispatch(getUser())
+    } else if (localStorage.getItem('refreshToken') !== null) {
+      dispatch(updateToken())
     }
   }, [])
 

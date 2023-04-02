@@ -4,11 +4,7 @@ import {
   GET_FEED_FAILED,
 } from "../actions/constants";
 
-interface IInitialStateFeed {
-  feedRequest: boolean;
-  feedFailed: boolean;
-  feed: any[];
-}
+import { IInitialStateFeed, TArrayCards } from "../types/data";
 
 const initialStateFeed: IInitialStateFeed = {
   feedRequest: false,
@@ -18,7 +14,7 @@ const initialStateFeed: IInitialStateFeed = {
 
 export const feedReducer = (
   state = initialStateFeed,
-  action: { type: string; feed: any }
+  action: { type: string; feed: TArrayCards }
 ) => {
   switch (action.type) {
     case GET_FEED: {

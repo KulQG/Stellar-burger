@@ -10,15 +10,7 @@ import {
   USER_WS_CONNECTION_SUCCESS,
   USER_WS_GET_MESSAGE,
 } from "../actions/constants";
-
-interface IWsState {
-  wsConnected: boolean;
-  orders: {
-    success: boolean;
-    orders: any[];
-  };
-  error: undefined | string;
-}
+import { IInitialStateStringBool, IWsState, IWsAction, IAction } from "../types/data";
 
 const initialState: IWsState = {
   wsConnected: false,
@@ -28,11 +20,6 @@ const initialState: IWsState = {
   },
   error: undefined,
 };
-
-interface IWsAction {
-  type: string;
-  payload: string | any[];
-}
 
 export const wsReducer = (state = initialState, action: IWsAction) => {
   switch (action.type) {
@@ -113,19 +100,14 @@ export const userWsReducer = (state = initialState, action: IWsAction) => {
 //Создать конструкцию которая бы выдавала какое соединение открыто,
 //и при открытии/закрытии обновлялось состояние
 
-interface ICurrentSocketState {
-  feed: boolean;
-  orders: boolean;
-}
-
-const currentSocket: ICurrentSocketState = {
+const currentSocket: IInitialStateStringBool = {
   feed: false,
   orders: false,
 };
 
 export const checkOpenWs = (
   state = currentSocket,
-  action: { type: string }
+  action: IAction
 ) => {
   switch (action.type) {
     case USER_WS_CONNECTION_SUCCESS: {
