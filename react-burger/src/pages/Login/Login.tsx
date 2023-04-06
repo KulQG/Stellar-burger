@@ -7,9 +7,10 @@ import {
 import styles from './Login.module.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { auth } from '../../services/actions/auth'
 import { Navigate } from 'react-router-dom'
+import { useDispatch } from '../../services/hooks'
 
 export const Login: FC = () => {
   const [change, setChange] = useState({

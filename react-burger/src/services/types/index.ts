@@ -25,7 +25,7 @@ type TApplicationActions =
   | TPostPasswordActions
   | TUpdateActions;
 
-type TAllActions = TApplicationActions | TNotThunkActions;
+export type TAllActions = TApplicationActions | TNotThunkActions;
 
 export type AppThunk<TReturn = void> = ActionCreator<
   ThunkAction<TReturn, RootState, Action, TAllActions>
