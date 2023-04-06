@@ -1,32 +1,29 @@
+import { GET_USER, GET_USER_FAILED, GET_USER_SUCCESS } from '../../utils/constantsActions'
 import {
     getCookie,
     getUserAddress,
 } from '../../utils/consts'
+import { AppDispatch, AppThunk } from '../types'
 import { updateToken } from './updateToken'
 
-export function patchUser([email, name, password]) {
+export const getUser: AppThunk =()=> {
     return function (dispatch) {
         dispatch({
-            type: 'GET_USER',
+            type: GET_USER,
         })
         fetch(getUserAddress, {
-            method: 'PATCH',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'authorization': `${getCookie('token')}`
-            },
-            body: JSON.stringify({
-                email: email,
-                name: name,
-                password: password
-            })
+            }
         })
             .then((res) => {
                 if (res.ok) {
                     return res.json()
                 } else {
                     dispatch({
-                        type: 'GET_USER_FAILED',
+                        type: GET_USER_FAILED,
                     })
                     dispatch(updateToken())
                     console.log('ошибка при получении данных' + res.status)
@@ -35,10 +32,13 @@ export function patchUser([email, name, password]) {
             .then((data) => {
                 if (data) {
                     dispatch({
-                        type: 'GET_USER_SUCCESS',
+                        type: GET_USER_SUCCESS,
                         payload: data,
                     })
                 }
+                setTimeout(() => {
+                    dispatch(updateToken())
+                },20 * 60 * 1000)
             })
             .catch((err) => {
                 dispatch({

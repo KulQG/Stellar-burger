@@ -1,5 +1,5 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, FC } from 'react'
 import {
   PasswordInput,
   Input,
@@ -10,7 +10,7 @@ import AuthFormWrapper from '../../components/AuthForm/AuthForm'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetPassword } from '../../services/actions/reset-password'
 
-export default function ResetPassword() {
+export const ResetPassword = () => {
   const [change, setChange] = useState({
     password: false,
     code: false,

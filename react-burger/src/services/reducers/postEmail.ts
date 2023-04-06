@@ -17,7 +17,7 @@ export const postForgotReducer = (
   state = initialStateEmail,
   action: {
     type: string;
-    postEmail: string | null;
+    postEmail: string;
   }
 ) => {
   switch (action.type) {

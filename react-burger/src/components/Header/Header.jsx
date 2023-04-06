@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
 import headerStyles from './Header.module.css'
 import NavigationComponent from '../NavigationComponent/NavigationComponent'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 
-export default function Header() {
+export const Header = () => {
   const navigate = useNavigate()
   const navigToHome = () => {
     navigate('/')

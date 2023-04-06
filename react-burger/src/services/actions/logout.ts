@@ -1,7 +1,9 @@
+import { DELETE_USER, LOGOUT_FAILED } from "../../utils/constantsActions"
 import { deleteCookie, logoutAddress } from "../../utils/consts"
+import { AppDispatch, AppThunk } from "../types"
 
-export function logout() {
-    return function (dispatch) {
+export const logout: AppThunk = () => {
+    return function (dispatch: AppDispatch) {
       fetch(logoutAddress, {
         method: 'POST',
         headers: {
@@ -23,13 +25,13 @@ export function logout() {
             localStorage.clear()
             deleteCookie('token')
             dispatch({
-                type: 'DELETE_USER'
+                type: DELETE_USER
             })
           }
         })
         .catch((err) => {
           dispatch({
-            type: 'LOGOUT_FAILED',
+            type: LOGOUT_FAILED,
           })
           console.log('ошибка' + err)
         })

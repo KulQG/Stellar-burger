@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import Header from '../../components/Header/Header'
 import IngredientsDetails from '../../components/IngredientsDetails/IngredientsDetails'
-import Home from '../Home/Home'
+import Home from '../Home/Home.jsx'
 import styles from './IngredientPage.module.css'
 
 export default function IngredientPage() {

@@ -1,8 +1,9 @@
-import Header from '../../components/Header/Header'
+import { Header } from '../../components/Header/Header'
+import {FC} from 'react'
 import TotalConstructor from '../../components/TotalConstructor/TotalConstructor'
 import PopupHandler from '../../components/PopupHandler/PopupHandler'
 
-export default function Home() {
+export const Home = () => {
   return (
     <>
       <Header />

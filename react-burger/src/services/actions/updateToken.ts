@@ -1,10 +1,12 @@
+import { UPDATE_TOKEN, UPDATE_TOKEN_FAILED, UPDATE_TOKEN_SUCCESS } from "../../utils/constantsActions"
 import { updateCookieAddress, setCookie } from "../../utils/consts"
+import { AppDispatch, AppThunk } from "../types"
 import { getUser } from "./getUser"
 import { Dispatch } from "redux"
 
-export function updateToken() {
-    return function (dispatch/*: Dispatch*/) {
-        dispatch({ type: 'UPDATE-TOKEN' })
+export const updateToken: AppThunk = () => {
+    return function (dispatch) {
+        dispatch({ type: UPDATE_TOKEN })
         fetch(updateCookieAddress, {
             method: 'POST',
             headers: {
@@ -19,14 +21,14 @@ export function updateToken() {
                     return res.json()
                 } else {
                     dispatch({
-                        type: 'UPDATE-TOKEN_FAILED',
+                        type: UPDATE_TOKEN_FAILED,
                     })
                     console.log('ошибка при получении данных' + res.status)
                 }
             })
             .then((data) => {
                 dispatch({
-                    type: 'UPDATE-TOKEN_SUCCESS',
+                    type: UPDATE_TOKEN_SUCCESS,
                     payload: data,
                 })
                 console.log(data)
@@ -39,7 +41,7 @@ export function updateToken() {
             })
             .catch((err) => {
                 dispatch({
-                    type: 'UPDATE-TOKEN_FAILED',
+                    type: UPDATE_TOKEN_FAILED,
                 })
                 console.log('ошибка' + err)
             })
