@@ -1,13 +1,14 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './Forgot-password.module.css'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import AuthFormWrapper from '../../components/AuthForm/AuthForm'
-import { useDispatch, useSelector } from 'react-redux'
 import { forgotPassword } from '../../services/actions/forgot-password'
+import { useSelector } from '../../services/hooks'
+import { RootState } from '../../services/types'
 
-export default function ForgotPassword() {
+export const ForgotPassword: FC = () => {
   const postEmail = useSelector((s) => s.postForgotReducer.postEmail)
 
   const [change, setChange] = useState(false)

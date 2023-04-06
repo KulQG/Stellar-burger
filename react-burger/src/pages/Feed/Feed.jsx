@@ -1,12 +1,12 @@
 import Header from "../../components/Header/Header";
 import styles from './Feed.module.css'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from "react-redux";
+import { FC, useEffect } from 'react'
 import { OrderComponents } from "../../components/OrderComponents/OrderComponents";
 import PopupHandler from "../../components/PopupHandler/PopupHandler";
 import { useLocation } from "react-router-dom";
+import { useDispatch } from "../../services/hooks";
 
-export function Feed() {
+export const Feed = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch({ type: 'WS_CONNECTION_START' })

@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link } from 'react-router-dom'
 import styles from './404.module.css'
 
-export default function NotFound() {
+export const NotFound: FC = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
