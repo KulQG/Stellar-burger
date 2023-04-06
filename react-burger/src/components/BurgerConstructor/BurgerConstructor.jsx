@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid'
 import FillItem from '../FillItem/FillItem.jsx'
 import { useNavigate } from 'react-router-dom'
 
-export default function BurgerConstructor() {
+export const BurgerConstructor = () => {
   const arr = useSelector((store) => store.drag.ingredients)
   const bun = useSelector((store) => store.drag.buns)
   const [priceBun, setPriceBun] = useState(bun.price)

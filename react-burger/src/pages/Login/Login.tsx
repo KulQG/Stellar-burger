@@ -1,50 +1,55 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import React, { useEffect, useState, FC } from 'react'
+import React, { useEffect, useState, FC, SyntheticEvent } from 'react'
 import {
   PasswordInput,
   EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './Login.module.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import AuthFormWrapper from '../../components/AuthForm/AuthForm'
-import { useSelector } from 'react-redux'
+import {AuthFormWrapper} from '../../components/AuthForm/AuthForm'
 import { auth } from '../../services/actions/auth'
 import { Navigate } from 'react-router-dom'
-import { useDispatch } from '../../services/hooks'
+import { useDispatch, useSelector } from '../../services/hooks'
+import { JsxElement } from 'typescript'
+
+interface IChange {
+  email: boolean;
+  password: boolean;
+}
 
 export const Login: FC = () => {
-  const [change, setChange] = useState({
+  const [change, setChange] = useState<IChange>({
     email: false,
     password: false,
   })
 
-  const [email, setEmail] = React.useState('')
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value)
+  const [email, setEmail] = React.useState<string>('')
+  const onChangeEmail = (e: SyntheticEvent<HTMLInputElement>) => {
+    setEmail(e.currentTarget.value);
     setChange({
       ...change,
       email: true,
-    })
-  }
+    });
+  };
 
-  const [password, setPassword] = React.useState('')
-  const onChangePassword = (e) => {
-    setPassword(e.target.value)
+  const [password, setPassword] = React.useState<string>("");
+  const onChangePassword = (e: SyntheticEvent<HTMLInputElement>) => {
+    setPassword(e.currentTarget.value);
     setChange({
       ...change,
       password: true,
-    })
-  }
+    });
+  };
 
   const authState = useSelector((s) => s.getUserReducer.getUser)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const onClick = (e) => {
-    e.preventDefault()
-    dispatch(auth([email, password]))
-  }
+  const onClick: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    dispatch(auth([email, password]));
+  };
 
   const location = useLocation()
   const locationBefore = location.search.split('?path=')[1]
@@ -69,7 +74,7 @@ export const Login: FC = () => {
     }
   }
 
-  const getForm = () => {
+  const getForm = (): JSX.Element => {
     return (
       <>
         <EmailInput
