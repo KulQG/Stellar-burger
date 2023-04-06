@@ -13,5 +13,4 @@ import { AnyAction } from "redux";
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
 
 // Хук не даст отправить экшен, который ему не знаком
-export const useDispatch = () =>
-  dispatchHook<AppDispatch & Dispatch<AnyAction>>();
+export const useDispatch = () => dispatchHook<AppDispatch | AppThunk>();

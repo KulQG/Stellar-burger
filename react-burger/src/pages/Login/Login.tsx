@@ -1,5 +1,5 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, FC } from 'react'
 import {
   PasswordInput,
   EmailInput,
@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../../services/actions/auth'
 import { Navigate } from 'react-router-dom'
 
-export default function Login() {
+export const Login: FC = () => {
   const [change, setChange] = useState({
     email: false,
     password: false,

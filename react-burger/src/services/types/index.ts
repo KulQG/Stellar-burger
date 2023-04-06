@@ -35,5 +35,5 @@ export type AppThunk<TReturn = void> = ActionCreator<
 export type AppDispatch = ThunkDispatch<
   RootState,
   any,
-  TAllActions | AnyAction
+  TAllActions
 >;
