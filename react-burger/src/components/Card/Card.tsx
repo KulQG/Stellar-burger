@@ -1,18 +1,23 @@
-import React from 'react'
+import React, { FC } from 'react'
 import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import cardStyles from './Card.module.css'
-import { useDispatch, useSelector } from 'react-redux'
 import { useDrag } from 'react-dnd'
-import { v4 as uuidv4 } from 'uuid'
+import uuid from "react-uuid";
 import { Link } from 'react-router-dom'
+import { TCard } from '../../services/types/data'
+import { useDispatch, useSelector } from '../../services/hooks';
 
-export default function Card(props) {
+interface ICardProps {
+  post: TCard;
+}
+
+export const Card: FC<ICardProps> = (props) => {
   const constructor = useSelector((s) => s.getConstructor.fill)
 
-  const count = constructor.filter((item) => item._id === props.post._id)
+  const count = constructor.filter((item: TCard) => item._id === props.post._id)
 
   const setCounter = () => {
     if (count.length > 0) {
@@ -21,6 +26,8 @@ export default function Card(props) {
           <Counter count={count.length} size="default" extraClass="m-1" />
         </div>
       )
+    } else {
+      return null
     }
   }
 
@@ -35,14 +42,14 @@ export default function Card(props) {
   }
   const [{ isDrag }, dragRef] = useDrag({
     type: typing(),
-    item: { ...props.post, id: uuidv4() },
+    item: { ...props.post, id: uuid() },
     collect: (monitor) => ({
       isDrag: monitor.isDragging(),
     }),
   })
 
   return (
-    !isDrag && (
+    !isDrag ? (
       <>
         <Link className={cardStyles.link} to={`/ingredients/${props.post._id}`}>
           <div
@@ -72,6 +79,6 @@ export default function Card(props) {
           </div>
         </Link>
       </>
-    )
+    ) : null
   )
 }

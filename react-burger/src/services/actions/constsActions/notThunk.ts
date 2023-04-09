@@ -13,6 +13,10 @@ import {
   SORTING,
   UPDATE_BUN,
   UPDATE_FILL,
+  USER_WS_CONNECTION_CLOSE,
+  USER_WS_CONNECTION_START,
+  WS_CONNECTION_CLOSE,
+  WS_CONNECTION_START,
 } from "../../../utils/constantsActions";
 import { TCard } from "../../types/data";
 
@@ -78,6 +82,22 @@ interface IClosePopupAction {
   readonly type: typeof CLOSE_POPUP;
 }
 
+interface IWsConnectionStartAction {
+  readonly type: typeof WS_CONNECTION_START
+}
+
+interface IWsConnectionCloseAction {
+  readonly type: typeof WS_CONNECTION_CLOSE;
+}
+
+interface IUserWsConnectionStartAction {
+  readonly type: typeof USER_WS_CONNECTION_START
+}
+
+interface IUserWsConnectionCloseAction {
+  readonly type: typeof USER_WS_CONNECTION_CLOSE;
+}
+
 export type TNotThunkActions =
   | IGetFillingAction
   | IGetCurCardAction
@@ -92,4 +112,8 @@ export type TNotThunkActions =
   | ISetPopupOrderAction
   | ISetPopupOrderInfoAction
   | IOpenPopupAction
-  | IClosePopupAction;
+  | IClosePopupAction
+  | IWsConnectionStartAction
+  | IWsConnectionCloseAction
+  | IUserWsConnectionStartAction
+  | IUserWsConnectionCloseAction;

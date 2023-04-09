@@ -1,11 +1,11 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './Forgot-password.module.css'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
-import AuthFormWrapper from '../../components/AuthForm/AuthForm'
+import {AuthFormWrapper} from '../../components/AuthForm/AuthForm'
 import { forgotPassword } from '../../services/actions/forgot-password'
-import { useSelector } from '../../services/hooks'
+import { useDispatch, useSelector } from '../../services/hooks'
 import { RootState } from '../../services/types'
 
 export const ForgotPassword: FC = () => {
@@ -15,21 +15,21 @@ export const ForgotPassword: FC = () => {
 
   const [email, setEmail] = React.useState('')
 
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value)
-    setChange(true)
-  }
+  const onChangeEmail = (e: SyntheticEvent<HTMLInputElement>) => {
+    setEmail(e.currentTarget.value);
+    setChange(true);
+  };
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  function click(e) {
-    e.preventDefault()
-    dispatch(forgotPassword(email))
+  const click: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    dispatch(forgotPassword(email));
     if (postEmail) {
-      navigate('/reset-password')
+      navigate("/reset-password");
     }
-  }
+  };
 
   useEffect(() => {
     if (email.length > 0 && postEmail) {

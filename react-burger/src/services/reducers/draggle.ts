@@ -4,7 +4,12 @@ import {
   DELETE_FILL,
   SORTING,
 } from "../../utils/constantsActions";
-import { TCard, TDraggedCardState } from "../types/data";
+import {
+  TArrayCards,
+  TCard,
+  TDraggedCard,
+  TDraggedCardState,
+} from "../types/data";
 
 const initialState: TDraggedCardState = {
   ingredients: [],
@@ -26,7 +31,10 @@ const initialState: TDraggedCardState = {
 
 export const drag = (
   state = initialState,
-  action: {type: string, payload: TCard}
+  action: {
+    type: string;
+    payload: TDraggedCard | string | TDraggedCard[] | [];
+  }
 ) => {
   switch (action.type) {
     case UPDATE_FILL: {
@@ -45,7 +53,7 @@ export const drag = (
       return {
         ...state,
         ingredients: state.ingredients.filter(
-          (item) => item.id !== action.payload
+          (item: TDraggedCard) => item.id !== action.payload
         ),
       };
     }

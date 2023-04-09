@@ -4,27 +4,16 @@ export interface IAction {
 }
 
 export type TDraggedCardState = {
-  ingredients: any[];
-  buns: {
-    _id: string;
-    name: string;
-    type: string;
-    proteins: number;
-    fat: number;
-    carbohydrates: number;
-    calories: number;
-    price: number;
-    image: string;
-    image_mobile: string;
-    image_large: string;
-    __v: number;
-  };
+  ingredients:
+    | TDraggedCard[]
+    | [];
+  buns: TDraggedCard | TCard
 };
 
 export type TCard = {
   _id: string;
   name: string;
-  type: "bun" | 'sauce' | 'main';
+  type: "bun" | "sauce" | "main";
   proteins: number;
   fat: number;
   carbohydrates: number;
@@ -36,7 +25,9 @@ export type TCard = {
   __v: number;
 };
 
-export type TArrayCards = TCard[]
+export type TDraggedCard = TCard & { id: string };
+
+export type TArrayCards = TCard[];
 
 export interface IGetUserInitial {
   getUserRequest: boolean;
@@ -69,15 +60,17 @@ export interface IInitialStateOrder {
 }
 
 export interface IInitialStateStringBool {
-  [name: string]: boolean
+  [name: string]: boolean;
 }
 
 export interface IInitialStateEmail {
   postEmailRequest: boolean;
   postEmailFailed: boolean;
-  postEmail: {
-    success: boolean;
-  };
+  postEmail:
+    | {
+        success: boolean;
+      }
+    | string;
 }
 
 export interface IInitialStateEmailForRegister {
@@ -92,12 +85,21 @@ export interface IWsState {
   wsConnected: boolean;
   orders: {
     success: boolean;
-    orders: any[];
+    orders: IWsObj[] | string;
   };
-  error: undefined | string;
+  error: any;
 }
 
 export interface IWsAction {
   type: string;
-  payload: string | any[];
+  payload: any;
 }
+
+export type IWsObj = {
+  ingredients: string[];
+  _id: string;
+  status: string;
+  number: number | string;
+  createdAt: string;
+  updatedAt: string;
+};

@@ -1,16 +1,18 @@
-import React, { useState, useReducer, useEffect } from 'react'
+import React, { useState, useReducer, useEffect, FC } from 'react'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import BrgConstructorStyles from './BrgConstructorStyles.module.css'
-import { useDispatch, useSelector } from 'react-redux'
 import { getOrder } from '../../services/actions/getOrder'
 import { useDrop } from 'react-dnd'
-import { v4 as uuidv4 } from 'uuid'
+import uuid from 'react-uuid'
 import FillItem from '../FillItem/FillItem.jsx'
 import { useNavigate } from 'react-router-dom'
+import { GET_FILLING } from '../../utils/constantsActions'
+import { useDispatch, useSelector } from '../../services/hooks'
+import { TArrayCards, TCard } from '../../services/types/data'
 
-export const BurgerConstructor = () => {
+export const BurgerConstructor: FC = () => {
   const arr = useSelector((store) => store.drag.ingredients)
   const bun = useSelector((store) => store.drag.buns)
   const [priceBun, setPriceBun] = useState(bun.price)
@@ -18,9 +20,9 @@ export const BurgerConstructor = () => {
   //функция нужна для возврата карточек из массива
   const fill = () => {
     //возврат каждой карточки
-    const mapMethod = (array) => {
+    const mapMethod = (array: TArrayCards) => {
       return array.map((card, index) => {
-        const id = uuidv4()
+        const id = uuid()
 
         return (
           <FillItem
@@ -38,7 +40,7 @@ export const BurgerConstructor = () => {
   }
 
   //вставляет булку
-  const baker = (indicator) => {
+  const baker = (indicator: number) => {
     if (indicator === 1) {
       return (
         <div ref={dropBun}>
@@ -72,13 +74,13 @@ export const BurgerConstructor = () => {
   useEffect(() => {
     if (arr) {
       const counter = () => {
-        const prices = arr.map((card) => card.price)
-        const reduc = prices.reduce((acc, current) => acc + current, priceBun)
+        const prices = arr.map((card: TCard) => card.price)
+        const reduc = prices.reduce((acc: number, current: number) => acc + current, priceBun)
         return reduc
       }
       dispatch({ type: 'data', payload: counter(arr) })
       //выносит конструктор в стор
-      dispatcher({ type: 'GET_FILLING', payload: [...arr, bun] })
+      dispatcher({ type: GET_FILLING, payload: [...arr, bun] })
     }
   }, [arr, bun])
 

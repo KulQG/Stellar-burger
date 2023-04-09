@@ -18,7 +18,7 @@ const initialState: IWsState = {
     success: false,
     orders: [],
   },
-  error: undefined,
+  error: "",
 };
 
 export const wsReducer = (state = initialState, action: IWsAction) => {
@@ -26,7 +26,7 @@ export const wsReducer = (state = initialState, action: IWsAction) => {
     case WS_CONNECTION_SUCCESS:
       return {
         ...state,
-        error: undefined,
+        error: "",
         wsConnected: true,
       };
     case WS_CONNECTION_ERROR:
@@ -38,20 +38,20 @@ export const wsReducer = (state = initialState, action: IWsAction) => {
     case WS_CONNECTION_CLOSED:
       return {
         ...state,
-        error: undefined,
+        error: "",
         wsConnected: false,
       };
     case WS_CONNECTION_CLOSE: {
       return {
         ...state,
-        error: undefined,
+        error: "",
         wsConnected: false,
       };
     }
     case WS_GET_MESSAGE:
       return {
         ...state,
-        error: undefined,
+        error: "",
         orders: action.payload,
       };
     default:

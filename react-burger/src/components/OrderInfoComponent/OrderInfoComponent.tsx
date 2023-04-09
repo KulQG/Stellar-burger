@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import styles from './OrderInfoComponent.module.css'
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from '../../services/hooks';
 import { useLocation, useParams } from "react-router-dom";
-import { IngredientCircle } from "../../components/IngredientCircle/IngredientCircle";
+import { IngredientCircle } from "../IngredientCircle/IngredientCircle";
 import { getCookie } from '../../utils/consts';
+import { USER_WS_CONNECTION_START, WS_CONNECTION_START } from '../../utils/constantsActions';
+import { TCard } from '../../services/types/data';
 
-export function OrderInfoComponent() {
+export const OrderInfoComponent: FC = () => {
     const checkOpenWs = useSelector(s => s.checkOpenWs)
     const commonOrders = useSelector(s => s.wsReducer.orders)
     const userOrders = useSelector(s => s.userWsReducer.orders)
@@ -30,26 +32,25 @@ export function OrderInfoComponent() {
         } else {
             if (path === '/feed') {
                 dispatch({
-                    type: 'WS_CONNECTION_START',
+                    type: WS_CONNECTION_START,
                 })
             } else {
                 dispatch({
-                    type: 'USER_WS_CONNECTION_START',
+                    type: USER_WS_CONNECTION_START,
                 })
             }
         }
     }, [orders])
 
-
     if (load) {
-        const order = orders.find((obj) => obj._id === id)
+        const order = orders.find((obj: TCard) => obj._id === id)
 
         const ingrs = order.ingredients
-        const objects = ingrs.map(id => allIngredients.find(ingr => ingr._id === id))
+        const objects = ingrs.map((id: string) => allIngredients.find(ingr => ingr._id === id))
 
         const getComposition = () => {
-            return objects.map((obj, index) => {
-                const count = objects.filter(i => i === obj)
+            return objects.map((obj: TCard, index: number) => {
+                const count = objects.filter((i:TCard) => i === obj)
 
                 if (objects.indexOf(obj) === index) {
                     return (
@@ -74,8 +75,8 @@ export function OrderInfoComponent() {
             }).filter(Boolean)
         }
 
-        const prices = objects.map(obj => obj.price)
-        const price = prices.reduce((acc, price) => acc + price, 0)
+        const prices = objects.map((obj:TCard) => obj.price)
+        const price = prices.reduce((acc: number, price: number) => acc + price, 0)
 
         const getStatus = () => {
             switch (order.status) {
@@ -105,7 +106,7 @@ export function OrderInfoComponent() {
                             Отменен
                         </p>
                     )
-                }
+                };
             }
         }
 
@@ -138,5 +139,7 @@ export function OrderInfoComponent() {
                 </div>
             </>
         )
+    } else {
+        return null
     }
 }
