@@ -1,10 +1,19 @@
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
+import { FC } from 'react'
+import { useSelector, useDispatch } from '../../services/hooks'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { IngredientCircle } from '../IngredientCircle/IngredientCircle'
 import styles from './OrderComponent.module.css'
 
-export function OrderComponent(props) {
+interface IOrderCompnt {
+    ingrs: string[];
+    num: number;
+    name: string;
+    date: string;
+    id: string
+}
+
+export const OrderComponent:FC<IOrderCompnt> = (props) => {
     const allIngredients = useSelector(s => s.feedReducer.feed)
     const currentIds = props.ingrs
 
@@ -17,7 +26,7 @@ export function OrderComponent(props) {
         const visibleImages = images.slice(0, maxImages);
         const hiddenImageCount = Math.max(images.length - maxImages, 0);
 
-        return visibleImages.map((img, index) => {
+        return visibleImages.map((img: string, index: number) => {
             const id = index;
             const zIndex = images.length - index;
 
@@ -68,7 +77,7 @@ export function OrderComponent(props) {
     }
 
     return (
-        <div key={props._id} className={styles.wrap} onClick={navigation}>
+        <div key={props.id} className={styles.wrap} onClick={navigation}>
             <div className={styles.date}>
                 <p className="text text_type_digits-default">{props.num}</p>
                 <p className="text text_type_main-default text_color_inactive">

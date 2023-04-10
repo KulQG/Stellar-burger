@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import {Login} from '../../pages/Login/Login'
 import {Home} from '../../pages/Home/Home.jsx'
 import Register from '../../pages/Register/Register'
-import ForgotPassword from '../../pages/Forgot-password/Forgot-password'
+import {ForgotPassword} from '../../pages/Forgot-password/Forgot-password'
 import {ResetPassword} from '../../pages/Reset-Password/Reset-Password'
 import Profile from '../../pages/Profile/Profile'
 import IngredientPage from '../../pages/IngredientPage/IngredientPage'
-import NotFound from '../../pages/404/404'
+import {NotFound} from '../../pages/404/404'
 import { ProtectedRouteElement } from '../../pages/ProtectedRouteElement'
 //import { useDispatch } from 'react-redux'
 import { useDispatch } from '../../services/hooks'
@@ -42,7 +42,7 @@ export const App: FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        {/*<Route path="/reset-password" element={<ResetPassword />} />*/}
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route
           path="/profile"
           element={<ProtectedRouteElement element={

@@ -1,6 +1,13 @@
+import { FC } from 'react'
 import styles from './IngredientCircle.module.css'
 
-export function IngredientCircle (props) {
+interface ICircleProps {
+    zIndex: number;
+    id: number;
+    img: string
+}
+
+export const IngredientCircle: FC<ICircleProps> = (props) => {
     const zIndex = props.zIndex
     const id = props.id
     return (

@@ -3,7 +3,7 @@ import { resetPasswordAddress } from "../../utils/consts";
 import { AppDispatch, AppThunk } from "../types";
 
 export const resetPassword: AppThunk = (password: string, token: string) => {
-  return function (dispatch: AppDispatch) {
+  return function (dispatch) {
     dispatch({ type: POST_PASSWORD });
     fetch(resetPasswordAddress, {
       method: "POST",

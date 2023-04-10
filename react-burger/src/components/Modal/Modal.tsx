@@ -1,18 +1,29 @@
-import ModalOverlay from '../ModalOverlay/ModalOverlay'
-import React from 'react'
+import {ModalOverlay} from '../ModalOverlay/ModalOverlay'
+import React, { FC, ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalClass from './Modal.module.css'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
+import { REMOVE_CURRENT_CARD } from '../../utils/constantsActions'
+
 const modalRoot = document.getElementById('react-modals')
 
-export default function Modal({ close, children }) {
+export interface IModalProps {
+  close: () => void;
+  children: ReactNode
+}
+
+interface KeyboardEventWithKey extends KeyboardEvent {
+  key: string;
+}
+
+export const Modal:FC<IModalProps> = ({ close, children }) => {
   React.useEffect(() => {
-    const handleEsc = (e) => {
+    const handleEsc = (e: KeyboardEventWithKey) => {
       if (e.key === 'Escape') {
         close()
-        dispatch({ type: 'REMOVE_CURRENT_CARD' })
+        dispatch({ type: REMOVE_CURRENT_CARD })
       }
     }
 
@@ -47,7 +58,7 @@ export default function Modal({ close, children }) {
         </div>
       </ModalOverlay>
     </div>),
-    modalRoot
+    modalRoot as HTMLElement
   )
 }
 

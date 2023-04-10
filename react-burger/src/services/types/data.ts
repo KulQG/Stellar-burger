@@ -4,10 +4,8 @@ export interface IAction {
 }
 
 export type TDraggedCardState = {
-  ingredients:
-    | TDraggedCard[]
-    | [];
-  buns: TDraggedCard | TCard
+  ingredients: TDraggedCard[];
+  buns: TDraggedCard;
 };
 
 export type TCard = {

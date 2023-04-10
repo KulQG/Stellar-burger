@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react'
-import { useSelector } from 'react-redux'
+import React, {FC, useEffect} from 'react'
+import { useSelector } from '../../services/hooks'
 import { useLocation } from 'react-router-dom'
 import classes from './IngredientsDetails.module.css'
 
-export default function IngredientsDetails() {
+export const IngredientsDetails: FC = () => {
   const location = useLocation()
   const feed = useSelector((s) => s.feedReducer.feed)
 

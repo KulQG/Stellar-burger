@@ -1,4 +1,4 @@
-import OrderDetails from "../OrderDetails/OrderDetails";
+import OrderDetails from "../OrderDetails/OrderDetails.tsx";
 import IngredientsDetails from "../IngredientsDetails/IngredientsDetails";
 import Modal from "../Modal/Modal";
 import { useNavigate } from "react-router-dom";

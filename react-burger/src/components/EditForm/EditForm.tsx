@@ -1,34 +1,34 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, FC, ChangeEvent, FormEvent } from 'react'
 import {
     PasswordInput,
     EmailInput,
     Input,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './EditForm.module.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from '../../services/hooks'
 import { patchUser } from '../../services/actions/patchUser'
 
-export function EditForm() {
+export const EditForm: FC = () => {
     const user = useSelector((s) => s.getUserReducer.getUser.user)
 
     //если юзер меняет данные формы - изменяется состояние
     //и кнопки появляются
-    const [change, setChange] = useState(false)
+    const [change, setChange] = useState<boolean>(false)
 
-    const [email, setEmail] = useState('')
-    const onChangeEmail = (e) => {
-        setEmail(e.target.value)
-        setChange(true)
-    }
+    const [email, setEmail] = useState<string>('')
+    const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+      setEmail(e.target.value);
+      setChange(true);
+    };
 
-    const [password, setPassword] = useState('')
-    const onChangePassword = (e) => {
-        setPassword(e.target.value)
-        setChange(true)
-    }
-    const [name, setName] = useState('')
-    const inputRef = useRef(null)
+    const [password, setPassword] = useState<string>('')
+    const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+      setPassword(e.target.value);
+      setChange(true);
+    };
+    const [name, setName] = useState<string>('')
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const getPrevData = () => {
         setEmail(user.email)
@@ -37,10 +37,10 @@ export function EditForm() {
 
     const dispatch = useDispatch()
 
-    const patchUserHandler = (e) => {
-        e.preventDefault()
-        dispatch(patchUser([email, name, password]))
-    }
+    const patchUserHandler = (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      dispatch(patchUser([email, name, password]));
+    };
 
     useEffect(() => {
         getPrevData()

@@ -3,6 +3,7 @@ import {
   POST_PASSWORD_SUCCESS,
   POST_PASSWORD_FAILED,
 } from "../../utils/constantsActions";
+import { TPostPasswordActions } from "../actions/constsActions/postPassword";
 
 interface IResetPasswordState {
   postPasswordRequest: boolean;
@@ -22,7 +23,7 @@ const initialState: IResetPasswordState = {
 
 export const resetPasswordReducer = (
   state = initialState,
-  action: { type: string; postPassword: string | null }
+  action: TPostPasswordActions
 ) => {
   switch (action.type) {
     case POST_PASSWORD: {

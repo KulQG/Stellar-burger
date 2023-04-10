@@ -1,11 +1,17 @@
+import { FC } from "react"
+import { IWsObj, IWsState } from "../../services/types/data"
 import { OrderComponent } from "../OrderComponent/OrderComponent"
 import styles from './OrderComponents.module.css'
 
-export function OrderComponents (props) {
+interface OrderCompnt {
+    socket: IWsState
+}
+
+export const OrderComponents:FC<OrderCompnt> = (props) => {
     const socket = props.socket
 
     const getOrderComponents = () => {
-        return socket.orders.map((order, index) => {
+        return socket.orders.map((order: IWsObj, index: number) => {
             const id = index
             return (
                 <OrderComponent

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import Card from "../Card/Card";
+import {Card} from "../Card/Card";
 import BIngrStyles from "./BurgerIngredients.module.css";
 import uuid from "react-uuid";
 import { useSelector } from "../../services/hooks";

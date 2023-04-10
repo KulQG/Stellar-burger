@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useState } from 'react'
+import  { FC } from 'react'
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
 import headerStyles from './Header.module.css'
-import NavigationComponent from '../NavigationComponent/NavigationComponent'
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import {NavigationComponent} from '../NavigationComponent/NavigationComponent'
+import { useNavigate } from 'react-router-dom'
 
-export const Header = () => {
+export const Header: FC = () => {
   const navigate = useNavigate()
   const navigToHome = () => {
     navigate('/')
@@ -33,7 +33,7 @@ export const Header = () => {
         />
       </div>
       <div style={{cursor: 'pointer'}} onClick={navigToHome} >
-        <Logo className={headerStyles.logo} />
+        <Logo />
       </div>
       <div className={headerStyles.rightPanel}>
         <NavigationComponent

@@ -1,28 +1,28 @@
-import React, { useState, useReducer, useEffect, FC } from 'react'
-import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import BrgConstructorStyles from './BrgConstructorStyles.module.css'
-import { getOrder } from '../../services/actions/getOrder'
-import { useDrop } from 'react-dnd'
-import uuid from 'react-uuid'
-import FillItem from '../FillItem/FillItem.jsx'
-import { useNavigate } from 'react-router-dom'
-import { GET_FILLING } from '../../utils/constantsActions'
-import { useDispatch, useSelector } from '../../services/hooks'
-import { TArrayCards, TCard } from '../../services/types/data'
+import React, { useState, useReducer, useEffect, FC } from "react";
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import BrgConstructorStyles from "./BrgConstructorStyles.module.css";
+import { getOrder } from "../../services/actions/getOrder";
+import { useDrop } from "react-dnd";
+import uuid from "react-uuid";
+import {FillItem} from "../FillItem/FillItem.jsx";
+import { useNavigate } from "react-router-dom";
+import { GET_FILLING, OPEN_POPUP, SET_ORDER_POPUP, UPDATE_BUN, UPDATE_FILL } from "../../utils/constantsActions";
+import { useDispatch, useSelector } from "../../services/hooks";
+import { TArrayCards, TCard, TDraggedCard } from "../../services/types/data";
 
 export const BurgerConstructor: FC = () => {
-  const arr = useSelector((store) => store.drag.ingredients)
-  const bun = useSelector((store) => store.drag.buns)
-  const [priceBun, setPriceBun] = useState(bun.price)
+  const arr = useSelector((store) => store.drag.ingredients);
+  const bun = useSelector((store) => store.drag.buns);
+  const [priceBun, setPriceBun] = useState<number>(bun.price);
 
   //функция нужна для возврата карточек из массива
   const fill = () => {
     //возврат каждой карточки
-    const mapMethod = (array: TArrayCards) => {
+    const mapMethod = (array: TDraggedCard[]) => {
       return array.map((card, index) => {
-        const id = uuid()
+        const id = uuid();
 
         return (
           <FillItem
@@ -32,12 +32,12 @@ export const BurgerConstructor: FC = () => {
             index={index}
             plus={decrementClick}
           />
-        )
-      })
-    }
+        );
+      });
+    };
 
-    return <>{mapMethod(arr)}</>
-  }
+    return <>{mapMethod(arr)}</>;
+  };
 
   //вставляет булку
   const baker = (indicator: number) => {
@@ -45,26 +45,26 @@ export const BurgerConstructor: FC = () => {
       return (
         <div ref={dropBun}>
           <ConstructorElement
-            type={'top'}
+            type={"top"}
             isLocked={true}
             text={`${bun.name} (верх)`}
             price={bun.price}
             thumbnail={bun.image}
           />
         </div>
-      )
+      );
     } else if (indicator === 2) {
       return (
         <ConstructorElement
-          type={'bottom'}
+          type={"bottom"}
           isLocked={true}
           text={`${bun.name} (низ)`}
           price={bun.price}
           thumbnail={bun.image}
         />
-      )
+      );
     }
-  }
+  };
 
   //подсчет итоговой стоимости бургера
 
@@ -74,79 +74,86 @@ export const BurgerConstructor: FC = () => {
   useEffect(() => {
     if (arr) {
       const counter = () => {
-        const prices = arr.map((card: TCard) => card.price)
-        const reduc = prices.reduce((acc: number, current: number) => acc + current, priceBun)
-        return reduc
-      }
-      dispatch({ type: 'data', payload: counter(arr) })
+        const prices = arr.map((card: TDraggedCard) => card.price);
+        const reduc = prices.reduce(
+          (acc: number, current: number) => acc + current, priceBun
+        );
+        return reduc;
+      };
+      dispatch({ type: "data", payload: counter() });
+      const payload: TDraggedCard[] = [...arr, bun]
       //выносит конструктор в стор
-      dispatcher({ type: GET_FILLING, payload: [...arr, bun] })
+      dispatcher({ type: GET_FILLING, payload: payload });
     }
-  }, [arr, bun])
+  }, [arr, bun]);
+
+  type TReduceAction =
+    | { type: "data"; payload: number }
+    | { type: "decrement"; payload: number };
 
   //Когда приходят данные я меняю price со значением counter(arr)
-  function reducer(state, action) {
+  function reducer(state: { price: number }, action: TReduceAction) {
     switch (action.type) {
-      case 'data':
-        return { price: action.payload }
-      case 'decrement':
-        return { price: state.price - action.payload }
+      case "data":
+        return { price: action.payload };
+      case "decrement":
+        return { price: state.price - action.payload };
       default:
-        return { price: state.price }
+        return { price: state.price };
     }
   }
 
-  const [state, dispatch] = useReducer(reducer, { price: 0 })
+  const [state, dispatch] = useReducer(reducer, { price: 0 });
 
-  const decrementClick = (value, data) => {
-    dispatch({ type: 'decrement', payload: value })
-    dispatcher({ type: 'DELETE_FILL', payload: data })
-  }
+  const decrementClick = (value: number, data: string) => {
+    dispatch({ type: "decrement", payload: value });
+    dispatcher({ type: "DELETE_FILL", payload: data });
+  };
 
   //отправка и получение api///////////////////////////////
 
-  const dispatcher = useDispatch()
+  const dispatcher = useDispatch();
 
   //принятие карточек из BurgerIngredients
   const [, dropIngr] = useDrop({
-    accept: 'ingr',
-    drop(item) {
+    accept: "ingr",
+    drop(item: TDraggedCard) {
       dispatcher({
-        type: 'UPDATE_FILL',
+        type: UPDATE_FILL,
         payload: item,
-      })
+      });
     },
-  })
+  });
 
   const [, dropBun] = useDrop({
-    accept: 'bun',
-    drop(item) {
+    accept: "bun",
+    drop(item: TDraggedCard) {
       dispatcher({
-        type: 'UPDATE_BUN',
+        type: UPDATE_BUN,
         payload: item,
-      })
-      setPriceBun(bun.price)
+      });
+      setPriceBun(bun.price);
     },
-  })
+  });
 
-  const user = useSelector((s) => s.getUserReducer.getUser)
-  const navigate = useNavigate()
+  const user = useSelector((s) => s.getUserReducer.getUser);
+  const navigate = useNavigate();
   const direct = () => {
     if (!user.success) {
-      navigate('/login')
+      navigate("/login");
     } else {
-      dispatcher({type: 'SET_ORDER_POPUP'})
-      dispatcher({type: 'OPEN_POPUP'})
-      dispatcher(getOrder([...arr, bun]))
+      dispatcher({ type: SET_ORDER_POPUP });
+      dispatcher({ type: OPEN_POPUP });
+      dispatcher(getOrder([...arr, bun]));
     }
-  }
+  };
 
   return (
     <div className={BrgConstructorStyles.total}>
       <div className={BrgConstructorStyles.elements}>
         {baker(1)}
         <div ref={dropIngr} className={BrgConstructorStyles.filling}>
-          {fill(arr)}
+          {fill()}
         </div>
         {baker(2)}
       </div>
@@ -160,12 +167,12 @@ export const BurgerConstructor: FC = () => {
           type="primary"
           size="large"
           onClick={() => {
-            direct()
+            direct();
           }}
         >
           Оформить заказ
         </Button>
       </div>
     </div>
-  )
-}
+  );
+};

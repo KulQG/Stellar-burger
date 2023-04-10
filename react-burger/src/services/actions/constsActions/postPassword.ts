@@ -14,13 +14,9 @@ interface IPostPasswordFailedAction {
 
 interface IPostPasswordSuccessAction {
   readonly type: typeof POST_PASSWORD_SUCCESS;
-  readonly postPassword:
-    | {
-        success: boolean;
-        message: string;
-      }
-    | null
-    | string;
+  readonly postPassword: {
+    success: boolean;
+  };
 }
 
 export type TPostPasswordActions =

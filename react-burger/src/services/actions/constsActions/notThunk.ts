@@ -18,11 +18,11 @@ import {
   WS_CONNECTION_CLOSE,
   WS_CONNECTION_START,
 } from "../../../utils/constantsActions";
-import { TCard } from "../../types/data";
+import { TArrayCards, TCard, TDraggedCard } from "../../types/data";
 
-interface IGetFillingAction {
+export interface IGetFillingAction {
   readonly type: typeof GET_FILLING;
-  readonly payload: any[];
+  readonly payload: TDraggedCard[];
 }
 
 interface IGetCurCardAction {
@@ -34,31 +34,31 @@ interface IRemoveCurCardAction {
   readonly type: typeof REMOVE_CURRENT_CARD;
 }
 
-interface IUpdateFillAction {
+export interface IUpdateFillAction {
   readonly type: typeof UPDATE_FILL;
-  readonly payload: TCard;
+  readonly payload: TDraggedCard;
 }
 
-interface IUpdateBunAction {
+export interface IUpdateBunAction {
   readonly type: typeof UPDATE_BUN;
-  readonly payload: TCard;
+  readonly payload: TDraggedCard;
 }
 
-interface IDeleteFillAction {
+export interface IDeleteFillAction {
   readonly type: typeof DELETE_FILL;
-  readonly payload: TCard;
+  readonly payload: string;
 }
 
-interface ISortFillAction {
+export interface ISortFillAction {
   readonly type: typeof SORTING;
-  readonly payload: TCard;
+  readonly payload: TDraggedCard[];
 }
 
-interface IOpenPopupOrderAction {
+export interface IOpenPopupOrderAction {
   readonly type: typeof OPEN_POPUP_ORDER_PAGE;
 }
 
-interface IOpenPopupIngrAction {
+export interface IOpenPopupIngrAction {
   readonly type: typeof OPEN_POPUP_INGR_PAGE;
 }
 

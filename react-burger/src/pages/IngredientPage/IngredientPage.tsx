@@ -1,10 +1,9 @@
-import { useSelector } from 'react-redux'
-import Header from '../../components/Header/Header'
-import IngredientsDetails from '../../components/IngredientsDetails/IngredientsDetails'
-import Home from '../Home/Home.jsx'
+import { useSelector } from '../../services/hooks'
+import {Header} from '../../components/Header/Header'
+import {IngredientsDetails} from '../../components/IngredientsDetails/IngredientsDetails'
+import {Home} from '../Home/Home.js'
 import styles from './IngredientPage.module.css'
-
-export default function IngredientPage() {
+export const IngredientPage = () => {
   const page = useSelector((s) => s.ingrPageHandler.page)
 
   if (page === 'page') {

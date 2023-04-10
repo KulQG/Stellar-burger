@@ -9,6 +9,7 @@ import uuid from "react-uuid";
 import { Link } from 'react-router-dom'
 import { TCard } from '../../services/types/data'
 import { useDispatch, useSelector } from '../../services/hooks';
+import { GET_CURRENT_CARD, OPEN_POPUP, OPEN_POPUP_INGR_PAGE, SET_INGR_POPUP } from '../../utils/constantsActions';
 
 interface ICardProps {
   post: TCard;
@@ -57,10 +58,10 @@ export const Card: FC<ICardProps> = (props) => {
             id={props.post._id}
             className={cardStyles.card}
             onClick={() => {
-              dispatch({ type: 'SET_INGR_POPUP' }) //определитель модального окна
-              dispatch({ type: 'OPEN_POPUP' }) //открытие модального окна
-              dispatch({ type: 'GET_CURRENT_CARD', payload: props.post }) //передача данных
-              dispatch({ type: 'OPEN_POPUP_INGR_PAGE' })
+              dispatch({ type: SET_INGR_POPUP }) //определитель модального окна
+              dispatch({ type: OPEN_POPUP }) //открытие модального окна
+              dispatch({ type: GET_CURRENT_CARD, payload: props.post }) //передача данных
+              dispatch({ type: OPEN_POPUP_INGR_PAGE })
             }}
           >
             {setCounter()}

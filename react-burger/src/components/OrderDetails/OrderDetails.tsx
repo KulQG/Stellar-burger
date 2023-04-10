@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { FC } from 'react'
 import orderClass from './OrderDetails.module.css'
 import done from '../../images/done.svg'
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../services/hooks'
 
-export default function OrderDetails() {
+export const OrderDetails: FC = () => {
   const order = useSelector(store => store.orderReducer.order)
 
   return (
@@ -11,7 +11,7 @@ export default function OrderDetails() {
       <h2 className={`text text_type_digits-large ${orderClass.title}`}>
         {order}
       </h2>
-      <h3 className={`text text_type_main-medium ${orderClass.subtitle}`}>
+      <h3 className={`text text_type_main-medium`}>
         идентификатор заказа
       </h3>
       <div className={orderClass.icon}>
