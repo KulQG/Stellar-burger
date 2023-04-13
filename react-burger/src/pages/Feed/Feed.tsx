@@ -1,16 +1,8 @@
 import { Header } from "../../components/Header/Header";
 import styles from "./Feed.module.css";
-import {
-  FC,
-  JSXElementConstructor,
-  ReactElement,
-  ReactFragment,
-  ReactPortal,
-  useEffect,
-} from "react";
+import { FC, useEffect } from "react";
 import { OrderComponents } from "../../components/OrderComponents/OrderComponents";
 import { PopupHandler } from "../../components/PopupHandler/PopupHandler";
-import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "../../services/hooks";
 import {
   WS_CONNECTION_CLOSE,
@@ -26,6 +18,7 @@ export const Feed: FC = () => {
       dispatch({ type: WS_CONNECTION_CLOSE });
     };
   }, [dispatch]);
+
   const socket = useSelector((s) => s.wsReducer.orders);
 
   const done = socket.orders.filter(

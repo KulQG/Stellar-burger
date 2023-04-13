@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect, FC } from "react";
+import { useState, useReducer, useEffect, FC } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -8,9 +8,9 @@ import { useDrop } from "react-dnd";
 import uuid from "react-uuid";
 import {FillItem} from "../FillItem/FillItem.jsx";
 import { useNavigate } from "react-router-dom";
-import { GET_FILLING, OPEN_POPUP, SET_ORDER_POPUP, UPDATE_BUN, UPDATE_FILL } from "../../utils/constantsActions";
+import { DELETE_FILL, GET_FILLING, OPEN_POPUP, SET_ORDER_POPUP, UPDATE_BUN, UPDATE_FILL } from "../../utils/constantsActions";
 import { useDispatch, useSelector } from "../../services/hooks";
-import { TArrayCards, TCard, TDraggedCard } from "../../services/types/data";
+import { TDraggedCard } from "../../services/types/data";
 
 export const BurgerConstructor: FC = () => {
   const arr = useSelector((store) => store.drag.ingredients);
@@ -107,7 +107,7 @@ export const BurgerConstructor: FC = () => {
 
   const decrementClick = (value: number, data: string) => {
     dispatch({ type: "decrement", payload: value });
-    dispatcher({ type: "DELETE_FILL", payload: data });
+    dispatcher({ type: DELETE_FILL, payload: data });
   };
 
   //отправка и получение api///////////////////////////////

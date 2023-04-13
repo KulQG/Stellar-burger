@@ -1,6 +1,6 @@
-import OrderDetails from "../OrderDetails/OrderDetails.tsx";
-import IngredientsDetails from "../IngredientsDetails/IngredientsDetails";
-import Modal from "../Modal/Modal";
+import { OrderDetails } from "../OrderDetails/OrderDetails";
+import { IngredientsDetails } from "../IngredientsDetails/IngredientsDetails";
+import { Modal } from "../Modal/Modal";
 import { useNavigate } from "react-router-dom";
 import { OrderInfoComponent } from "../OrderInfoComponent/OrderInfoComponent";
 import { useDispatch, useSelector } from "../../services/hooks";

@@ -1,5 +1,4 @@
 import React, {FC, ReactNode, useEffect} from 'react'
-import PropTypes from 'prop-types'
 import navigStyles from './NavigationComponent.module.css'
 import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ListIcon } from '@ya.praktikum/react-developer-burger-ui-components'

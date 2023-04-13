@@ -4,7 +4,6 @@ import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burge
 import { useSelector, useDispatch } from '../../services/hooks';
 import { useLocation, useParams } from "react-router-dom";
 import { IngredientCircle } from "../IngredientCircle/IngredientCircle";
-import { getCookie } from '../../utils/consts';
 import { USER_WS_CONNECTION_START, WS_CONNECTION_START } from '../../utils/constantsActions';
 import { TCard } from '../../services/types/data';
 

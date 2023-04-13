@@ -1,39 +1,36 @@
-import { FC, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import {Login} from '../../pages/Login/Login'
-import {Home} from '../../pages/Home/Home.jsx'
-import Register from '../../pages/Register/Register'
-import {ForgotPassword} from '../../pages/Forgot-password/Forgot-password'
-import {ResetPassword} from '../../pages/Reset-Password/Reset-Password'
-import Profile from '../../pages/Profile/Profile'
-import IngredientPage from '../../pages/IngredientPage/IngredientPage'
-import {NotFound} from '../../pages/404/404'
-import { ProtectedRouteElement } from '../../pages/ProtectedRouteElement'
-//import { useDispatch } from 'react-redux'
-import { useDispatch } from '../../services/hooks'
-import { getUser } from '../../services/actions/getUser'
-import { getFeed } from '../../services/actions/getFeed'
-import { Feed } from '../../pages/Feed/Feed'
-import { OrderInfo } from '../../pages/OrderInfo/OrderInfo'
-import { Orders } from '../../pages/Orders/Orders'
-import { EditForm } from '../EditForm/EditForm'
-import { checkToken } from '../../utils/consts'
-import { updateToken } from '../../services/actions/updateToken'
+import { FC, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Login } from "../../pages/Login/Login";
+import { Home } from "../../pages/Home/Home.jsx";
+import { Register } from "../../pages/Register/Register";
+import { ForgotPassword } from "../../pages/Forgot-password/Forgot-password";
+import { ResetPassword } from "../../pages/Reset-Password/Reset-Password";
+import { Profile } from "../../pages/Profile/Profile";
+import { IngredientPage } from "../../pages/IngredientPage/IngredientPage";
+import { NotFound } from "../../pages/404/404";
+import { ProtectedRouteElement } from "../../pages/ProtectedRouteElement";
+import { useDispatch } from "../../services/hooks";
+import { getUser } from "../../services/actions/getUser";
+import { getFeed } from "../../services/actions/getFeed";
+import { Feed } from "../../pages/Feed/Feed";
+import { OrderInfo } from "../../pages/OrderInfo/OrderInfo";
+import { Orders } from "../../pages/Orders/Orders";
+import { EditForm } from "../EditForm/EditForm";
+import { checkToken } from "../../utils/consts";
+import { updateToken } from "../../services/actions/updateToken";
 
 export const App: FC = () => {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getFeed())
+    dispatch(getFeed());
 
     if (checkToken()) {
-      dispatch(getUser())
-    } else if (localStorage.getItem('refreshToken') !== null) {
-      dispatch(updateToken())
+      dispatch(getUser());
+    } else if (localStorage.getItem("refreshToken") !== null) {
+      dispatch(updateToken());
     }
-  }, [])
-
+  }, []);
 
   return (
     <Router>
@@ -45,31 +42,31 @@ export const App: FC = () => {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route
           path="/profile"
-          element={<ProtectedRouteElement element={
-            <Profile>
-              <EditForm />
-            </Profile>}
-          />}
+          element={
+            <ProtectedRouteElement
+              element={
+                <Profile>
+                  <EditForm />
+                </Profile>
+              }
+            />
+          }
         />
         <Route
-          path='/profile/orders'
-          element={<ProtectedRouteElement
-            element={<Orders />}
-          />}
+          path="/profile/orders"
+          element={<ProtectedRouteElement element={<Orders />} />}
         />
         <Route
-          path='/profile/orders/:id'
-          element={<ProtectedRouteElement
-            element={<OrderInfo />}
-          />}
+          path="/profile/orders/:id"
+          element={<ProtectedRouteElement element={<OrderInfo />} />}
         />
         <Route path="/ingredients/:id" element={<IngredientPage />} />
-        <Route path='/feed' element={<Feed />} />
-        <Route path='/feed/:id' element={<OrderInfo />} />
+        <Route path="/feed" element={<Feed />} />
+        <Route path="/feed/:id" element={<OrderInfo />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;

@@ -1,8 +1,12 @@
-import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import { Route, Navigate, useLocation } from 'react-router-dom'
+import { useState, useEffect, FC, ReactNode } from 'react'
+import { useSelector } from '../services/hooks'
+import {  Navigate, useLocation } from 'react-router-dom'
 
-export const ProtectedRouteElement = ({ element }) => {
+interface IProtectedElProp {
+  element: ReactNode | any
+}
+
+export const ProtectedRouteElement: FC<IProtectedElProp> = ({ element }) => {
   const user = useSelector((s) => s.getUserReducer.getUser.success)
   const [isLoaded, setLoaded] = useState(false)
 

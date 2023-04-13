@@ -2,10 +2,9 @@ import { UPDATE_TOKEN, UPDATE_TOKEN_FAILED, UPDATE_TOKEN_SUCCESS } from "../../u
 import { updateCookieAddress, setCookie } from "../../utils/consts"
 import { AppDispatch, AppThunk } from "../types"
 import { getUser } from "./getUser"
-import { Dispatch } from "redux"
 
 export const updateToken: AppThunk = () => {
-    return function (dispatch) {
+    return function (dispatch: AppDispatch) {
         dispatch({ type: UPDATE_TOKEN })
         fetch(updateCookieAddress, {
             method: 'POST',

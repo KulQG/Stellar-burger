@@ -1,27 +1,26 @@
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
-import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import styles from './Forgot-password.module.css'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
-import {AuthFormWrapper} from '../../components/AuthForm/AuthForm'
-import { forgotPassword } from '../../services/actions/forgot-password'
-import { useDispatch, useSelector } from '../../services/hooks'
-import { RootState } from '../../services/types'
+import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import React, { FC, SyntheticEvent, useEffect, useState } from "react";
+import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import styles from "./Forgot-password.module.css";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { AuthFormWrapper } from "../../components/AuthForm/AuthForm";
+import { forgotPassword } from "../../services/actions/forgot-password";
+import { useDispatch, useSelector } from "../../services/hooks";
 
 export const ForgotPassword: FC = () => {
-  const postEmail = useSelector((s) => s.postForgotReducer.postEmail)
+  const postEmail = useSelector((s) => s.postForgotReducer.postEmail);
 
-  const [change, setChange] = useState(false)
+  const [change, setChange] = useState(false);
 
-  const [email, setEmail] = React.useState('')
+  const [email, setEmail] = React.useState("");
 
   const onChangeEmail = (e: SyntheticEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value);
     setChange(true);
   };
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const click: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -33,9 +32,9 @@ export const ForgotPassword: FC = () => {
 
   useEffect(() => {
     if (email.length > 0 && postEmail) {
-      navigate('/reset-password')
+      navigate("/reset-password");
     }
-  }, [postEmail])
+  }, [postEmail]);
 
   const getButton = () => {
     if (change) {
@@ -43,24 +42,24 @@ export const ForgotPassword: FC = () => {
         <Button htmlType="submit" type="primary" size="medium">
           Восстановить
         </Button>
-      )
+      );
     }
-  }
+  };
 
   const getForm = () => {
     return (
       <>
         <EmailInput
           value={email}
-          name={'email'}
+          name={"email"}
           onChange={onChangeEmail}
-          size={'default'}
+          size={"default"}
           placeholder="Укажите e-mail"
         />
         {getButton()}
       </>
-    )
-  }
+    );
+  };
 
   const getUILinks = () => {
     return (
@@ -74,10 +73,10 @@ export const ForgotPassword: FC = () => {
           </p>
         </Link>
       </div>
-    )
-  }
+    );
+  };
 
-  const user = useSelector((s) => s.getUserReducer.getUser)
+  const user = useSelector((s) => s.getUserReducer.getUser);
 
   return !user.success ? (
     <AuthFormWrapper
@@ -88,5 +87,5 @@ export const ForgotPassword: FC = () => {
     />
   ) : (
     <Navigate to="/" replace />
-  )
-}
+  );
+};

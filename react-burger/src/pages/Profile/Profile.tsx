@@ -1,42 +1,46 @@
-import styles from './Profile.module.css'
-import { useLocation, useNavigate } from 'react-router-dom'
-import Header from '../../components/Header/Header'
-import { useDispatch } from 'react-redux'
-import { logout } from '../../services/actions/logout'
+import styles from "./Profile.module.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Header } from "../../components/Header/Header";
+import { useDispatch } from "../../services/hooks";
+import { logout } from "../../services/actions/logout";
+import { FC, ReactNode } from "react";
 
-export default function Profile(props) {
+interface IProfProps {
+  children: ReactNode
+}
 
-  const dispatch = useDispatch()
+export const Profile: FC<IProfProps> = (props) => {
+  const dispatch = useDispatch();
 
-  const location = useLocation()
+  const location = useLocation();
   const setActiveLinkOrders = () => {
     if (location.pathname === `/profile/orders`) {
-      return `text text_type_main-medium`
+      return `text text_type_main-medium`;
     } else {
-      return `text text_type_main-medium text_color_inactive`
+      return `text text_type_main-medium text_color_inactive`;
     }
-  }
+  };
 
   const setActiveLinkAccount = () => {
     if (location.pathname === `/profile`) {
-      return `text text_type_main-medium`
+      return `text text_type_main-medium`;
     } else {
-      return `text text_type_main-medium text_color_inactive`
+      return `text text_type_main-medium text_color_inactive`;
     }
-  }
+  };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div className={styles.wrapper}>
       <Header />
       <div className={styles.profile}>
         <div className={styles.panel}>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div onClick={() => navigate('/profile')} className={styles.link}>
-              <p className={setActiveLinkAccount()} >Профиль</p>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div onClick={() => navigate("/profile")} className={styles.link}>
+              <p className={setActiveLinkAccount()}>Профиль</p>
             </div>
-            <div onClick={() => navigate('orders')} className={styles.link}>
+            <div onClick={() => navigate("orders")} className={styles.link}>
               <p className={setActiveLinkOrders()}>История заказов</p>
             </div>
             <div className={styles.link}>
@@ -55,5 +59,5 @@ export default function Profile(props) {
         {props.children}
       </div>
     </div>
-  )
+  );
 }

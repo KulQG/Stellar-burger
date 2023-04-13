@@ -3,7 +3,6 @@ import React, { FC, ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalClass from './Modal.module.css'
-import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { REMOVE_CURRENT_CARD } from '../../utils/constantsActions'
 
@@ -60,8 +59,4 @@ export const Modal:FC<IModalProps> = ({ close, children }) => {
     </div>),
     modalRoot as HTMLElement
   )
-}
-
-Modal.propTypes = {
-  close: PropTypes.func.isRequired,
 }

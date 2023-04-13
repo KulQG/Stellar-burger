@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from '../../services/hooks'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { IngredientCircle } from '../IngredientCircle/IngredientCircle'
 import styles from './OrderComponent.module.css'
+import { OPEN_POPUP, OPEN_POPUP_ORDER_PAGE, SET_ORDER_INFO_POPUP } from '../../utils/constantsActions'
 
 interface IOrderCompnt {
     ingrs: string[];
@@ -71,9 +72,9 @@ export const OrderComponent:FC<IOrderCompnt> = (props) => {
         } else if (location.pathname === '/profile/orders') {
             navig(`/profile/orders/${props.id}`)
         }
-        dispatch({ type: 'OPEN_POPUP' })
-        dispatch({ type: 'SET_ORDER_INFO_POPUP' })
-        dispatch({ type: 'OPEN_POPUP_ORDER_PAGE' })
+        dispatch({ type: OPEN_POPUP })
+        dispatch({ type: SET_ORDER_INFO_POPUP })
+        dispatch({ type: OPEN_POPUP_ORDER_PAGE })
     }
 
     return (

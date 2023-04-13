@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import orderClass from './OrderDetails.module.css'
 import done from '../../images/done.svg'
 import { useSelector } from '../../services/hooks'
@@ -18,7 +18,7 @@ export const OrderDetails: FC = () => {
         <img src={done} />
       </div>
       <p className={`text text_type_main-default ${orderClass.notification}`}>Ваш заказ начали готовить</p>
-      <p className={`text text_type_main-default text_color_inactive ${orderClass.await}`}>
+      <p className={`text text_type_main-default text_color_inactive`}>
         Дождитесь готовности на орбитальной станции
       </p>
     </div>

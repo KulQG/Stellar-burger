@@ -3,6 +3,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAILED,
 } from "../../utils/constantsActions";
+import { TRegisterActions } from "../actions/constsActions/register";
 import { IInitialStateEmailForRegister } from "../types/data";
 
 const initialStateEmail: IInitialStateEmailForRegister = {
@@ -15,10 +16,7 @@ const initialStateEmail: IInitialStateEmailForRegister = {
 
 export const registerReducer = (
   state = initialStateEmail,
-  action: {
-    type: string;
-    payload: string | null;
-  }
+  action: TRegisterActions
 ) => {
   switch (action.type) {
     case REGISTER: {
@@ -41,7 +39,7 @@ export const registerReducer = (
         ...state,
         registerFailed: true,
         registerRequest: false,
-        register: "ошибка получения данных",
+        register: {success: false},
       };
     }
     default: {

@@ -14,19 +14,7 @@ interface IRgisterFailedAction {
 
 interface IRgisterSuccessAction {
   readonly type: typeof REGISTER_SUCCESS;
-  readonly payload:
-    | {
-        success: true;
-        user: {
-          email: string;
-          name: string;
-        };
-        accessToken: string;
-        refreshToken: string;
-      }
-    | null
-    | string
-    | { success: false };
+  readonly payload: { success: boolean };
 }
 
 export type TRegisterActions =

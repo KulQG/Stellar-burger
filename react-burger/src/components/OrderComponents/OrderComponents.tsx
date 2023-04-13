@@ -11,7 +11,7 @@ export const OrderComponents:FC<OrderCompnt> = (props) => {
     const socket = props.socket
 
     const getOrderComponents = () => {
-        return socket.orders.map((order: IWsObj, index: number) => {
+        return socket.orders.orders.map((order: IWsObj, index: number) => {
             const id = index
             return (
                 <OrderComponent

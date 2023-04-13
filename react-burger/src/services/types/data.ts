@@ -48,7 +48,7 @@ export interface IStateForAuth {
 }
 
 export interface IPageHandler {
-  page: "page" | "popup";
+  page: string;
 }
 
 export interface IInitialStateOrder {
@@ -76,14 +76,14 @@ export interface IInitialStateEmailForRegister {
   registerFailed: boolean;
   register: {
     success: boolean;
-  };
+  }
 }
 
 export interface IWsState {
   wsConnected: boolean;
   orders: {
     success: boolean;
-    orders: IWsObj[] | string;
+    orders: IWsObj[]
   };
   error: any;
 }
@@ -97,7 +97,17 @@ export type IWsObj = {
   ingredients: string[];
   _id: string;
   status: string;
-  number: number | string;
+  number: number;
   createdAt: string;
   updatedAt: string;
+  name: string
+};
+
+export type WebSocketEvent = Event & {
+  data?: string;
+};
+
+export type WebSocketMessage = {
+  success: boolean;
+  [key: string]: any;
 };

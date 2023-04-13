@@ -3,7 +3,6 @@ import {
   OPEN_POPUP_INGR_PAGE,
 } from "../../utils/constantsActions";
 import { IOpenPopupIngrAction, IOpenPopupOrderAction } from "../actions/constsActions/notThunk";
-import { IAction } from "../types/data";
 import { IPageHandler } from "../types/data";
 
 const initialState: IPageHandler = {

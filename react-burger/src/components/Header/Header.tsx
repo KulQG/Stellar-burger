@@ -1,22 +1,22 @@
-import  { FC } from 'react'
-import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
-import headerStyles from './Header.module.css'
-import {NavigationComponent} from '../NavigationComponent/NavigationComponent'
-import { useNavigate } from 'react-router-dom'
+import { FC } from "react";
+import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
+import headerStyles from "./Header.module.css";
+import { NavigationComponent } from "../NavigationComponent/NavigationComponent";
+import { useNavigate } from "react-router-dom";
 
 export const Header: FC = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const navigToHome = () => {
-    navigate('/')
-  }
+    navigate("/");
+  };
 
   const navigToList = () => {
-    navigate('/feed')
-  }
+    navigate("/feed");
+  };
 
   const navigToProfile = () => {
-    navigate('/profile')
-  }
+    navigate("/profile");
+  };
 
   return (
     <header className={headerStyles.content}>
@@ -32,7 +32,7 @@ export const Header: FC = () => {
           icon="list"
         />
       </div>
-      <div style={{cursor: 'pointer'}} onClick={navigToHome} >
+      <div style={{ cursor: "pointer" }} onClick={navigToHome}>
         <Logo />
       </div>
       <div className={headerStyles.rightPanel}>
@@ -43,5 +43,5 @@ export const Header: FC = () => {
         />
       </div>
     </header>
-  )
-}
+  );
+};

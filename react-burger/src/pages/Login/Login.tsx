@@ -1,16 +1,15 @@
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import React, { useEffect, useState, FC, SyntheticEvent } from 'react'
+import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import React, { useEffect, useState, FC, SyntheticEvent } from "react";
 import {
   PasswordInput,
   EmailInput,
-} from '@ya.praktikum/react-developer-burger-ui-components'
-import styles from './Login.module.css'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import {AuthFormWrapper} from '../../components/AuthForm/AuthForm'
-import { auth } from '../../services/actions/auth'
-import { Navigate } from 'react-router-dom'
-import { useDispatch, useSelector } from '../../services/hooks'
-import { JsxElement } from 'typescript'
+} from "@ya.praktikum/react-developer-burger-ui-components";
+import styles from "./Login.module.css";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthFormWrapper } from "../../components/AuthForm/AuthForm";
+import { auth } from "../../services/actions/auth";
+import { Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "../../services/hooks";
 
 interface IChange {
   email: boolean;
@@ -21,9 +20,9 @@ export const Login: FC = () => {
   const [change, setChange] = useState<IChange>({
     email: false,
     password: false,
-  })
+  });
 
-  const [email, setEmail] = React.useState<string>('')
+  const [email, setEmail] = React.useState<string>("");
   const onChangeEmail = (e: SyntheticEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value);
     setChange({
@@ -41,28 +40,28 @@ export const Login: FC = () => {
     });
   };
 
-  const authState = useSelector((s) => s.getUserReducer.getUser)
+  const authState = useSelector((s) => s.getUserReducer.getUser);
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onClick: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     dispatch(auth([email, password]));
   };
 
-  const location = useLocation()
-  const locationBefore = location.search.split('?path=')[1]
+  const location = useLocation();
+  const locationBefore = location.search.split("?path=")[1];
 
   useEffect(() => {
     if (authState.success) {
       if (location.search) {
-        navigate(locationBefore, { replace: true })
+        navigate(locationBefore, { replace: true });
       } else {
-        navigate('/', { replace: true })
+        navigate("/", { replace: true });
       }
     }
-  }, [authState])
+  }, [authState]);
 
   const getButton = () => {
     if (change.email && change.password) {
@@ -70,30 +69,30 @@ export const Login: FC = () => {
         <Button htmlType="submit" type="primary" size="medium">
           Войти
         </Button>
-      )
+      );
     }
-  }
+  };
 
   const getForm = (): JSX.Element => {
     return (
       <>
         <EmailInput
           value={email}
-          name={'email'}
+          name={"email"}
           onChange={onChangeEmail}
-          size={'default'}
+          size={"default"}
           placeholder="E-mail"
         />
         <PasswordInput
           onChange={onChangePassword}
           value={password}
-          name={'password'}
-          placeholder={'Пароль'}
+          name={"password"}
+          placeholder={"Пароль"}
         />
         {getButton()}
       </>
-    )
-  }
+    );
+  };
 
   const getUILinks = () => {
     return (
@@ -121,19 +120,19 @@ export const Login: FC = () => {
           </Link>
         </div>
       </>
-    )
-  }
+    );
+  };
 
   if (!authState.success) {
     return (
       <AuthFormWrapper
         submit={onClick}
-        heading={'Вход'}
+        heading={"Вход"}
         form={getForm}
         uiLinks={getUILinks}
       />
-    )
+    );
   } else {
-    return <Navigate to={locationBefore || '/'} replace />
+    return <Navigate to={locationBefore || "/"} replace />;
   }
-}
+};
