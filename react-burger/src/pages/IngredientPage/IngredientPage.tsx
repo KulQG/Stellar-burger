@@ -1,7 +1,7 @@
 import { useSelector } from "../../services/hooks";
 import { Header } from "../../components/Header/Header";
 import { IngredientsDetails } from "../../components/IngredientsDetails/IngredientsDetails";
-import { Home } from "../Home/Home.js";
+import { Home } from "../Home/Home";
 import styles from "./IngredientPage.module.css";
 
 export const IngredientPage = () => {

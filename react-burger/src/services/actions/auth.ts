@@ -40,7 +40,7 @@ export const auth: AppThunk = ([email, password]: [string, string]) => {
                     payload: data,
                 })
                 let authToken = data.accessToken
-                setCookie('token', authToken, '/')
+                setCookie('token', authToken, {path:'/'})
                 const refreshToken = data.refreshToken
                 localStorage.setItem('refreshToken', refreshToken)
                 dispatch(getUser())

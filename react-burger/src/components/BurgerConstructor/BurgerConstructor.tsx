@@ -6,7 +6,7 @@ import BrgConstructorStyles from "./BrgConstructorStyles.module.css";
 import { getOrder } from "../../services/actions/getOrder";
 import { useDrop } from "react-dnd";
 import uuid from "react-uuid";
-import {FillItem} from "../FillItem/FillItem.jsx";
+import {FillItem} from "../FillItem/FillItem";
 import { useNavigate } from "react-router-dom";
 import { DELETE_FILL, GET_FILLING, OPEN_POPUP, SET_ORDER_POPUP, UPDATE_BUN, UPDATE_FILL } from "../../utils/constantsActions";
 import { useDispatch, useSelector } from "../../services/hooks";
