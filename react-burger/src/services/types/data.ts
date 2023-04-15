@@ -82,7 +82,6 @@ export interface IInitialStateEmailForRegister {
 export interface IWsState {
   wsConnected: boolean;
   orders: {
-    success: boolean;
     orders: IWsObj[]
   };
   error: any;

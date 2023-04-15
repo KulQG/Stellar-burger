@@ -1,10 +1,11 @@
 import { FC } from "react"
+import { useSelector } from "../../services/hooks"
 import { IWsObj, IWsState } from "../../services/types/data"
 import { OrderComponent } from "../OrderComponent/OrderComponent"
 import styles from './OrderComponents.module.css'
 
-interface OrderCompnt {
-    socket: IWsState
+interface IOrderCompntProp {
+    socket: {orders: IWsObj[]}
 }
 
 export const OrderComponents:FC<OrderCompnt> = (props) => {

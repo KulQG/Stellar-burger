@@ -15,7 +15,6 @@ import { IInitialStateStringBool, IWsState, IWsAction, IAction } from "../types/
 const initialState: IWsState = {
   wsConnected: false,
   orders: {
-    success: false,
     orders: [],
   },
   error: "",
