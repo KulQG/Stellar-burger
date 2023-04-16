@@ -2,7 +2,10 @@ import {
   OPEN_POPUP_ORDER_PAGE,
   OPEN_POPUP_INGR_PAGE,
 } from "../../utils/constantsActions";
-import { IOpenPopupIngrAction, IOpenPopupOrderAction } from "../actions/constsActions/notThunk";
+import {
+  IOpenPopupIngrAction,
+  IOpenPopupOrderAction,
+} from "../actions/constsActions/notThunk";
 import { IPageHandler } from "../types/data";
 
 const initialState: IPageHandler = {

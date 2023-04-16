@@ -32,8 +32,4 @@ export type AppThunk<TReturn = void> = ActionCreator<
 >;
 
 // Типизация метода dispatch для проверки на валидность отправляемого экшена
-export type AppDispatch = ThunkDispatch<
-  RootState,
-  any,
-  TAllActions
->;
+export type AppDispatch = ThunkDispatch<RootState, any, TAllActions>;

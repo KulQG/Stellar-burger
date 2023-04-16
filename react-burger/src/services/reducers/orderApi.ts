@@ -9,7 +9,7 @@ const initialStateOrder: IInitialStateOrder = {
   orderRequest: false,
   orderFailed: false,
   order: null,
-}
+};
 
 export const orderReducer = (
   state = initialStateOrder,

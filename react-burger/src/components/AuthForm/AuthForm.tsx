@@ -1,4 +1,4 @@
-import React, { FC, SyntheticEvent } from "react";
+import React, { FC } from "react";
 import { Header } from "../Header/Header";
 import styles from "./AuthForm.module.css";
 

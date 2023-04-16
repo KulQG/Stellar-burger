@@ -1,6 +1,10 @@
-import { POST_PASSWORD, POST_PASSWORD_FAILED, POST_PASSWORD_SUCCESS } from "../../utils/constantsActions";
+import {
+  POST_PASSWORD,
+  POST_PASSWORD_FAILED,
+  POST_PASSWORD_SUCCESS,
+} from "../../utils/constantsActions";
 import { resetPasswordAddress } from "../../utils/consts";
-import { AppDispatch, AppThunk } from "../types";
+import { AppThunk } from "../types";
 
 export const resetPassword: AppThunk = (password: string, token: string) => {
   return function (dispatch) {

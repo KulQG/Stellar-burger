@@ -1,5 +1,3 @@
-import { updateToken } from "../services/actions/updateToken";
-import { RootState, TAllActions } from "../services/types";
 import { getCookie, setCookie, updateCookieAddress } from "../utils/consts";
 import {
   USER_WS_CONNECTION_CLOSE,
@@ -12,7 +10,6 @@ import {
 } from "../utils/constantsActions";
 import { Middleware } from "redux";
 import { WebSocketEvent, WebSocketMessage } from "../services/types/data";
-import { ThunkAction } from "redux-thunk";
 
 type TUserWebSocketAction =
   | { type: "USER_WS_CONNECTION_START" }

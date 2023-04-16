@@ -12,12 +12,9 @@ const initialState: IGetUserInitial = {
   getUser: {
     success: false,
   },
-}
+};
 
-export const getUserReducer = (
-  state = initialState,
-  action: IAction
-) => {
+export const getUserReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case GET_USER: {
       return {

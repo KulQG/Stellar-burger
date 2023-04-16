@@ -56,6 +56,13 @@ export const Card: FC<ICardProps> = (props) => {
     }),
   });
 
+  const clickDispatcher = () => {
+    dispatch({ type: SET_INGR_POPUP }); //определитель модального окна
+    dispatch({ type: OPEN_POPUP }); //открытие модального окна
+    dispatch({ type: GET_CURRENT_CARD, payload: props.post }); //передача данных
+    dispatch({ type: OPEN_POPUP_INGR_PAGE });
+  }
+
   return !isDrag ? (
     <>
       <Link className={cardStyles.link} to={`/ingredients/${props.post._id}`}>
@@ -63,12 +70,7 @@ export const Card: FC<ICardProps> = (props) => {
           ref={dragRef}
           id={props.post._id}
           className={cardStyles.card}
-          onClick={() => {
-            dispatch({ type: SET_INGR_POPUP }); //определитель модального окна
-            dispatch({ type: OPEN_POPUP }); //открытие модального окна
-            dispatch({ type: GET_CURRENT_CARD, payload: props.post }); //передача данных
-            dispatch({ type: OPEN_POPUP_INGR_PAGE });
-          }}
+          onClick={clickDispatcher}
         >
           {setCounter()}
           <img

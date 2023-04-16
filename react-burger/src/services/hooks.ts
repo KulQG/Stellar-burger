@@ -5,7 +5,6 @@ import {
 } from "react-redux";
 import { RootState, TAllActions } from "./types";
 import { ThunkDispatch } from "redux-thunk";
-import { ThunkAction } from "redux-thunk";
 
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
 

@@ -10,7 +10,7 @@ const currentCardState: { post: null | unknown } = {
 
 export const currentCard = (
   state = currentCardState,
-  action: {type: string, payload: TCard}
+  action: { type: string; payload: TCard }
 ) => {
   switch (action.type) {
     case GET_CURRENT_CARD: {

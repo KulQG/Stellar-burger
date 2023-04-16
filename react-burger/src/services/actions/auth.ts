@@ -3,7 +3,7 @@ import {
     authAddress,
     setCookie,
 } from '../../utils/consts'
-import { AppDispatch, AppThunk } from '../types'
+import { AppThunk } from '../types'
 import { getUser } from './getUser'
 
 export const auth: AppThunk = ([email, password]: [string, string]) => {

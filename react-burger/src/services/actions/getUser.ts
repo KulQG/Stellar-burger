@@ -3,7 +3,7 @@ import {
     getCookie,
     getUserAddress,
 } from '../../utils/consts'
-import { AppDispatch, AppThunk } from '../types'
+import { AppThunk } from '../types'
 import { updateToken } from './updateToken'
 
 export const getUser: AppThunk =()=> {
@@ -42,7 +42,7 @@ export const getUser: AppThunk =()=> {
             })
             .catch((err) => {
                 dispatch({
-                    type: 'GET_USER_FAILED',
+                    type: GET_USER_FAILED,
                 })
                 console.log('ошибка' + err)
             })

@@ -39,7 +39,7 @@ export const registerReducer = (
         ...state,
         registerFailed: true,
         registerRequest: false,
-        register: {success: false},
+        register: { success: false },
       };
     }
     default: {

@@ -10,7 +10,12 @@ import {
   USER_WS_CONNECTION_SUCCESS,
   USER_WS_GET_MESSAGE,
 } from "../../utils/constantsActions";
-import { IInitialStateStringBool, IWsState, IWsAction, IAction } from "../types/data";
+import {
+  IInitialStateStringBool,
+  IWsState,
+  IWsAction,
+  IAction,
+} from "../types/data";
 
 const initialState: IWsState = {
   wsConnected: false,
@@ -104,10 +109,7 @@ const currentSocket: IInitialStateStringBool = {
   orders: false,
 };
 
-export const checkOpenWs = (
-  state = currentSocket,
-  action: IAction
-) => {
+export const checkOpenWs = (state = currentSocket, action: IAction) => {
   switch (action.type) {
     case USER_WS_CONNECTION_SUCCESS: {
       return {

@@ -76,13 +76,13 @@ export interface IInitialStateEmailForRegister {
   registerFailed: boolean;
   register: {
     success: boolean;
-  }
+  };
 }
 
 export interface IWsState {
   wsConnected: boolean;
   orders: {
-    orders: IWsObj[]
+    orders: IWsObj[];
   };
   error: any;
 }
@@ -99,7 +99,7 @@ export type IWsObj = {
   number: number;
   createdAt: string;
   updatedAt: string;
-  name: string
+  name: string;
 };
 
 export type WebSocketEvent = Event & {

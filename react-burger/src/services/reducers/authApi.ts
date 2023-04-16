@@ -9,7 +9,10 @@ const initialState: IStateForAuth = {
   },
 };
 
-export const authReducer = (state = initialState, action: IAction): IStateForAuth => {
+export const authReducer = (
+  state = initialState,
+  action: IAction
+): IStateForAuth => {
   switch (action.type) {
     case AUTH: {
       return {

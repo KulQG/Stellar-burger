@@ -1,6 +1,10 @@
-import { GET_USER, GET_USER_FAILED, GET_USER_SUCCESS } from "../../utils/constantsActions";
+import {
+  GET_USER,
+  GET_USER_FAILED,
+  GET_USER_SUCCESS,
+} from "../../utils/constantsActions";
 import { getCookie, getUserAddress } from "../../utils/consts";
-import { AppDispatch, AppThunk } from "../types";
+import { AppThunk } from "../types";
 import { updateToken } from "./updateToken";
 
 export const patchUser: AppThunk = ([email, name, password]: [

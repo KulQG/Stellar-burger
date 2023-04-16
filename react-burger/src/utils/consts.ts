@@ -1,12 +1,17 @@
-export const address = 'https://norma.nomoreparties.space/api/ingredients'
-export const postAddress = 'https://norma.nomoreparties.space/api/orders'
-export const postEmailAddress = 'https://norma.nomoreparties.space/api/password-reset'
-export const resetPasswordAddress = 'https://norma.nomoreparties.space/api/password-reset/reset'
-export const registerAddress = 'https://norma.nomoreparties.space/api/auth/register'
-export const authAddress = 'https://norma.nomoreparties.space/api/auth/login'
-export const logoutAddress = 'https://norma.nomoreparties.space/api/auth/logout'
-export const updateCookieAddress = 'https://norma.nomoreparties.space/api/auth/token'
-export const getUserAddress = 'https://norma.nomoreparties.space/api/auth/user'
+export const address = "https://norma.nomoreparties.space/api/ingredients";
+export const postAddress = "https://norma.nomoreparties.space/api/orders";
+export const postEmailAddress =
+  "https://norma.nomoreparties.space/api/password-reset";
+export const resetPasswordAddress =
+  "https://norma.nomoreparties.space/api/password-reset/reset";
+export const registerAddress =
+  "https://norma.nomoreparties.space/api/auth/register";
+export const authAddress = "https://norma.nomoreparties.space/api/auth/login";
+export const logoutAddress =
+  "https://norma.nomoreparties.space/api/auth/logout";
+export const updateCookieAddress =
+  "https://norma.nomoreparties.space/api/auth/token";
+export const getUserAddress = "https://norma.nomoreparties.space/api/auth/user";
 
 export function setCookie(
   name: string,
@@ -33,7 +38,7 @@ export function setCookie(
     }
   }
   document.cookie = updatedCookie;
-  console.log('Печенька запечена')
+  console.log("Печенька запечена");
 }
 
 export function getCookie(name: string): string | undefined {
@@ -46,17 +51,17 @@ export function getCookie(name: string): string | undefined {
 }
 
 export const deleteCookie = (name: string) => {
-  setCookie(name, '', { expires: -1, path: "/" });
+  setCookie(name, "", { expires: -1, path: "/" });
 };
 
 export function checkToken() {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        const [name, value] = cookie.split('=');
-        if (name === 'token') {
-            return true;
-        }
+  const cookies = document.cookie.split(";");
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].trim();
+    const [name, value] = cookie.split("=");
+    if (name === "token") {
+      return true;
     }
-    return false;
+  }
+  return false;
 }

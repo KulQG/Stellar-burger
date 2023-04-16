@@ -4,10 +4,13 @@ import {
   DELETE_FILL,
   SORTING,
 } from "../../utils/constantsActions";
-import { IDeleteFillAction, ISortFillAction, IUpdateBunAction, IUpdateFillAction } from "../actions/constsActions/notThunk";
 import {
-  TArrayCards,
-  TCard,
+  IDeleteFillAction,
+  ISortFillAction,
+  IUpdateBunAction,
+  IUpdateFillAction,
+} from "../actions/constsActions/notThunk";
+import {
   TDraggedCard,
   TDraggedCardState,
 } from "../types/data";
@@ -27,16 +30,17 @@ const initialState: TDraggedCardState = {
     image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
     image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
     __v: 0,
-    id: 'id'
+    id: "id",
   },
 };
 
-type TDragActions = IUpdateFillAction | IUpdateBunAction | IDeleteFillAction |ISortFillAction
+type TDragActions =
+  | IUpdateFillAction
+  | IUpdateBunAction
+  | IDeleteFillAction
+  | ISortFillAction;
 
-export const drag = (
-  state = initialState,
-  action: TDragActions
-) => {
+export const drag = (state = initialState, action: TDragActions) => {
   switch (action.type) {
     case UPDATE_FILL: {
       return {

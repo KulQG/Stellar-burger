@@ -10,7 +10,7 @@ const initialStateFeed: IInitialStateFeed = {
   feedRequest: false,
   feedFailed: false,
   feed: [],
-}
+};
 
 export const feedReducer = (
   state = initialStateFeed,
