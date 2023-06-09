@@ -3,6 +3,8 @@ export interface IAction {
   payload?: any;
 }
 
+export type IAnyAction = { type: string; [key: string]: any };
+
 export type TDraggedCardState = {
   ingredients: TDraggedCard[];
   buns: TDraggedCard;
