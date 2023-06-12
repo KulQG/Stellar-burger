@@ -1,10 +1,10 @@
-import { AUTH, AUTH_FAILED, AUTH_SUCCESS } from '../../utils/constantsActions'
+import { AUTH, AUTH_FAILED, AUTH_SUCCESS, GET_USER } from '../../utils/constantsActions'
 import {
     authAddress,
     setCookie,
 } from '../../utils/consts'
 import { AppThunk } from '../types'
-import { getUser } from './getUser'
+//import { getUserSaga } from './getUser'
 
 export const auth: AppThunk = ([email, password]: [string, string]) => {
     return function (dispatch) {
@@ -43,7 +43,7 @@ export const auth: AppThunk = ([email, password]: [string, string]) => {
                 setCookie('token', authToken, {path:'/'})
                 const refreshToken = data.refreshToken
                 localStorage.setItem('refreshToken', refreshToken)
-                dispatch(getUser())
+                dispatch({type: GET_USER})
             })
             .catch((err) => {
                 dispatch({

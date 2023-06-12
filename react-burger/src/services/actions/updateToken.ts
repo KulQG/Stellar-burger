@@ -6,7 +6,7 @@ import {
 } from "../../utils/constantsActions";
 import { updateCookieAddress, setCookie } from "../../utils/consts";
 import { AppDispatch, AppThunk } from "../types";
-import { getUser, getUserSaga } from "./getUser";
+import { getUserSaga } from "./getUser";
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 
 const getFetch = () => {
@@ -21,41 +21,41 @@ const getFetch = () => {
   });
 }
 
-export const updateToken: AppThunk = () => {
-  return function (dispatch: AppDispatch) {
-    dispatch({ type: UPDATE_TOKEN });
-    getFetch()
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          dispatch({
-            type: UPDATE_TOKEN_FAILED,
-          });
-          console.log("ошибка при получении данных" + res.status);
-        }
-      })
-      .then((data) => {
-        dispatch({
-          type: UPDATE_TOKEN_SUCCESS,
-          payload: data,
-        });
-        console.log(data);
-        let authToken = data.accessToken;
-        setCookie("token", authToken, { path: "/" });
-        localStorage.clear();
-        const refreshToken = data.refreshToken;
-        localStorage.setItem("refreshToken", refreshToken);
-        dispatch(getUser());
-      })
-      .catch((err) => {
-        dispatch({
-          type: UPDATE_TOKEN_FAILED,
-        });
-        console.log("ошибка" + err);
-      });
-  };
-};
+// export const updateToken: AppThunk = () => {
+//   return function (dispatch: AppDispatch) {
+//     dispatch({ type: UPDATE_TOKEN });
+//     getFetch()
+//       .then((res) => {
+//         if (res.ok) {
+//           return res.json();
+//         } else {
+//           dispatch({
+//             type: UPDATE_TOKEN_FAILED,
+//           });
+//           console.log("ошибка при получении данных" + res.status);
+//         }
+//       })
+//       .then((data) => {
+//         dispatch({
+//           type: UPDATE_TOKEN_SUCCESS,
+//           payload: data,
+//         });
+//         console.log(data);
+//         let authToken = data.accessToken;
+//         setCookie("token", authToken, { path: "/" });
+//         localStorage.clear();
+//         const refreshToken = data.refreshToken;
+//         localStorage.setItem("refreshToken", refreshToken);
+//         dispatch(getUser());
+//       })
+//       .catch((err) => {
+//         dispatch({
+//           type: UPDATE_TOKEN_FAILED,
+//         });
+//         console.log("ошибка" + err);
+//       });
+//   };
+// };
 
 export function* updateTokenSaga() {
   try {

@@ -7,48 +7,58 @@ import {
 import { AppDispatch, AppThunk } from "../types";
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 
-const getItems = () => {
-  return fetch(address)
-}
-
-export const getFeed: AppThunk = () => {
-  return function (dispatch: AppDispatch) {
-    dispatch({
-      type: GET_FEED,
-    });
-    getItems()
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          dispatch({
-            type: GET_FEED_FAILED,
-          });
-          console.log("ошибка при получении данных" + res.status);
-        }
-      })
-      .then((data) => {
-        dispatch({
-          type: GET_FEED_SUCCESS,
-          feed: data.data,
-        });
-      })
-      .catch((err) => {
-        dispatch({
-          type: GET_FEED_FAILED,
-        });
-        console.log("ошибка" + err);
-      });
-  };
+const getItems = async () => {
+  await fetch(address).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      console.log('ошибкаааааааааааааааааааааа')
+    }
+  })
+  .catch((err) => {
+    console.log(`${err} erooooooooooooooooooooooooooooooooooor`)
+  })
 };
+
+// export const getFeed: AppThunk = () => {
+//   return function (dispatch: AppDispatch) {
+//     dispatch({
+//       type: GET_FEED,
+//     });
+//     getItems()
+//       .then((res) => {
+//         if (res.ok) {
+//           return res.json();
+//         } else {
+//           dispatch({
+//             type: GET_FEED_FAILED,
+//           });
+//           console.log("ошибка при получении данных" + res.status);
+//         }
+//       })
+//       .then((data) => {
+//         dispatch({
+//           type: GET_FEED_SUCCESS,
+//           feed: data.data,
+//         });
+//       })
+//       .catch((err) => {
+//         dispatch({
+//           type: GET_FEED_FAILED,
+//         });
+//         console.log("ошибка" + err);
+//       });
+//   };
+// };
 
 export function* getFeedSaga() {
   try {
-    const {data} = yield call(getItems)
+    const { data } = yield call(getItems);
     yield put({
       type: GET_FEED_SUCCESS,
-      feed: data.data,
+      feed: data,
     });
+    console.log(data);
   } catch (error) {
     put({
       type: GET_FEED_FAILED,

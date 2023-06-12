@@ -1,11 +1,15 @@
-import { call, put, takeEvery, takeLatest, all } from "redux-saga/effects";
-import { GET_FEED, GET_ORDER, GET_USER, UPDATE_TOKEN } from "../utils/constantsActions";
+import { takeEvery, all } from "redux-saga/effects";
+import {
+  GET_FEED,
+  GET_USER,
+  UPDATE_TOKEN,
+} from "../utils/constantsActions";
 import { getFeedSaga } from "./actions/getFeed";
 import { getUserSaga } from "./actions/getUser";
 import { updateTokenSaga } from "./actions/updateToken";
 
 export const rootSaga = function* root() {
-  yield all([getFeedWatcher]);
+  yield all([getFeedWatcher, getUserWatcher, updateTokenWatcher]);
 };
 
 export function* getFeedWatcher() {
@@ -13,9 +17,9 @@ export function* getFeedWatcher() {
 }
 
 export function* getUserWatcher() {
-    yield takeEvery(GET_USER, getUserSaga)
+  yield takeEvery(GET_USER, getUserSaga);
 }
 
 export function* updateTokenWatcher() {
-    yield takeEvery(UPDATE_TOKEN, updateTokenSaga)
+  yield takeEvery(UPDATE_TOKEN, updateTokenSaga);
 }
