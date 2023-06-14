@@ -166,9 +166,7 @@ export const BurgerConstructor: FC = () => {
           htmlType="button"
           type="primary"
           size="large"
-          onClick={() => {
-            direct();
-          }}
+          onClick={direct}
         >
           Оформить заказ
         </Button>

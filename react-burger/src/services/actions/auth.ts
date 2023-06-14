@@ -11,14 +11,14 @@ export const auth: AppThunk = ([email, password]: [string, string]) => {
         dispatch({ type: AUTH })
         fetch(authAddress, {
             method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
+            // mode: 'cors',
+            // cache: 'no-cache',
+            // credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
             },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
+            // redirect: 'follow',
+            // referrerPolicy: 'no-referrer',
             body: JSON.stringify({
                 email: email,
                 password: password,
