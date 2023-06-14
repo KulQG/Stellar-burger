@@ -32,6 +32,7 @@ git clone https://github.com/kulqg/Stellar-burger.git
 Установите зависимости:
 ```
 cd Stellar-burger
+cd react-burger
 npm install
 ```
 Запустите проект:
