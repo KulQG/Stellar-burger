@@ -1,4 +1,4 @@
-import { takeEvery, all } from "redux-saga/effects";
+import { takeEvery, all, call } from "redux-saga/effects";
 import {
   GET_FEED,
   GET_USER,
@@ -9,7 +9,7 @@ import { getUserSaga } from "./actions/getUser";
 import { updateTokenSaga } from "./actions/updateToken";
 
 export const rootSaga = function* root() {
-  yield all([getFeedWatcher, getUserWatcher, updateTokenWatcher]);
+  yield all([call(getFeedWatcher), call(getUserWatcher), call(updateTokenWatcher)]);
 };
 
 export function* getFeedWatcher() {
