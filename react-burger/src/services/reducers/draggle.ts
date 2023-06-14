@@ -10,15 +10,12 @@ import {
   IUpdateBunAction,
   IUpdateFillAction,
 } from "../actions/constsActions/notThunk";
-import {
-  TDraggedCard,
-  TDraggedCardState,
-} from "../types/data";
+import { TDraggedCard, TDraggedCardState } from "../types/data";
 
 const initialState: TDraggedCardState = {
   ingredients: [],
   buns: {
-    _id: "60d3b41abdacab0026a733c6",
+    _id: "643d69a5c3f7b9001cfa093c",
     name: "Краторная булка N-200i",
     type: "bun",
     proteins: 80,

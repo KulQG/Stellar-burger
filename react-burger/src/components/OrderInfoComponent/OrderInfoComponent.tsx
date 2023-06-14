@@ -13,6 +13,7 @@ export const OrderInfoComponent: FC = () => {
     const userOrders = useSelector(s => s.userWsReducer.orders)
 
     const orders = checkOpenWs.feed ? commonOrders.orders : userOrders.orders
+    console.log(orders)
 
     const allIngredients = useSelector(s => s.feedReducer.feed)
 
