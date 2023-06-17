@@ -5,21 +5,7 @@ import {
 } from "../../utils/constantsActions";
 import { getCookie, postAddress } from "../../utils/consts";
 import { AppDispatch, AppThunk } from "../types";
-import { IAnyAction, TArrayCards } from "../types/data";
-import { call, put } from "redux-saga/effects";
-
-// const getFetch = (ids: () => string[]) => {
-//   return fetch(postAddress, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `${getCookie("token")}`,
-//     },
-//     body: JSON.stringify({
-//       ingredients: ids(),
-//     }),
-//   });
-// };
+import { TArrayCards } from "../types/data";
 
 export const getOrder: AppThunk = (arr: TArrayCards) => {
   return function (dispatch: AppDispatch) {
