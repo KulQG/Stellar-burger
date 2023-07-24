@@ -1,34 +1,36 @@
-import { address } from "../../utils/consts"
-import { GET_FEED, GET_FEED_FAILED, GET_FEED_SUCCESS } from "../../utils/constantsActions";
-import { AppDispatch, AppThunk } from "../types";
+import { address } from "../../utils/consts";
+import {
+  GET_FEED_FAILED,
+  GET_FEED_SUCCESS,
+} from "../../utils/constantsActions";
+import { call, put } from "redux-saga/effects";
 
-export const getFeed: AppThunk = () => {
-    return function (dispatch: AppDispatch) {
-      dispatch({
-        type: GET_FEED,
-      })
-      fetch(address)
-        .then((res) => {
-          if (res.ok) {
-            return res.json()
-          } else {
-            dispatch({
-              type: GET_FEED_FAILED,
-            })
-            console.log('ошибка при получении данных' + res.status)
-          }
-        })
-        .then((data) => {
-          dispatch({
-            type: GET_FEED_SUCCESS,
-            feed: data.data,
-          })
-        })
-        .catch((err) => {
-          dispatch({
-            type: 'GET_FEED_FAILED',
-          })
-          console.log('ошибка' + err)
-        })
+const getItems = async () => {
+  try {
+    const response = await fetch(address);
+    if (response.ok) {
+      const data = await response.json();
+      return { data };
+    } else {
+      throw new Error("Request failed with status " + response.status);
     }
+  } catch (error) {
+    console.log(`Error:, ${error}`);
   }
+};
+
+export function* getFeedSaga() {
+  try {
+    const { data } = yield call(getItems);
+    console.log(data);
+    yield put({
+      type: GET_FEED_SUCCESS,
+      feed: data.data,
+    });
+  } catch (error) {
+    yield put({
+      type: GET_FEED_FAILED,
+    });
+    console.log("Error:", error);
+  }
+}

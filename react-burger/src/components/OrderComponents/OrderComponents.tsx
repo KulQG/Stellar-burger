@@ -9,7 +9,6 @@ interface IOrderCompntProp {
 
 export const OrderComponents:FC<IOrderCompntProp> = (props) => {
     const socket = props.socket
-    console.log(socket.orders)
 
     const getOrderComponents = () => {
         return socket.orders.map((order: IWsObj, index: number) => {

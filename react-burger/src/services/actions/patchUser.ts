@@ -2,10 +2,11 @@ import {
   GET_USER,
   GET_USER_FAILED,
   GET_USER_SUCCESS,
+  UPDATE_TOKEN,
 } from "../../utils/constantsActions";
 import { getCookie, getUserAddress } from "../../utils/consts";
 import { AppThunk } from "../types";
-import { updateToken } from "./updateToken";
+//import { updateToken } from "./updateToken";
 
 export const patchUser: AppThunk = ([email, name, password]: [
   string,
@@ -35,7 +36,7 @@ export const patchUser: AppThunk = ([email, name, password]: [
           dispatch({
             type: GET_USER_FAILED,
           });
-          dispatch(updateToken());
+          dispatch({type: UPDATE_TOKEN});
           console.log("ошибка при получении данных" + res.status);
         }
       })

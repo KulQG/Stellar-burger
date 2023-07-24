@@ -10,25 +10,26 @@ import { IngredientPage } from "../../pages/IngredientPage/IngredientPage";
 import { NotFound } from "../../pages/404/404";
 import { ProtectedRouteElement } from "../../pages/ProtectedRouteElement";
 import { useDispatch } from "../../services/hooks";
-import { getUser } from "../../services/actions/getUser";
-import { getFeed } from "../../services/actions/getFeed";
+//import { getUser } from "../../services/actions/getUser";
+//import { getFeed } from "../../services/actions/getFeed";
 import { Feed } from "../../pages/Feed/Feed";
 import { OrderInfo } from "../../pages/OrderInfo/OrderInfo";
 import { Orders } from "../../pages/Orders/Orders";
 import { EditForm } from "../EditForm/EditForm";
 import { checkToken } from "../../utils/consts";
-import { updateToken } from "../../services/actions/updateToken";
+//import { updateToken } from "../../services/actions/updateToken";
+import { GET_FEED, GET_USER, UPDATE_TOKEN } from "../../utils/constantsActions";
 
 export const App: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getFeed());
+    dispatch({type: GET_FEED});
 
     if (checkToken()) {
-      dispatch(getUser());
+      dispatch({type: GET_USER});
     } else if (localStorage.getItem("refreshToken") !== null) {
-      dispatch(updateToken());
+      dispatch({type: UPDATE_TOKEN});
     }
   }, []);
 
